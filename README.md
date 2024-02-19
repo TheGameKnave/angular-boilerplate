@@ -7,9 +7,10 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Parallel server/client execution
 * Bare-bones api proxy to the back-end
 * SASS boilerplate included
-* Frontend environment switching
+* Frontend environment detection/switching
 * Heroku deployment
 * Google Analytics
+* Cookie API
 
 ## Future features:
 * Service workers to persist app and manage versions
@@ -20,14 +21,15 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Benchmark memory usage and response times (throttled for mobile) in tests
 * Elf state management
 * Immutable.js to minimize mutation
+* Tree-shaking/build optimization
 * Feature flags
 * Internationalization (i18n)
 * IndexedDB for offline storage
 * Websockets to reconcile disparities between server and local data
-* public api with graphql
+* public api with GraphQL
 * DB caching for external requests AND similar DB api calls (solr or the like)
 * Ionic & Electron integration
-* Auth-agnistic (or maybe just Firebase) user management (emails and password resetting and deliverability)
+* Auth-agnostic (or maybe just Firebase) user management (emails and password resetting and deliverability)
 
 ## Quick start
 
