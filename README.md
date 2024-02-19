@@ -1,6 +1,6 @@
 # angular-boilerplate
 
-This repo is intended to allow spooling up angular projects in a monorepo rapidly, with a minimum of configuration.
+This repo is intended to allow spooling up Angular projects in a monorepo rapidly, with a minimum of configuration.
 
 ## Current features
 * Angular 16 (with Node 18)
@@ -9,9 +9,10 @@ This repo is intended to allow spooling up angular projects in a monorepo rapidl
 * SASS boilerplate included
 * Frontend environment switching
 * Heroku deployment
+* Google Analytics
 
 ## Future features:
-* service workers to persist app and manage versions
+* Service workers to persist app and manage versions
 * Typescript with node for back-end (via webpack)?
 * Client & Server unit testing via jasmine
 * CI/CD (jenkins, sonar, etc?)
@@ -19,14 +20,14 @@ This repo is intended to allow spooling up angular projects in a monorepo rapidl
 * Benchmark memory usage and response times (throttled for mobile) in tests
 * Elf state management
 * Immutable.js to minimize mutation
-* feature flags
+* Feature flags
 * Internationalization (i18n)
-* indexedDB for offline storage
+* IndexedDB for offline storage
 * Websockets to reconcile disparities between server and local data
 * public api with graphql
 * DB caching for external requests AND similar DB api calls (solr or the like)
-* ionic & electron integration
-* auth-agnistic user management (emails and password resetting and deliverability)
+* Ionic & Electron integration
+* Auth-agnistic (or maybe just Firebase) user management (emails and password resetting and deliverability)
 
 ## Quick start
 
@@ -42,7 +43,7 @@ Install Angular CLI to allow executing commands: `npm i -g @angular/cli`
 
 ### Install modules
 
-From the root, run `npm ci --workspaces` (or do so from the two directories: /server and /client)
+From the root, run `npm ci --workspaces`
 
 ### Environment variables
 
