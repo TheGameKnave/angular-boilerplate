@@ -1,0 +1,24 @@
+/**
+ * Basic typography style for copy text
+ */
+
+html {
+  font-size: 62.5%;
+}
+body {
+  font: normal 1.2rem / 1.4 $text-font-stack;
+  font-family: $text-font-stack;
+  font-weight: 500;
+  font-feature-settings: "lnum";
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+  }
+}
+.monospace {
+  font-family: $code-font-stack;
+}
