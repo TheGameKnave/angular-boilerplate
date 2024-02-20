@@ -1,6 +1,6 @@
 {
   "name": "angular-boilerplate",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "client": "cd client && npm run start -- --configuration development",

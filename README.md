@@ -12,9 +12,9 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Heroku deployment
 * Google Analytics
 * Cookie API
+* Service worker to persist app and manage versions
 
 ## Future features:
-* Service workers to persist app and manage versions
 * Typescript with node for back-end (via webpack)?
 * Client & Server unit testing via jasmine
 * CI/CD (jenkins, sonar, etc?)
