@@ -13,6 +13,7 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Google Analytics
 * Cookie API
 * Service worker to persist app and manage versions
+* Hot module replacement for faster dev iteration
 
 ## Future features:
 * Typescript with node for back-end (via webpack)?
