@@ -8,6 +8,7 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Bare-bones api proxy to the back-end
 * SASS boilerplate included
 * Frontend environment detection/switching
+* Auto-unsub from subscriptions and component variables
 * Heroku deployment
 * Google Analytics
 * Cookie API

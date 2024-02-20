@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AutoUnsubscribe } from "src/app/helpers/unsub";
 import { CookieService } from 'ngx-cookie-service';
 import packageJson from '../../../package.json';
 
@@ -6,7 +7,8 @@ import packageJson from '../../../package.json';
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent implements OnInit {
+@AutoUnsubscribe()
+export class AppComponent implements OnInit, OnDestroy {
   public version: string = packageJson.version;
 
   constructor(
@@ -14,8 +16,8 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
   }
 
+  ngOnDestroy(): void {}
 }
 
