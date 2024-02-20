@@ -14,9 +14,9 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Cookie API
 * Service worker to persist app and manage versions
 * Hot module replacement for faster dev iteration
+* Typescript with node for back-end
 
 ## Future features:
-* Typescript with node for back-end (via webpack)?
 * Client & Server unit testing via jasmine
 * CI/CD (jenkins, sonar, etc?)
 * e2e testing with (testcafe/puppeteer?) + snapshots
