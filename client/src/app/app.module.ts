@@ -4,10 +4,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ExampleOneComponent } from './components/example-one/example-one.component';
+import { ExampleTwoComponent } from './components/example-two/example-two.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ExampleOneComponent,
+    ExampleTwoComponent,
   ],
   imports: [
     BrowserModule,

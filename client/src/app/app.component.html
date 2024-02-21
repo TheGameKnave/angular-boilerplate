@@ -1,3 +1,7 @@
 <h1>Angular Boilerplate</h1>
 <h2>v. {{ version }}</h2>
 <p>Hello, World!</p>
+<button *ngIf="componentToShow === 'example-one'" (click)="onComponentToggle('example-two')">Switch to Example Two</button>
+<button *ngIf="componentToShow === 'example-two'" (click)="onComponentToggle('example-one')">Switch to Example One</button>
+<app-example-one *ngIf="componentToShow === 'example-one'"></app-example-one>
+<app-example-two *ngIf="componentToShow === 'example-two'"></app-example-two>
