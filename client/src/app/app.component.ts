@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { AutoUnsubscribe } from "src/app/helpers/unsub";
 import { CookieService } from 'ngx-cookie-service';
 import packageJson from '../../../package.json';
@@ -17,7 +17,6 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private cookieService: CookieService,
     private updateService: UpdateService,
-    private cd: ChangeDetectorRef,
   ){
     updateService.checkForUpdates();
   }
@@ -26,7 +25,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   onComponentToggle(component: string): void {
     this.componentToShow = component;
-    this.cd.detectChanges();
   }
 
   ngOnDestroy(): void {}

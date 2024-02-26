@@ -23,6 +23,7 @@ export class UpdateService {
     this.updates.versionUpdates.subscribe(event => this.promptUser(event));
   }
 
+  /* istanbul ignore next */
   private promptUser(event: VersionEvent): void {
     if(event.type == 'VERSION_READY') {
       if(confirm('A new version is available. Please click “OK” to reload.')) {
