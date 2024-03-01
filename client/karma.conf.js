@@ -35,7 +35,7 @@ module.exports = function (config) {
     browsers: ['Chrome'],
     restartOnFileChange: true,
     files: [
-      '../test-data/global-variables.js',
+      '../test/global-variables.js',
     ]
   });
 };

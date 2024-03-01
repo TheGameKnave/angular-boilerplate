@@ -18,6 +18,7 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 
 ## Future features:
 * Client & Server unit testing via jasmine
+* Server testing for Windows (currently not working atm)
 * CI/CD (jenkins, sonar, etc?)
 * e2e testing with (testcafe/puppeteer?) + snapshots
 * Benchmark memory usage and response times (throttled for mobile) in tests
