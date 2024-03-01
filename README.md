@@ -15,22 +15,22 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Service worker to persist app and manage versions
 * Hot module replacement for faster dev iteration
 * Typescript with node for back-end
+* Client & Server unit testing via jasmine
 
 ## Future features:
-* Client & Server unit testing via jasmine
-* CI/CD (jenkins, sonar, etc?)
 * e2e testing with (testcafe/puppeteer?) + snapshots
-* Benchmark memory usage and response times (throttled for mobile) in tests
-* Elf state management
-* Immutable.js to minimize mutation
+* CI/CD (jenkins, sonar, etc?)
 * Tree-shaking/build optimization
-* Feature flags
+* Benchmark memory usage and response times (throttled for mobile) in tests
 * Internationalization (i18n)
+* Feature flags
 * IndexedDB for offline storage
 * Websockets to reconcile disparities between server and local data
 * public api with GraphQL
 * DB caching for external requests AND similar DB api calls (solr or the like)
 * Ionic & Electron integration
+* Elf state management
+* Immutable.js to minimize mutation
 * Auth-agnostic (or maybe just Firebase) user management (emails and password resetting and deliverability)
 
 ## Quick start
