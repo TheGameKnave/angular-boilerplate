@@ -86,6 +86,10 @@ This will display the API responses.
 
 tbd
 
+### TestCafe end2end testing
+
+### `npx testcafe chrome`
+
 ## Deployment
 
 ### Install Heroku CLI

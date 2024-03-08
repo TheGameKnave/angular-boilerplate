@@ -20,5 +20,8 @@
   "devDependencies": {
     "karma-jasmine": "^5.1.0",
     "testcafe": "^3.5.0"
+  },
+  "dependencies": {
+    "testcafe-angular-selectors": "^0.4.1"
   }
 }
