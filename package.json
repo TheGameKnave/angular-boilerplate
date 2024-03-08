@@ -18,6 +18,7 @@
     "./server"
   ],
   "devDependencies": {
-    "karma-jasmine": "^5.1.0"
+    "karma-jasmine": "^5.1.0",
+    "testcafe": "^3.5.0"
   }
 }
