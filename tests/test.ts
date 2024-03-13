@@ -13,5 +13,8 @@ test('Angular selector', async t => {
         .expect(rootAngular.exists).ok()
 });
 test('Click Button Test', async t => {
-    await t.click('button');
+    await t
+        .takeScreenshot('test-screenshot-1.png')
+        .click('button')
+        .takeScreenshot('test-screenshot-2.png');
 });
