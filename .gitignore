@@ -135,3 +135,10 @@ dist
 # Why, Mac, why?
 .DS_Store
 dump_prod.sql
+
+# e2e Testcafe current screenshot, only need the base
+**/e2e/**/actual.png
+**/e2e/**/out.png
+
+# generated files from e2e snapshot testing
+generated

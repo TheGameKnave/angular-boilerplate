@@ -1,3 +1,3 @@
 module.exports = {
-    "src": "tests"
+    "src": "tests/e2e"
 }

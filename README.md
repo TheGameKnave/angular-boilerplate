@@ -90,6 +90,20 @@ tbd
 
 ### `npx testcafe chrome`
 
+### Visual disgression testing in Testcafe via testcafe-blink-diff
+Run the Testcafe command with more parameters, since 
+with this one we're taking screenshots and prepping to compare them.
+
+* `npx testcafe chrome tests -s tests/e2e/screenshots --take-snapshot base`
+Takes the base screenshot. Run this once when the site is working.
+
+* `npx testacafe chrome tests -s tests/e2e/screenshots --take-snapshot actual`
+Takes an actual screenshot of the current site.
+Once taken, compared with the base screenshot for differences.
+
+* `npx testcafe-blink-diff tests/e2e/screenshots --compare base:actual --open --threshold 0.005`
+The CLI command to compare base:actual screenshots for differences.
+The report will be in generated/index.html.
 
 ## Deployment
 

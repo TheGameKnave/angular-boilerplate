@@ -10,8 +10,8 @@
     "heroku-postbuild": "cd client && npm install && npm run build -- --configuration ${NODE_ENV}",
     "dev": "run-p client server",
     "prod": "run-p client-prod server-prod",
-    "test": "./test/test.sh",
-    "test-win": "test\\test.bat"
+    "test": "./tests/test.sh",
+    "test-win": "tests\\test.bat"
   },
   "workspaces": [
     "./client",
@@ -19,7 +19,8 @@
   ],
   "devDependencies": {
     "karma-jasmine": "^5.1.0",
-    "testcafe": "^3.5.0"
+    "testcafe": "^3.5.0",
+    "testcafe-blink-diff": "^0.5.5"
   },
   "dependencies": {
     "testcafe-angular-selectors": "^0.4.1"
