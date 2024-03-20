@@ -96,10 +96,11 @@ with this one we're taking screenshots and prepping to compare them.
 
 * `npx testcafe chrome tests -s tests/e2e/screenshots --take-snapshot base`
 Takes the base screenshot. Run this once when the site is working.
+Be careful when running this, this will overrite the "working" screenshots in the directory.
 
 * `npx testacafe chrome tests -s tests/e2e/screenshots --take-snapshot actual`
 Takes an actual screenshot of the current site.
-Once taken, compared with the base screenshot for differences.
+Once taken, we use this to compare wit the "base" working screenshots to check for userflow errors.
 
 * `npx testcafe-blink-diff tests/e2e/screenshots --compare base:actual --open --threshold 0.005`
 The CLI command to compare base:actual screenshots for differences.
