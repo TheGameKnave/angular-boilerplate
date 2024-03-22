@@ -1,7 +1,7 @@
-import * as path from "path";
-import * as express from 'express';
+import path from "path";
+import express from 'express';
 import { Request, Response, NextFunction } from 'express';
-import * as pino from 'express-pino-logger';
+import pino from 'express-pino-logger';
 import config from './config/environment';
 import rateLimit from 'express-rate-limit';
 import apiRouter from './routes/api';
@@ -15,10 +15,6 @@ declare global {
   };
 }
 global.cache = {};
-
-export function sendAngularApp(req: Request, res: Response) {
-  res.sendFile(path.join(__dirname, 'client/dist/angular-boilerplate', 'index.html'));
-}
 
 
 export function setupApp(): express.Application {
@@ -35,11 +31,7 @@ export function setupApp(): express.Application {
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
   });
-  
-  app.use((req: Request, res: Response, next: NextFunction) => {
-    console.log('Time:', Date.now());
-    next();
-  });
+
   app.use('/api', apiLimiter);
   app.use('/api', apiRouter);
   
@@ -49,11 +41,15 @@ export function setupApp(): express.Application {
     app.use(express.static(path.join(dirname, 'client/dist/angular-boilerplate'),{maxAge:3600000}));
   
     // Handle app routing, return all requests to ngx app
-    app.get('*', sendAngularApp);
+    // istanbul ignore next
+    app.get('*', (req: Request, res: Response) => {
+      res.sendFile(path.join(__dirname, 'client/dist/angular-boilerplate', 'index.html'));
+    });
   }
   return app;
 }
 
+// istanbul ignore next
 if (require.main === module) {
   const app = setupApp();
   app.listen(config.server_port || 3000, () => {

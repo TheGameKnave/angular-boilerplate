@@ -1,7 +1,7 @@
-import * as request from 'supertest';
-import * as express from 'express';
+import request from 'supertest';
+import express from 'express';
 
-import { setupApp, sendAngularApp } from './index'; 
+import { setupApp } from './index'; 
 
 describe('Express server', () => {
   let app: express.Application;
@@ -9,11 +9,12 @@ describe('Express server', () => {
   process.env.SERVER_PORT = '9200';
   var server: any;
 
-  beforeEach(() => {
+  beforeEach(function(done) {
     app = setupApp(); // Use the helper function to set up the Express application
-    // Store the original sendFile method and replace it with a mock implementation
+
     server = app.listen(process.env.SERVER_PORT || 3000, () => {
       console.log('Express server is running on ' + (process.env.SERVER_PORT || 3000))
+      done();
     });
   });
 
@@ -24,8 +25,6 @@ describe('Express server', () => {
   describe('GET /', function() {
     it('serves the index file for the root path', async () => {
       // const response = await request(app).get('/');
-      // expect(response.status).toBe(200);
-      // expect(response.headers['content-type']).toBe('text/html; charset=UTF-8');
     });
   });
 

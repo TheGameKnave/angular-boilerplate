@@ -18,11 +18,10 @@
     "./server"
   ],
   "devDependencies": {
-    "karma-jasmine": "^5.1.0",
     "testcafe": "^3.5.0",
+    "testcafe-angular-selectors": "^0.4.1",
     "testcafe-blink-diff": "^0.5.5"
   },
   "dependencies": {
-    "testcafe-angular-selectors": "^0.4.1"
   }
 }

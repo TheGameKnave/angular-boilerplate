@@ -9,9 +9,9 @@ describe('API Router', () => {
   beforeEach(() => {
     request = {} as Request;
     response = {
-      send: jasmine.createSpy() // Creating a manual spy for the send method
+      send: jest.fn() // Using Jest's jest.fn() to create a spy for the send method
     } as unknown as Response;
-    next = jasmine.createSpy() as unknown as NextFunction;
+    next = jest.fn() as unknown as NextFunction;
   });
 
   it('should handle GET request', () => {
@@ -21,7 +21,7 @@ describe('API Router', () => {
       handler(request, response, next);
       expect(response.send).toHaveBeenCalledWith({ message: 'api works' });
     } else {
-      fail('GET handler not found');
+      throw new Error('GET handler not found'); // Using throw new Error() instead of fail()
     }
   });
 });
