@@ -11,7 +11,8 @@
     "dev": "run-p client server",
     "prod": "run-p client-prod server-prod",
     "test": "./tests/test.sh",
-    "test-win": "tests\\test.bat"
+    "test-win": "tests\\test.bat",
+    "watch": "testcafe chrome tests -L"
   },
   "workspaces": [
     "./client",

@@ -88,6 +88,9 @@ tbd
 
 ### TestCafe end-to-end testing Startup
 
+### `npx testcafe chrome -L --app "npm run dev"`
+    This command starts Testcafe in Live mode (-L) while launching the dev server first. 
+    if the server is running, do: 
 ### `npx testcafe chrome`
 
 ### Visual disgression testing in Testcafe via testcafe-blink-diff
