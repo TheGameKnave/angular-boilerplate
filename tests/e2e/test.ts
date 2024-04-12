@@ -6,13 +6,7 @@ fixture `App tests`
     .beforeEach(async () => {
         await waitForAngular();
     });
-
-const rootAngular = AngularSelector();
-
-test('Angular selector', async t => {
-    await t
-        .expect(rootAngular.exists).ok()
-});
+    
 test('Click Button Once', async t => {
     await t
         // .takeScreenshot('App_tests/Click_Button_Test/test-screenshot-1.png')

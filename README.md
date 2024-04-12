@@ -101,7 +101,7 @@ with this one we're taking screenshots and prepping to compare them.
 Takes the base screenshot. Run this once when the site is working.
 Be careful when running this, this will overrite the "working" screenshots in the directory.
 
-* `npx testacafe chrome tests -s tests/e2e/screenshots --take-snapshot actual`
+* `npx testcafe chrome tests -s tests/e2e/screenshots --take-snapshot actual`
 Takes an actual screenshot of the current site.
 Once taken, we use this to compare wit the "base" working screenshots to check for userflow errors.
 
