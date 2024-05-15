@@ -16,13 +16,12 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Hot module replacement for faster dev iteration
 * Typescript with node for back-end
 * Client & Server unit testing via jasmine
+* e2e testing with (testcafe/puppeteer?) + snapshots
+* Benchmark memory usage and response times (throttled for mobile) in tests
 
 ## Future features:
-* Server testing for Windows (currently not working atm)
-* e2e testing with (testcafe/puppeteer?) + snapshots
 * CI/CD (jenkins, sonar, etc?)
 * Tree-shaking/build optimization
-* Benchmark memory usage and response times (throttled for mobile) in tests
 * Internationalization (i18n)
 * Feature flags
 * IndexedDB for offline storage
