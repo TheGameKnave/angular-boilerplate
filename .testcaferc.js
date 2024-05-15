@@ -1,3 +1,4 @@
 module.exports = {
-    "src": "tests/e2e"
+    "src": "tests/e2e",
+    "retryTestPages": true,
 }

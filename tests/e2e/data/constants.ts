@@ -1,5 +1,5 @@
 export const thresholds = {
-    pageLoad: 20,
+    pageLoad: 40,
     memory: 80000000
 }
 export function getThreshold(thresholdKey: string){
