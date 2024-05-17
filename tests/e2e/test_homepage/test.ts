@@ -2,7 +2,7 @@ import { AngularSelector, waitForAngular } from 'testcafe-angular-selectors';
 import { takeSnapshot } from 'testcafe-blink-diff';
 import { Selector, test } from 'testcafe';
 import { ClientFunction } from 'testcafe';
-import { getThreshold } from './data/constants';
+import { getThreshold } from '../data/constants';
 
 // making memory exception. Might want to move to global ts file
 declare global {
