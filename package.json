@@ -11,7 +11,7 @@
     "server": "cd server && node-env-run --exec nodemon | pino-colada",
     "server-prod": "cd server && node-env-run --exec nodemon",
     "heroku-postbuild": "cd client && npm install && npm run build -- --configuration ${NODE_ENV}",
-    "start": "cd server && node index.js",
+    "start": "cd server && node index.ts",
     "dev": "run-p client server",
     "prod": "run-p client-prod server-prod",
     "test": "./tests/test.sh",
