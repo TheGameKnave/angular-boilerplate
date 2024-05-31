@@ -2,12 +2,16 @@
   "name": "angular-boilerplate",
   "version": "0.1.4",
   "private": true,
+  "engines": {
+    "node": "18.12.1"
+  },
   "scripts": {
     "client": "cd client && npm run start -- --configuration development",
     "client-prod": "NODE_ENV=production && cd client && npm run start -- --configuration production",
     "server": "cd server && node-env-run --exec nodemon | pino-colada",
     "server-prod": "cd server && node-env-run --exec nodemon",
     "heroku-postbuild": "cd client && npm install && npm run build -- --configuration ${NODE_ENV}",
+    "start": "cd server && ts-node index.ts",
     "dev": "run-p client server",
     "prod": "run-p client-prod server-prod",
     "test": "./tests/test.sh",
