@@ -42,6 +42,8 @@
     "mysql2": "^3.1.2",
     "sqlstring": "^2.3.3",
     "string-similarity": "^4.0.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.4.3",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
@@ -60,8 +62,6 @@
     "pino-colada": "^2.2.2",
     "sinon": "^17.0.1",
     "supertest": "^6.3.4",
-    "ts-jest": "^29.1.2",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.4.3"
+    "ts-jest": "^29.1.2"
   }
 }
