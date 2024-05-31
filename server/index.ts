@@ -1,7 +1,7 @@
-import * as path from "path";
-import * as express from 'express';
+import path from "path";
+import express from 'express';
 import { Request, Response, NextFunction } from 'express';
-import * as pino from 'express-pino-logger';
+import pino from 'express-pino-logger';
 import config from './config/environment';
 import rateLimit from 'express-rate-limit';
 import apiRouter from './routes/api';
