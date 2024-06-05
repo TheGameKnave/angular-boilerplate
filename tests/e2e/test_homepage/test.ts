@@ -32,10 +32,10 @@ const validateMemory = (memoryVal: { jsHeapSizeLimit: number; usedJSHeapSize: nu
 };
 
 fixture `App tests`
-    .page('http://localhost:4200')
-    .beforeEach(async () => {
-        await waitForAngular();
-    });
+    .page('https://angular-node-boilerplate-c873a67b06f7.herokuapp.com/')
+    // .beforeEach(async () => {
+    //     await waitForAngular();
+    // });
 // measures page load time, fails if load time over threshold
 test('Measure Page Load Time', async t => {
     const startTime = await t.eval(() => performance.now());

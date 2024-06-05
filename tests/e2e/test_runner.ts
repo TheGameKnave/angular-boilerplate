@@ -7,7 +7,7 @@ const createTestCafe = require("testcafe");
     const runner = testcafe.createRunner();
 
     const failedCount = await runner
-      .browsers(["edge --window-size=1280,1024"])
+      .browsers(["chrome --window-size=1280,1024"])
       .src(["tests/e2e/test_homepage/test.ts"])
       .run();
 
