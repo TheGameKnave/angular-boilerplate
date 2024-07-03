@@ -1,0 +1,15 @@
+<footer>
+  <ul
+    class="i18n"
+    (click)="onI18n($event)"
+  >
+    <li *ngFor="let language of languages" [class]="'i18n-' + language.code">
+      <a
+        tabindex="0"
+        [ngClass]="{'active': language.code === (translate.currentLang || translate.defaultLang)}"
+      >
+        {{language.flag}} {{language.name}}
+      </a>
+    </li>
+  </ul>
+</footer>
