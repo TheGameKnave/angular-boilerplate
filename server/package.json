@@ -60,6 +60,6 @@
     "nyc": "^15.1.0",
     "onchange": "^7.1.0",
     "pino-colada": "^2.2.2",
-    "supertest": "^6.3.4",
+    "supertest": "^6.3.4"
   }
 }
