@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private updateService: UpdateService,
     private translate: TranslateService, // used in the template
   ){
-    updateService.checkForUpdates();
+    this.updateService.checkForUpdates();
   }
 
   ngOnInit(): void {
