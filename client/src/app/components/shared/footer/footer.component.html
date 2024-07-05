@@ -3,12 +3,12 @@
     class="i18n"
     (click)="onI18n($event)"
   >
-    <li *ngFor="let language of languages" [class]="'i18n-' + language.code">
+    <li *ngFor="let ln of supportedLanguages" [class]="'i18n-' + ln">
       <a
         tabindex="0"
-        [ngClass]="{'active': language.code === (translate.currentLang || translate.defaultLang)}"
+        [ngClass]="{'active': ln === (translate.currentLang || translate.defaultLang)}"
       >
-        {{language.flag}} {{language.name}}
+        {{Object.values(languages[ln].regions)[0].flag}} {{languages[ln].nativeName}}
       </a>
     </li>
   </ul>

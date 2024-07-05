@@ -42,7 +42,7 @@ export function createTranslateLoader(http: HttpClient) {
       // use the forChild static method to import 
       // the TranslateModule.
       // https://github.com/ngx-translate/core
-    }), 
+    }),
   ],
   exports: [
       TranslateModule,

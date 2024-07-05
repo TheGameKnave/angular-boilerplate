@@ -1,3 +1,10 @@
 {
-  "HELLO": "Hola mundo"
+  "hello": "Hola mundo"
+  ,"angularBoilerplate": "Plantilla Angular"
+  ,"v.": "v."
+  ,"switchToExample": "Cambiar al ejemplo {{componentNumber}}"
+  ,"one": "Uno"
+  ,"two": "Dos"
+  ,"exampleOneWorks!": "¡El ejemplo Uno funciona!"
+  ,"exampleTwoWorks!": "¡El ejemplo Dos funciona!"
 }

@@ -1,3 +1,10 @@
 {
-  "HELLO": "Hello world"
+  "hello": "Hello world"
+  ,"angularBoilerplate": "Angular Boilerplate"
+  ,"v.": "v."
+  ,"switchToExample": "Switch to example {{componentNumber}}"
+  ,"one": "One"
+  ,"two": "Two"
+  ,"exampleOneWorks!": "Example One works!"
+  ,"exampleTwoWorks!": "Example Two works!"
 }

@@ -12,14 +12,13 @@ import { TranslateService } from '@ngx-translate/core';
 })
 @AutoUnsubscribe()
 export class AppComponent implements OnInit, OnDestroy {
-  param = {value: 'World'}
   public version: string = packageJson.version;
   public componentToShow: string = 'example-one';
 
   constructor(
     private cookieService: CookieService,
     private updateService: UpdateService,
-    private translate: TranslateService,
+    private translate: TranslateService, // used in the template
   ){
     updateService.checkForUpdates();
   }
