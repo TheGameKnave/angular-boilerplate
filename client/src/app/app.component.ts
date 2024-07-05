@@ -18,7 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private cookieService: CookieService,
     private updateService: UpdateService,
   ){
-    updateService.checkForUpdates();
+    this.updateService.checkForUpdates();
   }
 
   ngOnInit(): void {
