@@ -23,6 +23,7 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * CI/CD (jenkins, sonar, etc?)
 * Tree-shaking/build optimization
 * Internationalization (i18n)
+* Google Analytics reports on site activity
 * Feature flags
 * IndexedDB for offline storage
 * Websockets to reconcile disparities between server and local data
