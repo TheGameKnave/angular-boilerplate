@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LANGUAGES, SUPPORTED_LANGUAGES } from 'src/app/helpers/constants';
+import { SUPPORTED_LANGUAGES } from 'src/app/helpers/constants';
+import { LANGUAGES } from 'i18n-l10n-flags';
 
 @Component({
   selector: 'app-footer',
