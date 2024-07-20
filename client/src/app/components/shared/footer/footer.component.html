@@ -4,12 +4,22 @@
     (click)="onI18n($event)"
   >
     <li *ngFor="let ln of supportedLanguages" [class]="'i18n-' + ln">
-      <a
-        tabindex="0"
-        [ngClass]="{'active': ln === (translate.currentLang || translate.defaultLang)}"
-      >
-        {{Object.values(languages[ln].regions)[0].flag}} {{languages[ln].nativeName}}
-      </a>
+      <ng-template [ngIf]="!ln.includes('-')" [ngIfElse]="locale">
+        <a
+          tabindex="0"
+          [ngClass]="{'active': ln === (translate.currentLang || translate.defaultLang)}"
+        >
+          {{Object.values(languages[ln].locales)[0].flag}} {{languages[ln].nativeName}}
+        </a>
+      </ng-template>
+      <ng-template #locale>
+        <a
+          tabindex="0"
+          [ngClass]="{'active': ln === (translate.currentLang || translate.defaultLang)}"
+        >
+          {{languages[ln.split('-')[0]].locales[ln].flag}} {{languages[ln.split('-')[0]].nativeName}} ({{languages[ln.split('-')[0]].locales[ln].nativeName}})
+        </a>
+      </ng-template>
     </li>
   </ul>
 </footer>
