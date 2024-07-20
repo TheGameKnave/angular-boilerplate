@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { SUPPORTED_LANGUAGES } from 'src/app/helpers/constants';
 import { LANGUAGES } from 'i18n-l10n-flags';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-footer',
@@ -16,6 +17,7 @@ export class FooterComponent {
 
   constructor(
     public translate: TranslateService,
+    public cookieService: CookieService,
   ){
     this.supportedLanguages.forEach(lang => this.classToLang[`i18n-${lang}`] = lang);
   }
@@ -30,6 +32,7 @@ export class FooterComponent {
       if (langClass) {
         const langCode = this.classToLang[langClass];
         this.translate.use(langCode);
+        this.cookieService.set('lang', langCode);
       }
     }
   }
