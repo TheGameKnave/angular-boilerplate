@@ -1,0 +1,14 @@
+{
+  "hello": "你好，世界"
+  ,"angularBoilerplate": "Angular 模板"
+  ,"v.": "v."
+  ,"switchToExample": "切换到示例 {{componentNumber}}"
+  ,"one": "一"
+  ,"two": "二"
+  ,"exampleWorks!": "示例{{componentNumber}}运行正常！"
+  ,"componentsCount": {
+    "none": "没有组件。",
+    "singular": "有 {{ componentsQty }} 个组件。",
+    "plural": "有 {{ componentsQty }} 个组件。"
+  }
+}

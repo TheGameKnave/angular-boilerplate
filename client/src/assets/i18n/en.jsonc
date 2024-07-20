@@ -1,0 +1,15 @@
+{
+  // English
+  "hello": "Hello world" // main page greeting
+  ,"angularBoilerplate": "Angular Boilerplate" // main page title
+  ,"v.": "v." // main page version
+  ,"one": "One" // numbers
+  ,"two": "Two" // numbers
+  ,"switchToExample": "Switch to example {{componentNumber}}" // main page component swap button
+  ,"exampleWorks!": "Example {{componentNumber}} works!" // success message
+  ,"componentsCount": { // message about component quantity
+    "none": "There are no components.",
+    "singular": "There is {{ componentsQty }} component.",
+    "plural": "There are {{ componentsQty }} components."
+  }
+}

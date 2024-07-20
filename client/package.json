@@ -24,7 +24,7 @@
     "@angular/service-worker": "^16.1.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
-    "i18n-l10n-flags": "^1.0.0",
+    "i18n-l10n-flags": "^2.0.0",
     "ngx-cookie-service": "^16.1.0",
     "rxjs": "~7.8.0",
     "testcafe": "^3.5.0",
