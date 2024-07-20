@@ -2,11 +2,10 @@
   "hello": "Bonjour le monde"
   ,"angularBoilerplate": "Modèle Angular"
   ,"v.": "v."
-  ,"switchToExample": "Passer à l'exemple {{componentNumber}}"
   ,"one": "Un"
   ,"two": "Deux"
-  ,"exampleOneWorks!": "L'exemple Un fonctionne !"
-  ,"exampleTwoWorks!": "L'exemple Deux fonctionne !"
+  ,"switchToExample": "Passer à l'exemple {{componentNumber}}"
+  ,"exampleWorks!": "L'exemple {{componentNumber}} fonctionne !"
   ,"componentsCount": {
     "none": "Il n'y a pas de composants.",
     "singular": "Il y a {{ componentsQty }} composant.",

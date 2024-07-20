@@ -10,10 +10,11 @@ import { ExampleOneComponent } from './components/example-one/example-one.compon
 import { ExampleTwoComponent } from './components/example-two/example-two.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { PluralTranslatePipe } from './pipes/plural-translate.pipe';
+import { JsoncLoader } from './helpers/jsonc-loader';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new JsoncLoader(http);
 }
 
 @NgModule({
@@ -36,9 +37,9 @@ export function createTranslateLoader(http: HttpClient) {
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
-          provide: TranslateLoader,
-          useFactory: (createTranslateLoader),
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
       }
       // When you lazy load a module, you should 
       // use the forChild static method to import 

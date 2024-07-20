@@ -5,8 +5,7 @@
   ,"switchToExample": "切換到示例 {{componentNumber}}"
   ,"one": "一"
   ,"two": "二"
-  ,"exampleOneWorks!": "示例一成功！"
-  ,"exampleTwoWorks!": "示例二成功！"
+  ,"exampleWorks!": "示例{{componentNumber}}成功！"
   ,"componentsCount": {
     "none": "沒有元件。"
     ,"singular": "有 {{ componentsQty }} 個元件。"

@@ -5,8 +5,7 @@
   ,"switchToExample": "切换到示例 {{componentNumber}}"
   ,"one": "一"
   ,"two": "二"
-  ,"exampleOneWorks!": "示例一运行正常！"
-  ,"exampleTwoWorks!": "示例二运行正常！"
+  ,"exampleWorks!": "示例{{componentNumber}}运行正常！"
   ,"componentsCount": {
     "none": "没有组件。",
     "singular": "有 {{ componentsQty }} 个组件。",
