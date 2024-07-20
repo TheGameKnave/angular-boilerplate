@@ -7,4 +7,9 @@
   ,"two": "Zwei"
   ,"exampleOneWorks!": "Beispiel Eins funktioniert!"
   ,"exampleTwoWorks!": "Beispiel Zwei funktioniert!"
+  ,"componentsCount": {
+    "none": "Es gibt keine Komponenten.",
+    "singular": "Es gibt {{ componentsQty }} Komponente.",
+    "plural": "Es gibt {{ componentsQty }} Komponenten."
+  }
 }

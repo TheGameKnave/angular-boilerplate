@@ -9,6 +9,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { ExampleOneComponent } from './components/example-one/example-one.component';
 import { ExampleTwoComponent } from './components/example-two/example-two.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
+import { PluralTranslatePipe } from './pipes/plural-translate.pipe';
 
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
@@ -21,6 +22,7 @@ export function createTranslateLoader(http: HttpClient) {
     ExampleOneComponent,
     ExampleTwoComponent,
     FooterComponent,
+    PluralTranslatePipe,
   ],
   imports: [
     BrowserModule,

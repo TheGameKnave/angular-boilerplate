@@ -2,6 +2,7 @@
   <h1>{{ 'angularBoilerplate' | translate }}</h1>
   <h2>{{ 'v.' | translate}} {{ version }}</h2>
   <p>{{ 'hello' | translate }}</p>
+  <p>{{ 'componentsCount' | pluralTranslate:2 | translate:{ componentsQty: 2} }}</p>
   <app-example-one *ngIf="componentToShow === 'example-one'"></app-example-one>
   <app-example-two *ngIf="componentToShow === 'example-two'"></app-example-two>
   <button *ngIf="componentToShow === 'example-one'" (click)="onComponentToggle('example-two')">{{ 'switchToExample' | translate:{ componentNumber: 'two' | translate } }}</button>
