@@ -1,8 +1,10 @@
-<h1>{{ 'angularBoilerplate' | translate }}</h1>
-<h2>{{ 'v.' | translate}} {{ version }}</h2>
-<p>{{ 'hello' | translate }}  </p>
-<button *ngIf="componentToShow === 'example-one'" (click)="onComponentToggle('example-two')">{{ 'switchToExample' | translate:{ componentNumber: 'two' | translate } }}</button>
-<button *ngIf="componentToShow === 'example-two'" (click)="onComponentToggle('example-one')">{{ 'switchToExample' | translate:{ componentNumber: 'one' | translate } }}</button>
-<app-example-one *ngIf="componentToShow === 'example-one'"></app-example-one>
-<app-example-two *ngIf="componentToShow === 'example-two'"></app-example-two>
-<app-footer></app-footer>
+<ng-container *ngIf="displayApp">
+  <h1>{{ 'angularBoilerplate' | translate }}</h1>
+  <h2>{{ 'v.' | translate}} {{ version }}</h2>
+  <p>{{ 'hello' | translate }}</p>
+  <app-example-one *ngIf="componentToShow === 'example-one'"></app-example-one>
+  <app-example-two *ngIf="componentToShow === 'example-two'"></app-example-two>
+  <button *ngIf="componentToShow === 'example-one'" (click)="onComponentToggle('example-two')">{{ 'switchToExample' | translate:{ componentNumber: 'two' | translate } }}</button>
+  <button *ngIf="componentToShow === 'example-two'" (click)="onComponentToggle('example-one')">{{ 'switchToExample' | translate:{ componentNumber: 'one' | translate } }}</button>
+  <app-footer></app-footer>
+</ng-container>
