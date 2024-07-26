@@ -2,40 +2,104 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { CookieService } from 'ngx-cookie-service';
 import { UpdateService } from './services/update.service';
+import { TranslateService, TranslateModule, TranslateLoader, TranslateFakeLoader } from '@ngx-translate/core';
+import { of } from 'rxjs';
+import { PluralTranslatePipe } from './pipes/plural-translate.pipe';
+import { FooterComponent } from './components/shared/footer/footer.component';
+import { ExampleOneComponent } from './components/example-one/example-one.component';
+import { ExampleTwoComponent } from './components/example-two/example-two.component';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
+  let cookieService: jasmine.SpyObj<CookieService>;
   let updateService: jasmine.SpyObj<UpdateService>;
+  let translateService: jasmine.SpyObj<TranslateService>;
 
   beforeEach(() => {
+    const cookieServiceSpy = jasmine.createSpyObj('CookieService', ['get', 'set']);
     const updateServiceSpy = jasmine.createSpyObj('UpdateService', ['checkForUpdates']);
 
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      declarations: [
+        AppComponent,
+        PluralTranslatePipe,
+        FooterComponent,
+        ExampleOneComponent,
+        ExampleTwoComponent,
+      ],
+      imports: [
+        TranslateModule.forRoot({ // !!!!!! This is the way to mock the TranslateService
+          loader: {               // don't try to mock/stub instead.
+            provide: TranslateLoader,
+            useClass: TranslateFakeLoader,
+          }
+        }),
+      ],
       providers: [
-        CookieService,
-        { provide: UpdateService, useValue: updateServiceSpy }
+        { provide: CookieService, useValue: cookieServiceSpy },
+        { provide: UpdateService, useValue: updateServiceSpy },
       ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+    cookieService = TestBed.inject(CookieService) as jasmine.SpyObj<CookieService>;
     updateService = TestBed.inject(UpdateService) as jasmine.SpyObj<UpdateService>;
+    translateService = TestBed.inject(TranslateService) as jasmine.SpyObj<TranslateService>;
   });
 
-  it('should create the app', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should check for updates', () => {
+  it('should initialize userLang and displayApp correctly on ngOnInit', () => {
+    // Set up the mock for the get method
+    cookieService.get.and.returnValue('fr-FR');
+
+    // Call ngOnInit
+    component.ngOnInit();
+
+    // Verify interactions and component state
+    expect(cookieService.get).toHaveBeenCalledWith('lang');
+    expect(cookieService.set).toHaveBeenCalledWith('lang', 'fr');
+    expect(component.userLang).toBe('fr');
+    expect(component.displayApp).toBeTrue();
+  });
+
+  it('should fall back to default language if userLang is not supported', () => {
+    // Set up the mock for the get method
+    cookieService.get.and.returnValue('xx-YY');
+
+    // Call ngOnInit
+    component.ngOnInit();
+
+    // Verify interactions and component state
+    expect(cookieService.get).toHaveBeenCalledWith('lang');
+    expect(cookieService.set).toHaveBeenCalledWith('lang', 'en');
+    expect(component.userLang).toBe('en');
+  });
+
+  it('should toggle componentToShow correctly', () => {
+    const newComponent = 'example-two';
+    component.onComponentToggle(newComponent);
+    expect(component.componentToShow).toBe(newComponent);
+  });
+
+  it('should call checkForUpdates on initialization', () => {
+    // Ensure checkForUpdates is called once
     component.ngOnInit();
     expect(updateService.checkForUpdates).toHaveBeenCalled();
   });
 
-  it('should toggle component', () => {
-    component.onComponentToggle('example-one');
-    expect(component.componentToShow).toBe('example-one');
+  it('should use the correct language on translate', () => {
+    const userLang = 'es';
+    cookieService.get.and.returnValue(userLang);
+    
+    // Call ngOnInit to trigger the translate use
+    component.ngOnInit();
+    
+    // Check if translateService.use was called with the correct argument
+    expect(translateService.currentLang).toBe(userLang);
   });
-  
 });

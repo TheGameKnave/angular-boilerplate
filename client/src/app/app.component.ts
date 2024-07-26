@@ -43,13 +43,13 @@ export class AppComponent implements OnInit, OnDestroy {
     // set language in the cookie (mainly important for first load)
     this.cookieService.set('lang', this.userLang);
     // set language in the translate service
-    this.translate.use(this.userLang);
     // listen for language changes and display the app
-    this.translate.onLangChange.subscribe(() => {
+    this.translate.use(this.userLang).subscribe(() => {
       this.displayApp = !!this.userLang && !!this.translate.currentLang;
       this.changeDetector.detectChanges();
     });
   }
+  
   onComponentToggle(component: string): void {
     this.componentToShow = component;
   }
