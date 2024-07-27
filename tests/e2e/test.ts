@@ -84,7 +84,7 @@ test('Measure Memory Usage', async t => {
 });
 test('Test Language Change', async t => {
   const englishButton = Selector('.i18n-en');
-  const dutchButton = Selector('.i18n-de');
+  const germanButton = Selector('.i18n-de');
   const frenchButton = Selector('.i18n-fr');
   const spanishButton = Selector('.i18n-es');
   const chineseButton = Selector('.i18n-zh-CN');
@@ -102,9 +102,9 @@ test('Test Language Change', async t => {
     .expect(Selector('button').innerText).eql("Switch to example Two" || "Switch to example One");
     
 
-  // Click on the Dutch button
-  await t.click(dutchButton);
-  // Test if the page has been translated to Dutch
+  // Click on the German button
+  await t.click(germanButton);
+  // Test if the page has been translated to German
   await t
     .expect(Selector('app-root > :nth-child(1)').innerText).eql("Angular Boilerplate")
     .expect(Selector('app-root > :nth-child(3)').innerText).eql("Hallo Welt")
