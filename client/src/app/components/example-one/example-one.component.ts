@@ -2,9 +2,10 @@ import { Component, OnDestroy } from '@angular/core';
 import { AutoUnsubscribe } from 'src/app/helpers/unsub';
 
 @Component({
-  selector: 'app-example-one',
-  templateUrl: './example-one.component.html',
-  styles: ``
+    selector: 'app-example-one',
+    templateUrl: './example-one.component.html',
+    styles: ``,
+    standalone: true
 })
 @AutoUnsubscribe()
 export class ExampleOneComponent implements OnDestroy {

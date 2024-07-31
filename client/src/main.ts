@@ -1,11 +1,20 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { environment } from './environments/environment';
+import { importProvidersFrom, isDevMode } from '@angular/core';
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { ENVIRONMENT } from './environments/environment';
+import { AppComponent } from './app/app.component';
 
-import { AppModule } from './app/app.module';
-
-
-platformBrowserDynamic().bootstrapModule(AppModule).then(() => {
-  if ('serviceWorker' in navigator && environment.production) {
+bootstrapApplication(AppComponent, {
+    providers: [
+        importProvidersFrom(BrowserModule, ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000',
+        })),
+        provideHttpClient(withInterceptorsFromDi())
+    ]
+}).then(() => {
+  if ('serviceWorker' in navigator && ENVIRONMENT.production) {
     navigator.serviceWorker.register('ngsw-worker.js');
   }
-}).catch(err => console.log(err));
+}).catch(err => console.error(err));

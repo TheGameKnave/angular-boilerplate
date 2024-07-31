@@ -17,19 +17,17 @@ describe('AppComponent', () => {
     const updateServiceSpy = jasmine.createSpyObj('UpdateService', ['checkForUpdates']);
 
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent,
+    imports: [
         FooterComponent,
         ExampleOneComponent,
         ExampleTwoComponent,
-      ],
-      imports: [
-      ],
-      providers: [
+        AppComponent
+    ],
+    providers: [
         { provide: CookieService, useValue: cookieServiceSpy },
         { provide: UpdateService, useValue: updateServiceSpy },
-      ],
-    }).compileComponents();
+    ],
+}).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;

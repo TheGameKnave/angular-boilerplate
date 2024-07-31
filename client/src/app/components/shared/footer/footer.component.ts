@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 import { SUPPORTED_LANGUAGES } from 'src/app/helpers/constants';
 import { LANGUAGES } from 'i18n-l10n-flags';
 import { CookieService } from 'ngx-cookie-service';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-footer',
-  templateUrl: './footer.component.html',
-  styles: ``
+    selector: 'app-footer',
+    templateUrl: './footer.component.html',
+    standalone: true,
+    imports: [NgClass],
+    styles: ``
 })
 export class FooterComponent {
   Object = Object;

@@ -1,14 +1,26 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { AutoUnsubscribe } from "src/app/helpers/unsub";
-import { CookieService } from 'ngx-cookie-service';
-import packageJson from '../../../package.json';
 import { UpdateService } from './services/update.service';
+import { CookieService } from 'ngx-cookie-service';
+import { AutoUnsubscribe } from "src/app/helpers/unsub";
+
+import packageJson from '../../../package.json';
 import { SUPPORTED_LANGUAGES } from 'src/app/helpers/constants';
 
+import { ExampleOneComponent } from './components/example-one/example-one.component';
+import { ExampleTwoComponent } from './components/example-two/example-two.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
+
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        ExampleOneComponent,
+        ExampleTwoComponent,
+        FooterComponent,
+    ],
+    styles: ``
 })
 @AutoUnsubscribe()
 export class AppComponent implements OnInit, OnDestroy {

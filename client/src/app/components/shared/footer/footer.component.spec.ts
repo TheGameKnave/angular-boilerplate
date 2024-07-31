@@ -12,11 +12,11 @@ describe('FooterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FooterComponent],
-      providers: [
+    imports: [FooterComponent],
+    providers: [
         CookieService,
-      ]
-    }).compileComponents();
+    ]
+}).compileComponents();
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
     cookieService = TestBed.inject(CookieService);
