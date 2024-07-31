@@ -1,22 +1,26 @@
-import { TestBed, discardPeriodicTasks, fakeAsync,flush,tick } from '@angular/core/testing';
+import { TestBed, discardPeriodicTasks, fakeAsync, flush, tick } from '@angular/core/testing';
 import { UpdateService } from './update.service';
-import { SwUpdate, UnrecoverableStateEvent, UpdateActivatedEvent, UpdateAvailableEvent, VersionEvent } from '@angular/service-worker';
+import { SwUpdate } from '@angular/service-worker';
 import { Observable, of, Subject, Subscription } from 'rxjs';
+import { VersionEvent, UnrecoverableStateEvent } from '@angular/service-worker'; // Import the VersionEvent type
+import { Injectable } from '@angular/core';
 
+export class UnrecoverableStateEventMock implements UnrecoverableStateEvent {
+  reason: string = '';
+  type: "UNRECOVERABLE_STATE" = "UNRECOVERABLE_STATE";
+  // Add any other properties required by UnrecoverableStateEvent
+}
+
+@Injectable()
 export class SwUpdateMock extends SwUpdate {
-  private $$availableSubj = new Subject<UpdateAvailableEvent>();
-  private $$activatedSubj = new Subject<UpdateActivatedEvent>();
-  private $$unrecoverableSubj = new Subject<UnrecoverableStateEvent>();
+  private $$availableSubj = new Subject<VersionEvent>();
+  private $$activatedSubj = new Subject<VersionEvent>();
+  private $$unrecoverableSubj = new Subject<UnrecoverableStateEventMock>();
 
   override versionUpdates: Observable<VersionEvent> = of({} as VersionEvent);
-  override available: Observable<UpdateAvailableEvent> = this.$$availableSubj.asObservable();
-  override activated: Observable<UpdateActivatedEvent> = this.$$activatedSubj.asObservable();
-  override unrecoverable: Observable<UnrecoverableStateEvent> = this.$$unrecoverableSubj.asObservable();
-
-  override get isEnabled(): boolean {
-    return true; // Your mock implementation for isEnabled
-  }
-
+  public available: Observable<VersionEvent> = this.$$availableSubj.asObservable();
+  public activated: Observable<VersionEvent> = this.$$activatedSubj.asObservable();
+  override unrecoverable: Observable<UnrecoverableStateEventMock> = this.$$unrecoverableSubj.asObservable();
   constructor() {
     super({} as any);
   }
@@ -34,17 +38,17 @@ export class SwUpdateMock extends SwUpdate {
 
 describe('UpdateService', () => {
   let service: UpdateService;
-
-  const swUpdateMock = new SwUpdateMock();
+  let swUpdate: SwUpdateMock;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         UpdateService,
-        { provide: SwUpdate, useValue: SwUpdateMock }
+        { provide: SwUpdate, useClass: SwUpdateMock }
       ]
     });
     service = TestBed.inject(UpdateService);
+    swUpdate = TestBed.inject(SwUpdate) as SwUpdateMock;
   });
 
   it('should be created', () => {
