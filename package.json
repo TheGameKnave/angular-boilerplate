@@ -1,9 +1,9 @@
 {
   "name": "angular-boilerplate",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "private": true,
   "engines": {
-    "node": "18.20.4"
+    "node": "20.16.0"
   },
   "scripts": {
     "client": "cd client && npm run start -- --configuration development",
