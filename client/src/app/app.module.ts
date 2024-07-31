@@ -1,21 +1,12 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { ExampleOneComponent } from './components/example-one/example-one.component';
 import { ExampleTwoComponent } from './components/example-two/example-two.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
-import { PluralTranslatePipe } from './pipes/plural-translate.pipe';
-import { JsoncLoader } from './helpers/jsonc-loader';
-
-// AoT requires an exported function for factories
-export function createTranslateLoader(http: HttpClient) {
-  return new JsoncLoader(http);
-}
 
 @NgModule({
   declarations: [
@@ -23,7 +14,6 @@ export function createTranslateLoader(http: HttpClient) {
     ExampleOneComponent,
     ExampleTwoComponent,
     FooterComponent,
-    PluralTranslatePipe,
   ],
   imports: [
     BrowserModule,
@@ -34,23 +24,12 @@ export function createTranslateLoader(http: HttpClient) {
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    TranslateModule.forRoot({
-      defaultLanguage: 'en',
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
-      // When you lazy load a module, you should 
-      // use the forChild static method to import 
-      // the TranslateModule.
-      // https://github.com/ngx-translate/core
-    }),
   ],
   exports: [
-      TranslateModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent,
+  ],
 })
 export class AppModule { }

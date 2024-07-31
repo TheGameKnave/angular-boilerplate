@@ -3,7 +3,6 @@ import { AutoUnsubscribe } from "src/app/helpers/unsub";
 import { CookieService } from 'ngx-cookie-service';
 import packageJson from '../../../package.json';
 import { UpdateService } from './services/update.service';
-import { TranslateService } from '@ngx-translate/core';
 import { SUPPORTED_LANGUAGES } from 'src/app/helpers/constants';
 
 @Component({
@@ -21,7 +20,6 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private cookieService: CookieService,
     private updateService: UpdateService,
-    private translate: TranslateService,
     private changeDetector: ChangeDetectorRef,
   ){
     this.updateService.checkForUpdates();
@@ -44,10 +42,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.cookieService.set('lang', this.userLang);
     // set language in the translate service
     // listen for language changes and display the app
-    this.translate.use(this.userLang).subscribe(() => {
-      this.displayApp = !!this.userLang && !!this.translate.currentLang;
-      this.changeDetector.detectChanges();
-    });
+    // this.translate.use(this.userLang).subscribe(() => {
+    //   this.displayApp = !!this.userLang && !!this.translate.currentLang;
+    //   this.changeDetector.detectChanges();
+    // });
   }
   
   onComponentToggle(component: string): void {

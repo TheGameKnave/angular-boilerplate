@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TranslateModule } from '@ngx-translate/core';
 import { ExampleOneComponent } from './example-one.component';
 
 describe('ExampleOneComponent', () => {
@@ -8,7 +7,6 @@ describe('ExampleOneComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
       declarations: [ExampleOneComponent],
     });
     fixture = TestBed.createComponent(ExampleOneComponent);
