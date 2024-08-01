@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { SUPPORTED_LANGUAGES } from 'src/app/helpers/constants';
 import { FooterComponent } from './footer.component';
 import { of } from 'rxjs';
+import { getTranslocoModule } from 'src/app/helpers/transloco-testing.module';
 
 
 describe('FooterComponent', () => {
@@ -12,11 +13,14 @@ describe('FooterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [FooterComponent],
-    providers: [
+      imports: [
+        FooterComponent,
+        getTranslocoModule(),
+      ],
+      providers: [
         CookieService,
-    ]
-}).compileComponents();
+      ]
+    }).compileComponents();
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
     cookieService = TestBed.inject(CookieService);

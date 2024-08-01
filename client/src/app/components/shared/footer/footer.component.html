@@ -3,11 +3,11 @@
     @for (ln of supportedLanguages; track ln) {
       <li [class]="'i18n-' + ln">
         @if (!ln.includes('-')) {
-          <a tabindex="0" [ngClass]="{'active': ln === 'en'}">
+          <a tabindex="0" [ngClass]="{'active': ln === translate.getActiveLang()}">
             {{ Object.values(languages[ln].locales)[0].flag }} {{ languages[ln].nativeName }}
           </a>
         } @else {
-          <a tabindex="0" [ngClass]="{'active': ln === 'en'}">
+          <a tabindex="0" [ngClass]="{'active': ln === translate.getActiveLang()}">
             {{ languages[ln.split('-')[0]].locales[ln].flag }} {{ languages[ln.split('-')[0]].nativeName }} ({{ languages[ln.split('-')[0]].locales[ln].nativeName }})
           </a>
         }

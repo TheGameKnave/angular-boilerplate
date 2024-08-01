@@ -1,0 +1,8 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["client/src/assets/i18n/*.json"],
+      "url": "./tests/translation/translation.schema.json"
+    }
+  ]
+}

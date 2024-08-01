@@ -17,7 +17,7 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Typescript with node for back-end
 * Client & Server unit testing via jasmine
 * Benchmark memory usage and response times (throttled for mobile) in tests
-* Internationalization (i18n) with ngx-translate
+* Internationalization (i18n) with Transloco
 
 ## Future features:
 * e2e testing with puppeteer + snapshots
@@ -82,7 +82,9 @@ Open [http://localhost:4201](http://localhost:4201) to view it in the browser.
 
 This will display the API responses.
 
-### unit testing
+## Tests
+
+### Unit Testing
 
 tbd
 

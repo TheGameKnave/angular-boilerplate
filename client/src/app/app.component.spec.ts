@@ -1,69 +1,40 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { CookieService } from 'ngx-cookie-service';
 import { UpdateService } from './services/update.service';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { ExampleOneComponent } from './components/example-one/example-one.component';
 import { ExampleTwoComponent } from './components/example-two/example-two.component';
+import { getTranslocoModule } from './helpers/transloco-testing.module';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-  let cookieService: jasmine.SpyObj<CookieService>;
   let updateService: jasmine.SpyObj<UpdateService>;
 
   beforeEach(() => {
-    const cookieServiceSpy = jasmine.createSpyObj('CookieService', ['get', 'set']);
     const updateServiceSpy = jasmine.createSpyObj('UpdateService', ['checkForUpdates']);
 
     TestBed.configureTestingModule({
-    imports: [
+      imports: [
         FooterComponent,
         ExampleOneComponent,
         ExampleTwoComponent,
-        AppComponent
-    ],
-    providers: [
-        { provide: CookieService, useValue: cookieServiceSpy },
+        AppComponent,
+        getTranslocoModule(),
+      ],
+      providers: [
         { provide: UpdateService, useValue: updateServiceSpy },
-    ],
-}).compileComponents();
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
-    cookieService = TestBed.inject(CookieService) as jasmine.SpyObj<CookieService>;
     updateService = TestBed.inject(UpdateService) as jasmine.SpyObj<UpdateService>;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should initialize userLang and displayApp correctly on ngOnInit', () => {
-    // Set up the mock for the get method
-    cookieService.get.and.returnValue('fr-FR');
-
-    // Call ngOnInit
-    component.ngOnInit();
-
-    // Verify interactions and component state
-    expect(cookieService.get).toHaveBeenCalledWith('lang');
-    expect(cookieService.set).toHaveBeenCalledWith('lang', 'fr');
-    expect(component.userLang).toBe('fr');
-    // expect(component.displayApp).toBeTrue();
-  });
-
-  it('should fall back to default language if userLang is not supported', () => {
-    // Set up the mock for the get method
-    cookieService.get.and.returnValue('xx-YY');
-
-    // Call ngOnInit
-    component.ngOnInit();
-
-    // Verify interactions and component state
-    expect(cookieService.get).toHaveBeenCalledWith('lang');
-    expect(cookieService.set).toHaveBeenCalledWith('lang', 'en');
-    expect(component.userLang).toBe('en');
   });
 
   it('should toggle componentToShow correctly', () => {
@@ -72,20 +43,13 @@ describe('AppComponent', () => {
     expect(component.componentToShow).toBe(newComponent);
   });
 
-  it('should call checkForUpdates on initialization', () => {
+  it('should call checkForUpdates on construction', () => {
     // Ensure checkForUpdates is called once
-    component.ngOnInit();
     expect(updateService.checkForUpdates).toHaveBeenCalled();
   });
 
-  // it('should use the correct language on translate', () => {
-  //   const userLang = 'es';
-  //   cookieService.get.and.returnValue(userLang);
-    
-  //   // Call ngOnInit to trigger the translate use
-  //   component.ngOnInit();
-    
-  //   // Check if translateService.use was called with the correct argument
-  //   expect(translateService.currentLang).toBe(userLang);
-  // });
+  it('should have the correct english title', () => {
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('h1')).nativeElement.innerText).toBe('Angular Boilerplate');
+  });
 });
