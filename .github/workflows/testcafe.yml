@@ -6,11 +6,16 @@ jobs:
     name: Install Node and launch TestCafe tests in Chrome
     runs-on: windows-latest
     steps:
-      - uses: actions/setup-node@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
         with:
-          node-version: lts/*
-      - uses: actions/checkout@v1
+          node-version: 20.16.0
+      - name: Checkout code
+        uses: actions/checkout@v1
+      - name: Start Angular server
+        run: ng serve --watch --poll=1000
       - name: Run TestCafe Tests
         uses: DevExpress/testcafe-action@latest
         with:
-          args: chrome tests
+          args: |
+            chrome '--window-size=1280,1024' tests/e2e/run
