@@ -43,7 +43,7 @@ export function setupApp(): express.Application {
     // Handle app routing, return all requests to ngx app
     // istanbul ignore next
     app.get('*', (req: Request, res: Response) => {
-      res.sendFile(path.join(__dirname, 'client/dist/angular-boilerplate', 'index.html'));
+      res.sendFile(path.join(dirname, 'client/dist/angular-boilerplate', 'index.html'));
     });
   }
   return app;
