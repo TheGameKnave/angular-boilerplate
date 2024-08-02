@@ -34,7 +34,7 @@ jobs:
           done
 
       - name: Run TestCafe Tests
-        uses: DevExpress/testcafe-action@v2
+        uses: DevExpress/testcafe-action@latest
         with:
           args: |
             chrome '--window-size=1280,1024' tests/e2e/run
