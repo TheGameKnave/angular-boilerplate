@@ -137,8 +137,9 @@ dist
 dump_prod.sql
 
 # e2e Testcafe current screenshot, only need the base
-**/e2e/**/actual.png
+**/e2e/**/actual*
 **/e2e/**/out.png
+**/e2e/**/thumbnails/
 
 # generated files from e2e snapshot testing
 generated

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { environment } from "src/environments/environment";
+import { ENVIRONMENT } from "src/environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ export class HelpersService {
 
   constructor(
   ) {
-    if(!environment.production){
+    if(!ENVIRONMENT.production){
       (window as any).helpersService = this;
     }
   }

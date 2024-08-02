@@ -1,7 +1,20 @@
-<h1>Angular Boilerplate</h1>
-<h2>v. {{ version }}</h2>
-<p>Hello, World!</p>
-<button *ngIf="componentToShow === 'example-one'" (click)="onComponentToggle('example-two')">Switch to Example Two</button>
-<button *ngIf="componentToShow === 'example-two'" (click)="onComponentToggle('example-one')">Switch to Example One</button>
-<app-example-one *ngIf="componentToShow === 'example-one'"></app-example-one>
-<app-example-two *ngIf="componentToShow === 'example-two'"></app-example-two>
+@if (displayApp || true) {
+  <ng-container *transloco="let t">
+    <h1>{{ t('Angular Boilerplate') }}</h1>
+    <h2>{{ t('v.') }} {{ version }}</h2>
+    <p>{{ t('Hello world') }}</p>
+    <p>{{ t('There are {{count}} components.',{count: 2}) }}</p>
+  
+    @if (componentToShow === 'example-one') {
+      <app-example-one></app-example-one>
+      <button (click)="onComponentToggle('example-two')">{{ t('Switch to example {{componentNumber}}',{ componentNumber: t('Two') }) }}</button>
+    }
+  
+    @if (componentToShow === 'example-two') {
+      <app-example-two></app-example-two>
+      <button (click)="onComponentToggle('example-one')">{{ t('Switch to example {{componentNumber}}',{ componentNumber: t('One') }) }}</button>
+    }
+  
+    <app-footer></app-footer>
+  </ng-container>
+}

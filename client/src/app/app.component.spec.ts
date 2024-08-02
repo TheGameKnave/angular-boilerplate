@@ -1,7 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { CookieService } from 'ngx-cookie-service';
 import { UpdateService } from './services/update.service';
+import { FooterComponent } from './components/shared/footer/footer.component';
+import { ExampleOneComponent } from './components/example-one/example-one.component';
+import { ExampleTwoComponent } from './components/example-two/example-two.component';
+import { getTranslocoModule } from './helpers/transloco-testing.module';
+import { By } from '@angular/platform-browser';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -12,10 +16,15 @@ describe('AppComponent', () => {
     const updateServiceSpy = jasmine.createSpyObj('UpdateService', ['checkForUpdates']);
 
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      imports: [
+        FooterComponent,
+        ExampleOneComponent,
+        ExampleTwoComponent,
+        AppComponent,
+        getTranslocoModule(),
+      ],
       providers: [
-        CookieService,
-        { provide: UpdateService, useValue: updateServiceSpy }
+        { provide: UpdateService, useValue: updateServiceSpy },
       ],
     }).compileComponents();
 
@@ -24,18 +33,23 @@ describe('AppComponent', () => {
     updateService = TestBed.inject(UpdateService) as jasmine.SpyObj<UpdateService>;
   });
 
-  it('should create the app', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should check for updates', () => {
-    component.ngOnInit();
+  it('should toggle componentToShow correctly', () => {
+    const newComponent = 'example-two';
+    component.onComponentToggle(newComponent);
+    expect(component.componentToShow).toBe(newComponent);
+  });
+
+  it('should call checkForUpdates on construction', () => {
+    // Ensure checkForUpdates is called once
     expect(updateService.checkForUpdates).toHaveBeenCalled();
   });
 
-  it('should toggle component', () => {
-    component.onComponentToggle('example-one');
-    expect(component.componentToShow).toBe('example-one');
+  it('should have the correct english title', () => {
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('h1')).nativeElement.innerText).toBe('Angular Boilerplate');
   });
-  
 });

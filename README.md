@@ -3,7 +3,7 @@
 This repo is intended to allow spooling up Angular projects in a monorepo rapidly, with a minimum of configuration.
 
 ## Current features
-* Angular 16 (with Node 18)
+* Angular 18 (with Node 20)
 * Parallel server/client execution
 * Bare-bones api proxy to the back-end
 * SASS boilerplate included
@@ -16,13 +16,14 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Hot module replacement for faster dev iteration
 * Typescript with node for back-end
 * Client & Server unit testing via jasmine
-* e2e testing with (testcafe/puppeteer?) + snapshots
 * Benchmark memory usage and response times (throttled for mobile) in tests
+* Internationalization (i18n) with Transloco
 
 ## Future features:
+* e2e testing with puppeteer + snapshots
 * CI/CD (jenkins, sonar, etc?)
 * Tree-shaking/build optimization
-* Internationalization (i18n)
+* Google Analytics reports on site activity
 * Feature flags
 * IndexedDB for offline storage
 * Websockets to reconcile disparities between server and local data
@@ -81,7 +82,9 @@ Open [http://localhost:4201](http://localhost:4201) to view it in the browser.
 
 This will display the API responses.
 
-### unit testing
+## Tests
+
+### Unit Testing
 
 tbd
 
@@ -107,6 +110,9 @@ Once taken, we use this to compare wit the "base" working screenshots to check f
 * `npx testcafe-blink-diff tests/e2e/screenshots --compare base:actual --open --threshold 0.005`
 The CLI command to compare base:actual screenshots for differences.
 The report will be in generated/index.html.
+
+* `npm run rebase`
+Accept all screenshot diffs and overwrite base comparisons.
 
 ## Deployment
 

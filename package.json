@@ -1,9 +1,10 @@
 {
   "name": "angular-boilerplate",
-  "version": "0.1.4",
+  "version": "0.18.0",
+  "siteUrl": "https://angular-node-boilerplate-c873a67b06f7.herokuapp.com/",
   "private": true,
   "engines": {
-    "node": "18.12.1"
+    "node": "20.16.0"
   },
   "scripts": {
     "client": "cd client && npm run start -- --configuration development",
@@ -16,7 +17,8 @@
     "prod": "run-p client-prod server-prod",
     "test": "./tests/test.sh",
     "test-win": "tests\\test.bat",
-    "watch": "testcafe chrome tests -L"
+    "watch": "testcafe chrome tests -L",
+    "rebase": "cd tests/e2e && node rebase.js"
   },
   "workspaces": [
     "./client",
@@ -25,8 +27,12 @@
   "devDependencies": {
     "testcafe": "^3.6.0",
     "testcafe-angular-selectors": "^0.4.1",
-    "testcafe-blink-diff": "^0.5.5"
+    "testcafe-blink-diff": "^0.5.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@rodrigoff/ajv-cli": "^5.2.0",
+    "ajv": "^8.17.1"
   }
 }

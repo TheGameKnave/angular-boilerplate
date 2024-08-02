@@ -8,25 +8,30 @@ import { interval } from 'rxjs';
 })
 @AutoUnsubscribe()
 export class UpdateService {
+  confirming: boolean = false;
   constructor(
-    public updates: SwUpdate
-  ){
-    if (updates.isEnabled) {
-      console.log('enabled');
-      interval(20 * 60 * 1000).subscribe(() => updates.checkForUpdate()
-        .then(() => console.log('checking for updates')));
-    }
-  }
+    private updates: SwUpdate
+  ){}
 
   public checkForUpdates(): void {
-    console.log('checking for updates');
-    this.updates.versionUpdates.subscribe(event => this.promptUser(event));
+    this.updates.versionUpdates.subscribe(event => {
+      this.promptUser(event);
+    });
+
+    interval(20 * 60 * 1000).subscribe(() => {
+      this.updates.checkForUpdate().then(() => {
+        console.log('checked for updates');
+      });
+    });
+
   }
 
   /* istanbul ignore next */
   private promptUser(event: VersionEvent): void {
-    if(event.type == 'VERSION_READY') {
-      if(confirm('A new version is available. Please click “OK” to reload.')) {
+    if(event.type == 'VERSION_READY' && !this.confirming) {
+      this.confirming = true;
+      if(confirm('A new version of this app is available. Please click “OK” to reload.')) {
+        this.confirming = false;
         window.location.reload();
       }
     }else if(event.type == 'VERSION_DETECTED') {

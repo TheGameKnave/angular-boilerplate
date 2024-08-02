@@ -1,11 +1,7 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { environment } from './environments/environment';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { appProviders } from './main.config';
 
-import { AppModule } from './app/app.module';
-
-
-platformBrowserDynamic().bootstrapModule(AppModule).then(() => {
-  if ('serviceWorker' in navigator && environment.production) {
-    navigator.serviceWorker.register('ngsw-worker.js');
-  }
-}).catch(err => console.log(err));
+bootstrapApplication(AppComponent, {
+  providers: appProviders,
+}).catch(err => console.error(err));

@@ -1,0 +1,10 @@
+{
+  "Hello world": "Hola mundo"
+  ,"Angular Boilerplate": "Plantilla Angular"
+  ,"v.": "v."
+  ,"One": "Uno"
+  ,"Two": "Dos"
+  ,"Switch to example {{componentNumber}}": "Cambiar al ejemplo {{componentNumber}}"
+  ,"Example {{componentNumber}} works!": "¡El ejemplo {{componentNumber}} funciona!"
+  ,"There are {{count}} components.": "{count, plural, =0 {No hay componentes.} one {Hay 1 componente.} other {Hay # componentes.}}"
+}

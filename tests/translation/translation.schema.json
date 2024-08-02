@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Translation File Schema",
+  "type": "object",
+  "properties": {
+    "Hello world": {
+      "type": "string",
+      "description": "Main page greeting"
+    },
+    "Angular Boilerplate": {
+      "type": "string",
+      "description": "Main page title"
+    },
+    "v.": {
+      "type": "string",
+      "description": "Main page version"
+    },
+    "One": {
+      "type": "string",
+      "description": "Number representation for 'One'"
+    },
+    "Two": {
+      "type": "string",
+      "description": "Number representation for 'Two'"
+    },
+    "Switch to example {{componentNumber}}": {
+      "type": "string",
+      "description": "Main page component swap button text with component number as {{componentNumber}}"
+    },
+    "Example {{componentNumber}} works!": {
+      "type": "string",
+      "description": "Success message with component number as {{componentNumber}}"
+    },
+    "There are {{count}} components.": {
+      "type": "string",
+      "description": "Message about the number of components, using a pluralization format"
+    }
+  },
+  "required": [
+    "Hello world",
+    "Angular Boilerplate",
+    "v.",
+    "One",
+    "Two",
+    "Switch to example {{componentNumber}}",
+    "Example {{componentNumber}} works!",
+    "There are {{count}} components."
+  ],
+  "additionalProperties": false
+}
