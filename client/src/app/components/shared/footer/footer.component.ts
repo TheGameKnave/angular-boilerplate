@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { SUPPORTED_LANGUAGES } from 'src/app/helpers/constants';
 import { LANGUAGES } from 'i18n-l10n-flags';
-import { CookieService } from 'ngx-cookie-service';
 import { NgClass } from '@angular/common';
 import { TranslocoService } from '@jsverse/transloco';
 
@@ -19,7 +18,6 @@ export class FooterComponent {
   classToLang: {[className: string]: string} = {};
 
   constructor(
-    public cookieService: CookieService,
     public translate: TranslocoService,
   ){
     this.supportedLanguages.forEach(lang => this.classToLang[`i18n-${lang}`] = lang);

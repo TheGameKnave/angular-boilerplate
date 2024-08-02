@@ -9,7 +9,6 @@ import { getTranslocoModule } from 'src/app/helpers/transloco-testing.module';
 describe('FooterComponent', () => {
   let component: FooterComponent;
   let fixture: ComponentFixture<FooterComponent>;
-  let cookieService: CookieService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -23,7 +22,6 @@ describe('FooterComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
-    cookieService = TestBed.inject(CookieService);
   });
 
   it('should create', () => {
@@ -38,74 +36,68 @@ describe('FooterComponent', () => {
   });
 
   it('should change language if langClass is found', () => {
-    // spyOn(translateService, 'use');
-    // spyOn(cookieService, 'set');
-
-    // const event = {
-    //   target: {
-    //     closest: () => ({
-    //       classList: ['i18n-en'],
-    //     }),
-    //   },
-    // } as unknown as Event;
-
-    // component.onI18n(event);
-
-    // expect(translateService.use).toHaveBeenCalledWith('en');
-    // expect(cookieService.set).toHaveBeenCalledWith('lang', 'en');
+    const langClass = 'i18n-de';
+    const event = {
+      target: {
+        closest: (selector: string) => ({
+          classList: [langClass]
+        })
+      }
+    } as unknown as Event;
+  
+    spyOn(component.translate, 'setActiveLang').and.callThrough();
+  
+    component.onI18n(event);
+  
+    expect(component.translate.setActiveLang).toHaveBeenCalledWith('de');
   });
-
-  it('should handle language change and set cookie', () => {
-    // spyOn(translateService, 'use');
-    // spyOn(cookieService, 'set');
-
-    // const event = {
-    //   target: {
-    //     closest: (selector: string) => ({
-    //       classList: ['i18n-en']
-    //     })
-    //   }
-    // } as unknown as Event;
-
-    // component.onI18n(event);
-
-    // expect(translateService.use).toHaveBeenCalledWith('en');
-    // expect(cookieService.set).toHaveBeenCalledWith('lang', 'en');
+  
+  it('should handle language change', () => {
+    const langClass = 'i18n-de';
+    const event = {
+      target: {
+        closest: (selector: string) => ({
+          classList: [langClass]
+        })
+      }
+    } as unknown as Event;
+  
+    spyOn(component.translate, 'setActiveLang').and.callThrough();
+  
+    component.onI18n(event);
+  
+    expect(component.translate.getActiveLang()).toBe('de');
   });
-
+  
   it('should not change language if target classList is empty', () => {
-    // spyOn(translateService, 'use');
-    // spyOn(cookieService, 'set');
-
-    // const event = {
-    //   target: {
-    //     closest: (selector: string) => ({
-    //       classList: []
-    //     })
-    //   }
-    // } as unknown as Event;
-
-    // component.onI18n(event);
-
-    // expect(translateService.use).not.toHaveBeenCalled();
-    // expect(cookieService.set).not.toHaveBeenCalled();
+    const event = {
+      target: {
+        closest: (selector: string) => ({
+          classList: []
+        })
+      }
+    } as unknown as Event;
+  
+    spyOn(component.translate, 'setActiveLang').and.callThrough();
+  
+    component.onI18n(event);
+  
+    expect(component.translate.setActiveLang).not.toHaveBeenCalled();
   });
-
+  
   it('should not change language if no language class is found', () => {
-    // spyOn(translateService, 'use');
-    // spyOn(cookieService, 'set');
-
-    // const event = {
-    //   target: {
-    //     closest: (selector: string) => ({
-    //       classList: ['some-other-class']
-    //     })
-    //   }
-    // } as unknown as Event;
-
-    // component.onI18n(event);
-
-    // expect(translateService.use).not.toHaveBeenCalled();
-    // expect(cookieService.set).not.toHaveBeenCalled();
+    const event = {
+      target: {
+        closest: (selector: string) => ({
+          classList: ['some-other-class']
+        })
+      }
+    } as unknown as Event;
+  
+    spyOn(component.translate, 'setActiveLang').and.callThrough();
+  
+    component.onI18n(event);
+  
+    expect(component.translate.setActiveLang).not.toHaveBeenCalled();
   });
 });

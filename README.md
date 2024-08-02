@@ -111,6 +111,9 @@ Once taken, we use this to compare wit the "base" working screenshots to check f
 The CLI command to compare base:actual screenshots for differences.
 The report will be in generated/index.html.
 
+* `npm run rebase`
+Accept all screenshot diffs and overwrite base comparisons.
+
 ## Deployment
 
 ### Install Heroku CLI

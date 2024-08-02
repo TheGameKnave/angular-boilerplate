@@ -9,22 +9,33 @@ import { interval } from 'rxjs';
 @AutoUnsubscribe()
 export class UpdateService {
   constructor(
-    public updates: SwUpdate
+    private updates: SwUpdate
   ){
     if (updates.isEnabled) {
-      console.log('enabled');
-      interval(20 * 60 * 1000).subscribe(() => updates.checkForUpdate()
-        .then(() => console.log('checking for updates')));
+      this.checkForUpdates();
     }
   }
 
   public checkForUpdates(): void {
     console.log('checking for updates');
-    this.updates.versionUpdates.subscribe(event => this.promptUser(event));
+    this.updates.versionUpdates.subscribe(event => {
+      console.log(event);
+      this.promptUser(event);
+    });
+
+    interval(20 * 60 * 1).subscribe(() => {
+      console.log('checking for updates')
+      this.updates.checkForUpdate().then(() => {
+        console.log('checked for updates');
+      });
+    });
+
   }
 
   /* istanbul ignore next */
   private promptUser(event: VersionEvent): void {
+    console.log(event);
+    console.log('new version available');
     if(event.type == 'VERSION_READY') {
       if(confirm('A new version is available. Please click “OK” to reload.')) {
         window.location.reload();

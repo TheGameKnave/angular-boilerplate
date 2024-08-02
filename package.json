@@ -17,7 +17,8 @@
     "prod": "run-p client-prod server-prod",
     "test": "./tests/test.sh",
     "test-win": "tests\\test.bat",
-    "watch": "testcafe chrome tests -L"
+    "watch": "testcafe chrome tests -L",
+    "rebase": "cd tests/e2e && node rebase.js"
   },
   "workspaces": [
     "./client",
