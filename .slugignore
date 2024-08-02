@@ -1,0 +1,20 @@
+# .slugignore
+
+# Ignore test-related dependencies and files
+node_modules/karma/
+node_modules/jest-runner/
+node_modules/typescript/
+node_modules/webpack/
+node_modules/webpack-dev-server/
+node_modules/@babel/
+node_modules/terser/
+node_modules/babel-core/
+node_modules/esbuild/
+node_modules/esbuild-wasm/
+node_modules/@types/
+node_modules/sass/
+node_modules/less/
+
+# Other potential candidates
+*.ts
+*.map
