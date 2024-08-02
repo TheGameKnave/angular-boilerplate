@@ -26,8 +26,6 @@ import { TranslocoDirective } from '@jsverse/transloco';
 export class AppComponent implements OnDestroy {
   public version: string = packageJson.version;
   public componentToShow: string = 'example-one';
-  public userLang: string = '';
-  public displayApp: boolean = false;
 
   constructor(
     private updateService: UpdateService,

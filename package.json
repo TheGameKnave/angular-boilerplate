@@ -10,7 +10,7 @@
     "client": "cd client && npm run start -- --configuration development",
     "client-prod": "NODE_ENV=production && cd client && npm run start -- --configuration production",
     "server": "cd server && node-env-run --exec nodemon | pino-colada",
-    "server-prod": "cd server && node-env-run --exec nodemon",
+    "server-prod": "NODE_ENV=production && cd server && node-env-run --exec nodemon",
     "heroku-postbuild": "cd client && npm install && npm run build -- --configuration ${NODE_ENV}",
     "start": "cd server && ts-node index.ts",
     "dev": "run-p client server",
@@ -25,14 +25,12 @@
     "./server"
   ],
   "devDependencies": {
-    "testcafe": "^3.6.0",
+    "@rodrigoff/ajv-cli": "^5.2.0",
+    "ajv": "^8.17.1",
+    "testcafe": "^3.5.0",
     "testcafe-angular-selectors": "^0.4.1",
     "testcafe-blink-diff": "^0.5.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
-  },
-  "dependencies": {
-    "@rodrigoff/ajv-cli": "^5.2.0",
-    "ajv": "^8.17.1"
   }
 }
