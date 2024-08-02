@@ -38,12 +38,12 @@ export function setupApp(): express.Application {
   if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'development') {
     // Serve any static files
     let dirname = __dirname.replace("/server", "")
-    app.use(express.static(path.join(dirname, 'client/dist/angular-boilerplate'),{maxAge:3600000}));
+    app.use(express.static(path.join(dirname, 'client/dist/angular-boilerplate/browser/'),{maxAge:3600000}));
   
     // Handle app routing, return all requests to ngx app
     // istanbul ignore next
     app.get('*', (req: Request, res: Response) => {
-      res.sendFile(path.join(dirname, 'client/dist/angular-boilerplate', 'index.html'));
+      res.sendFile(path.join(dirname, 'client/dist/angular-boilerplate/browser/', 'index.html'));
     });
   }
   return app;
