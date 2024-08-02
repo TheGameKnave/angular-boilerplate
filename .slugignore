@@ -16,5 +16,5 @@ node_modules/sass/
 node_modules/less/
 
 # Other potential candidates
-*.ts
-*.map
+# *.ts
+# *.map
