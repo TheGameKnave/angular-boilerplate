@@ -17,14 +17,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install wait-on
-        run: npm install -g wait-on
-
       - name: Start Angular server
         run: npm run start -- --watch --poll=1000 &
 
       - name: Wait for Angular server to start
-        run: wait-on http://localhost:4200
+        run: |
+          until curl --output /dev/null --silent --head --fail http://localhost:4200; do
+            echo 'Waiting for Angular server...'
+            sleep 5
+          done
 
       - name: Run TestCafe Tests
         uses: DevExpress/testcafe-action@latest
