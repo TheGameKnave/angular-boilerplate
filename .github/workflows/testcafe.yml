@@ -10,12 +10,19 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20.16.0
+
       - name: Checkout code
         uses: actions/checkout@v1
+
       - name: Install dependencies
         run: npm ci
+
       - name: Start Angular server
-        run: npm run start -- --watch --poll=1000
+        run: npm run start -- --watch --poll=1000 &
+
+      - name: Wait for Angular server to start
+        run: npx wait-on http://localhost:4200
+
       - name: Run TestCafe Tests
         uses: DevExpress/testcafe-action@latest
         with:
