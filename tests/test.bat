@@ -1,6 +1,6 @@
 @echo off
 
-cd tests/translation && ts-node translation-validation.ts^
+cd tests/translation && cd && ts-node translation-validation.ts && ^
 cd ../../server && npm test && ^
 cd ../client && npm test && ^
 cd ../ && npx testcafe "chrome '--window-size=1280,1024'" tests/e2e/run -s tests/e2e/screenshots --take-snapshot tested --app "npm run dev" --hostname localhost && ^
