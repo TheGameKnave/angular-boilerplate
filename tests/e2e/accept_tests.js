@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const directoryPath = 'screenshots/App_tests/';
-const oldPattern = /^actual.*\.png$/;
-const newFileName = 'base.png';
+const directoryPath = 'screenshots/';
+const oldPattern = /^tested.png$/;
+const newFileName = 'accepted.png';
 
 function traverseDirectory(dirPath) {
     fs.readdir(dirPath, (err, files) => {

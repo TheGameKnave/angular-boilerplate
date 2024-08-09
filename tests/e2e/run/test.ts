@@ -31,10 +31,13 @@ const validateMemory = (memoryVal: { jsHeapSizeLimit: number; usedJSHeapSize: nu
     return isMemoryLowerThanThreshold;
 };
 
+let savePath: string;
 fixture `App tests`
     .page('http://localhost:4200')
-    .beforeEach(async () => {
+    .beforeEach(async (t) => {
         await waitForAngular();
+        const screenshotMode = process.env.TEST_MODE || 'tested';
+        savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     });
 // measures page load time, fails if load time over threshold
 test('Measure Page Load Time', async t => {
@@ -59,8 +62,8 @@ test('Click Button Once', async t => {
         .click('button')
         .expect(elementTwo.exists).ok()
         .expect(!elementOne.exists).notOk();
-
-        await takeSnapshot(t);
+    const screenshotDir = `Click_Button_Once/${savePath}`
+    await t.takeScreenshot(screenshotDir);
 });
 test('Click Button Twice', async t => {
     const elementOne = Selector('app-example-one');
@@ -76,7 +79,8 @@ test('Click Button Twice', async t => {
         .click('button')
         .expect(elementOne.exists).ok()
         .expect(!elementTwo.exists).notOk();
-    await takeSnapshot(t);
+    const screenshotDir = `Click_Button_Twice/${savePath}`
+    await t.takeScreenshot(screenshotDir);
 });
 test('Measure Memory Usage', async t => {
     const memoryVal = await getMemory(t);

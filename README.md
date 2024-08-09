@@ -20,7 +20,7 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Internationalization (i18n) with Transloco
 
 ## Future features:
-* e2e testing with puppeteer + snapshots
+* e2e testing with TestCafe + snapshots
 * CI/CD (jenkins, sonar, etc?)
 * Tree-shaking/build optimization
 * Google Analytics reports on site activity
@@ -38,9 +38,9 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 
 ### Node
 
-Install node 18.12.1. Recommended to install NVM to manage node versions.
+Install node `20.16.0` Recommended to install NVM to manage node versions.
 
-Install NPM 8.19.2 (should be bundled with node; later versions have caused problems).
+Install NPM 10.8.1 (should be bundled with node).
 
 ### Angular cli
 
@@ -48,7 +48,7 @@ Install Angular CLI to allow executing commands: `npm i -g @angular/cli`
 
 ### Install modules
 
-From the root, run `npm ci --workspaces`
+From the root, run `npm ci`
 
 ### Environment variables
 
@@ -57,7 +57,7 @@ Create your `.env` file from the `.env.example` **and never commit sensitive inf
 
 ### git branches
 
-Develop against branches from dev feature branch using prefix `feature/`. Main is for production releases, staging is to test prod.
+Develop against branches from `dev` feature branch using prefix `feature/`. `main` is for production releases, `staging` is to test prod.
 
 ## Available Scripts
 
@@ -78,7 +78,7 @@ The page will reload if you make edits.
 ### `npm run server`
 
 Runs only the back-end of the app (on port 4201) in development mode.  
-Open [http://localhost:4201](http://localhost:4201) to view it in the browser.
+Open [http://localhost:4201/api](http://localhost:4201/api) to view it in the browser.
 
 This will display the API responses.
 
@@ -90,29 +90,23 @@ tbd
 
 ### TestCafe end-to-end testing Startup
 
-### `npx testcafe chrome -L --app "npm run dev"`
-    This command starts Testcafe in Live mode (-L) while launching the dev server first. 
-    if the server is running, do: 
-### `npx testcafe chrome`
-
 ### Visual disgression testing in Testcafe via testcafe-blink-diff
 Run the Testcafe command with more parameters, since 
 with this one we're taking screenshots and prepping to compare them.
 
-* `npx testcafe chrome tests -s tests/e2e/screenshots --take-snapshot base`
-Takes the base screenshot. Run this once when the site is working.
-Be careful when running this, this will overrite the "working" screenshots in the directory.
+* from tests/e2e `TEST_MODE=accepted node test_runner.ts`
+Runs e2e tests and takes the base screenshots. Run this **once** when the site is working.
+Be careful when running this, this will overwrite the "working" screenshots in the directory.
 
-* `npx testcafe chrome tests -s tests/e2e/screenshots --take-snapshot actual`
-Takes an actual screenshot of the current site.
-Once taken, we use this to compare wit the "base" working screenshots to check for userflow errors.
+* from tests/e2e `node test_runner.ts`
+Runs e2e tests and takes new "tested" screenshots.
 
-* `npx testcafe-blink-diff tests/e2e/screenshots --compare base:actual --open --threshold 0.005`
-The CLI command to compare base:actual screenshots for differences.
+* `npx testcafe-blink-diff tests/e2e/screenshots --compare accepted:tested --open --threshold 0.005`
+The CLI command to compare accepted:tested screenshots for differences. If new screenshot tests have been created, this will fail when looking for the "accepted.png"
 The report will be in generated/index.html.
 
-* `npm run rebase`
-Accept all screenshot diffs and overwrite base comparisons.
+* `npm run accept`
+Accept all screenshot diffs and overwrite accepted comparisons.
 
 ## Deployment
 

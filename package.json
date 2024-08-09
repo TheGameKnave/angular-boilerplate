@@ -1,6 +1,6 @@
 {
   "name": "angular-boilerplate",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "siteUrl": "https://angular-node-boilerplate-c873a67b06f7.herokuapp.com/",
   "private": true,
   "engines": {
@@ -17,8 +17,7 @@
     "prod": "run-p client-prod server-prod",
     "test": "./tests/test.sh",
     "test-win": "tests\\test.bat",
-    "watch": "testcafe chrome tests -L",
-    "rebase": "cd tests/e2e && node rebase.js"
+    "accept": "cd tests/e2e && node accept_tests.js"
   },
   "workspaces": [
     "./client",

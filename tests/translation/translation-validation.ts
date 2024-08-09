@@ -5,7 +5,7 @@ const schemaPath = 'translation.schema.json';
 const translationsDir = '..\\..\\client\\src\\assets\\i18n';
 
 SUPPORTED_LANGUAGES.forEach((lang) => {
-  const command = `..\\..\\node_modules\\.bin\\ajv -s ${schemaPath} -d ${translationsDir}\\${lang}.json --strict=false`;
+  const command = `../../node_modules/.bin/ajv -s ${schemaPath} -d ${translationsDir}/${lang}.json --strict=false`;
 
   exec(command, (error, stdout, stderr) => {
     if (error) {
