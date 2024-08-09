@@ -27,7 +27,7 @@ export class UpdateService {
   }
 
   /* istanbul ignore next */
-  private promptUser(event: VersionEvent): void {
+  public promptUser(event: VersionEvent): void {
     if(event.type == 'VERSION_READY' && !this.confirming) {
       this.confirming = true;
       if(confirm('A new version of this app is available. Please click “OK” to reload.')) {
