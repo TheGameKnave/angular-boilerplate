@@ -4,6 +4,8 @@ import { Selector, test } from 'testcafe';
 import { ClientFunction } from 'testcafe';
 import { getThreshold } from '../data/constants';
 
+const screenshotMode = process.env.TEST_MODE || 'tested';
+
 // making memory exception. Might want to move to global ts file
 declare global {
     interface Performance {
@@ -31,13 +33,10 @@ const validateMemory = (memoryVal: { jsHeapSizeLimit: number; usedJSHeapSize: nu
     return isMemoryLowerThanThreshold;
 };
 
-let savePath: string;
 fixture `App tests`
     .page('http://localhost:4200')
-    .beforeEach(async (t) => {
+    .beforeEach(async () => {
         await waitForAngular();
-        const screenshotMode = process.env.TEST_MODE || 'tested';
-        savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     });
 // measures page load time, fails if load time over threshold
 test('Measure Page Load Time', async t => {
@@ -51,6 +50,7 @@ test('Measure Page Load Time', async t => {
     console.log(`Page load time: ${pageLoadTime} milliseconds`);
 });
 test('Click Button Once', async t => {
+    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     const elementOne = Selector('app-example-one');
     const elementTwo = Selector('app-example-two'); 
     await t
@@ -66,6 +66,7 @@ test('Click Button Once', async t => {
     await t.takeScreenshot(screenshotDir);
 });
 test('Click Button Twice', async t => {
+    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     const elementOne = Selector('app-example-one');
     const elementTwo = Selector('app-example-two'); 
     await t

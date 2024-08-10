@@ -1,5 +1,7 @@
 const createTestCafe = require("testcafe");
 const { exec } = require("child_process");
+const { promisify } = require("util");
+const execPromise = promisify(exec);
 
 process.env.TEST_MODE = process.env.TEST_MODE || 'tested';
 
@@ -31,5 +33,13 @@ process.env.TEST_MODE = process.env.TEST_MODE || 'tested';
   } finally {
     await testcafe.close();
     serverProcess.kill();
+    
+    // Kill processes on ports 4200 and 4201
+    try {
+      await execPromise('lsof -ti :4200 | xargs kill -9');
+      await execPromise('lsof -ti :4201 | xargs kill -9');
+    } catch (err) {
+      console.error("Error killing processes:", err);
+    }
   }
 })();
