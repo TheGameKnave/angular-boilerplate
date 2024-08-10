@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TranslocoLoader } from '@jsverse/transloco';
+import { TranslocoLoader, Translation } from '@jsverse/transloco';
 import { Observable } from 'rxjs';
-import { Translation } from '@jsverse/transloco';
 import { ENVIRONMENT } from '../../environments/environment';
 
 @Injectable({

@@ -1,13 +1,12 @@
 import path from "path";
-import express from 'express';
-import { Request, Response, NextFunction } from 'express';
+import express, { Request, Response } from 'express';
 import pino from 'express-pino-logger';
 import config from './config/environment';
 import rateLimit from 'express-rate-limit';
 import apiRouter from './routes/api';
 
 declare global {
-  var cache: {
+  var cache: { // NOSONAR
     [resource: string]: {
       time: Date,
       data: any,

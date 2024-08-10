@@ -23,17 +23,40 @@ export class FooterComponent {
     this.supportedLanguages.forEach(lang => this.classToLang[`i18n-${lang}`] = lang);
   }
 
+  getFlag(ln: string): string {
+    if (!ln.includes('-')) {
+      return Object.values(this.languages[ln].locales)[0].flag;
+    } else {
+      return this.languages[ln.split('-')[0]].locales[ln].flag;
+    }
+  }
+  
+  getNativeName(ln: string): string {
+    if (!ln.includes('-')) {
+      return this.languages[ln].nativeName;
+    } else {
+      return `${this.languages[ln.split('-')[0]].nativeName} (${this.languages[ln.split('-')[0]].locales[ln].nativeName})`;
+    }
+  }
+
   onI18n(event: Event): void {
-    const target = (event.target as HTMLElement).closest('li');
-    if (target && target.classList) {
+    console.log(event, event.type === 'keydown',event instanceof KeyboardEvent,(<any>event)['key'] === 'Enter');
+    if (event.type === 'click' || (event.type === 'keydown' && event instanceof KeyboardEvent && event.key === 'Enter')) {
+      const target = (event.target as HTMLElement).closest('li');
+      if (target?.classList) {
+        
+        const classList = Array.from(target.classList);
+        const langClass = classList.find(className => this.classToLang[className]);
       
-      const classList = Array.from(target.classList);
-      const langClass = classList.find(className => this.classToLang[className]);
-    
-      if (langClass) {
-        const langCode = this.classToLang[langClass];
-        this.translate.setActiveLang(langCode);
+        if (langClass) {
+          const langCode = this.classToLang[langClass];
+          this.translate.setActiveLang(langCode);
+        }
       }
     }
+  }
+
+  stopEventPropagation(event: Event): void {
+    event.stopPropagation();
   }
 }

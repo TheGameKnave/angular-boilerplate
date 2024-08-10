@@ -12,7 +12,7 @@ import { provideTranslocoLocale } from '@jsverse/transloco-locale';
 import { SUPPORTED_LANGUAGES } from './app/helpers/constants';
 
 export function getLangFn({ cachedLang, browserLang, cultureLang, defaultLang }: GetLangParams) {
-  return cachedLang || browserLang || cultureLang || defaultLang;
+  return cachedLang ?? browserLang ?? cultureLang ?? defaultLang;
 }
 
 export const appProviders = [
