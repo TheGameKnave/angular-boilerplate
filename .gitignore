@@ -132,6 +132,9 @@ dist
 # Angular build caches
 .angular/
 
+# SonarQube
+.scannerwork/
+
 # Why, Mac, why?
 .DS_Store
 dump_prod.sql

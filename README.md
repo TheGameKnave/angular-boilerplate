@@ -90,7 +90,7 @@ tbd
 
 ### TestCafe end-to-end testing Startup
 
-### Visual disgression testing in Testcafe via testcafe-blink-diff
+#### Visual regression testing in Testcafe via testcafe-blink-diff
 Run the Testcafe command with more parameters, since 
 with this one we're taking screenshots and prepping to compare them.
 
@@ -107,6 +107,25 @@ The report will be in generated/index.html.
 
 * `npm run accept`
 Accept all screenshot diffs and overwrite accepted comparisons.
+
+### SonarQube code hygeine testing
+
+Install Docker from website (not homebrew).
+
+from `tests`, create docker instance with `docker run -d --name sonarqube -e SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true -p 9000:9000 sonarqube:latest`
+
+Navigate to [SonarQube Server](http://localhost:9000) instance
+
+* Log in to your SonarQube server as an administrator.
+* Go to the Security page (usually located in the top-right corner of the page).
+* Click on My Account.
+* Scroll down to the Security section.
+* Click on Generate Tokens.
+* Enter a name for the token (e.g., "My Token").
+* Click Generate.
+* add token to .env file
+
+Download SonarScanner and run from project root: `npm run sonar`
 
 ## Deployment
 
