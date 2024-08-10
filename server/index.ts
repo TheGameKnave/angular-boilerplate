@@ -16,15 +16,26 @@ declare global {
 }
 global.cache = {};
 
+function setupStaticFileServing(app: express.Application, env: string) {
+  if (env === 'production' || env === 'staging' || env === 'development') {
+    // Serve any static files
+    const dirname = path.resolve(__dirname, "../client/dist/angular-boilerplate/browser");
+    app.use(express.static(dirname, { maxAge: 3600000 }));
+
+    // Handle app routing, return all requests to ngx app
+    app.get('*', (req: Request, res: Response) => {
+      res.sendFile(path.join(dirname, 'index.html'));
+    });
+  }
+}
 
 export function setupApp(): express.Application {
   const app = express();
-
   const logger = pino();
+
   app.use(logger); // logging framework
-  
   app.use(express.json());
-  
+
   const apiLimiter = rateLimit({
     windowMs: 10 * 60 * 1000, // 10 minute window
     max: 2000, // Limit each IP to 2000 requests per `window`
@@ -34,18 +45,9 @@ export function setupApp(): express.Application {
 
   app.use('/api', apiLimiter);
   app.use('/api', apiRouter);
-  
-  if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'development') {
-    // Serve any static files
-    let dirname = __dirname.replace("/server", "")
-    app.use(express.static(path.join(dirname, 'client/dist/angular-boilerplate/browser/'),{maxAge:3600000}));
-  
-    // Handle app routing, return all requests to ngx app
-    // istanbul ignore next
-    app.get('*', (req: Request, res: Response) => {
-      res.sendFile(path.join(dirname, 'client/dist/angular-boilerplate/browser/', 'index.html'));
-    });
-  }
+
+  setupStaticFileServing(app, process.env.NODE_ENV || 'development');
+
   return app;
 }
 
@@ -53,6 +55,6 @@ export function setupApp(): express.Application {
 if (require.main === module) {
   const app = setupApp();
   app.listen(config.server_port || 3000, () => {
-    console.log('Express server is running on ' + (config.server_port || 3000))
+    console.log('Express server is running on ' + (config.server_port || 3000));
   });
 }
