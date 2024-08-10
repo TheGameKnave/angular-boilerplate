@@ -26,6 +26,7 @@ describe('AutoUnsubscribe Decorator', () => {
       subscription2 = jasmine.createSpyObj('subscription2', ['unsubscribe']);
       prop1: any = {};
       prop2: any = {};
+      prop3: string = '';
 
       // Mock ngOnDestroy lifecycle hook
       ngOnDestroy() {}
@@ -42,5 +43,6 @@ describe('AutoUnsubscribe Decorator', () => {
     expect(testComponent.subscription2.unsubscribe).toHaveBeenCalled();
     expect(testComponent.prop1).toBeNull();
     expect(testComponent.prop2).toBeNull();
+    expect(testComponent.prop3).toBe('');
   });
 });

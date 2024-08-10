@@ -51,6 +51,20 @@ describe('FooterComponent', () => {
   
     expect(component.translate.setActiveLang).toHaveBeenCalledWith('de');
   });
+
+it('should not change language if target classList is empty', () => {
+  const event = {
+    target: {
+      closest: () => null,
+    },
+  };
+
+  const getActiveLangSpy = spyOn(component.translate, 'getActiveLang');
+
+  component.onI18n(event as any);
+
+  expect(getActiveLangSpy).not.toHaveBeenCalled();
+});
   
   it('should handle language change', () => {
     const langClass = 'i18n-de';
