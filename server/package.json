@@ -22,7 +22,8 @@
       "!**/node_modules/**",
       "!**/vendor/**",
       "!**/coverage/**"
-    ]
+    ],
+    "coverageReporters": ["json", "lcov", "text","text-summary"]
   },
   "browserslist": [
     ">0.2%",

@@ -4,7 +4,7 @@
     "ng": "ng",
     "build": "ng build",
     "start": "ng serve --hmr",
-    "test": "ng test --source-map=false --browsers=ChromeHeadless --watch=false",
+    "test": "ng test --browsers=ChromeHeadless --watch=false",
     "watch": "ng test"
   },
   "private": true,
@@ -37,8 +37,10 @@
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "^3.0.3",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "karma-sabarivka-reporter": "^3.3.1",
     "typescript": "~5.4.5"
   }
 }
