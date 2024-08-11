@@ -1,5 +1,6 @@
 
 import { TranslocoTestingModule, TranslocoTestingOptions } from '@jsverse/transloco';
+import { SUPPORTED_LANGUAGES } from './constants';
 
 // TODO find a way to programmatically import languages from SUPPORTED_LANGUAGES
 // (may not be possible with TranslocoTestingModule or with the variable pattern below)
@@ -9,6 +10,18 @@ import de from '../../assets/i18n/de.json';
 import fr from '../../assets/i18n/fr.json';
 import zhCN from '../../assets/i18n/zh-CN.json';
 import zhTW from '../../assets/i18n/zh-TW.json';
+
+// Function to generate language paths
+const generateLanguagePaths = (languages: readonly string[]) => {
+  const basePath = '../../assets/i18n/';
+  return languages.reduce((paths, lang) => {
+    paths[lang] = `${basePath}${lang}.json`;
+    return paths;
+  }, {} as Record<string, string>);
+};
+
+const LANGUAGE_PATHS = generateLanguagePaths(SUPPORTED_LANGUAGES);
+console.log(LANGUAGE_PATHS);
 
 export function getTranslocoModule(options: TranslocoTestingOptions = {}) {
   return TranslocoTestingModule.forRoot({
@@ -21,14 +34,7 @@ export function getTranslocoModule(options: TranslocoTestingOptions = {}) {
       'zh-TW': zhTW,
     },
     translocoConfig: {
-      availableLangs: [
-        'en',
-        'es',
-        'de',
-        'fr',
-        'zh-CN',
-        'zh-TW',
-      ],
+      availableLangs: SUPPORTED_LANGUAGES,
       defaultLang: 'en',
     },
     preloadLangs: true,
