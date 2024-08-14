@@ -1,5 +1,5 @@
 import { exec } from 'child_process';
-import { SUPPORTED_LANGUAGES } from '..\\..\\client\\src\\app\\helpers\\constants';
+import { SUPPORTED_LANGUAGES } from '../../client/src/app/helpers/constants';
 import * as path from 'path';
 
 const schemaPath = path.join(__dirname, 'translation.schema.json');
