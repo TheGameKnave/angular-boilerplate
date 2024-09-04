@@ -2,16 +2,11 @@
   <h1>{{ t('Angular Boilerplate') }}</h1>
   <h2>{{ t('v.') }} {{ version }}</h2>
   <p>{{ t('Hello world') }}</p>
-  <p>{{ t('There are {{count}} components.',{count: 2}) }}</p>
-
-  @if (componentToShow === 'example-one') {
-    <app-example-one></app-example-one>
-    <button (click)="onComponentToggle('example-two')">{{ t('Switch to example {{componentNumber}}',{ componentNumber: t('Two') }) }}</button>
-  }
-
-  @if (componentToShow === 'example-two') {
-    <app-example-two></app-example-two>
-    <button (click)="onComponentToggle('example-one')">{{ t('Switch to example {{componentNumber}}',{ componentNumber: t('One') }) }}</button>
+  <p>{{ t('There are {{count}} components.',{count: componentList.length}) }}</p>
+ {{activeComponent}}
+ <ng-container *ngComponentOutlet="componentList[activeComponent].component" />
+  @for (component of componentList; track $index) {
+    <button (click)="onComponentActivate($index)">{{ t('Switch to {{componentName}}',{ componentName: t(component.name) }) }}</button>
   }
 
   <app-footer></app-footer>

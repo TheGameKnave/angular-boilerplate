@@ -15,21 +15,21 @@
       "type": "string",
       "description": "Main page version"
     },
-    "One": {
+    "Example One": {
       "type": "string",
-      "description": "Number representation for 'One'"
+      "description": "Name of component one"
     },
-    "Two": {
+    "Example Two": {
       "type": "string",
-      "description": "Number representation for 'Two'"
+      "description": "Name of component two"
     },
-    "Switch to example {{componentNumber}}": {
+    "Switch to {{componentName}}": {
       "type": "string",
-      "description": "Main page component swap button text with component number as {{componentNumber}}"
+      "description": "Main page component swap button text with component name as {{componentName}}"
     },
-    "Example {{componentNumber}} works!": {
+    "{{componentName}} works!": {
       "type": "string",
-      "description": "Success message with component number as {{componentNumber}}"
+      "description": "Success message with component name as {{componentName}}"
     },
     "There are {{count}} components.": {
       "type": "string",
@@ -40,10 +40,10 @@
     "Hello world",
     "Angular Boilerplate",
     "v.",
-    "One",
-    "Two",
-    "Switch to example {{componentNumber}}",
-    "Example {{componentNumber}} works!",
+    "Example One",
+    "Example Two",
+    "Switch to {{componentName}}",
+    "{{componentName}} works!",
     "There are {{count}} components."
   ],
   "additionalProperties": false

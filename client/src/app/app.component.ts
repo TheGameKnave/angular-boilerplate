@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { NgComponentOutlet, CommonModule } from '@angular/common';
 import { UpdateService } from './services/update.service';
 import { AutoUnsubscribe } from "src/app/helpers/unsub";
 
@@ -10,22 +11,24 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        ExampleOneComponent,
-        ExampleTwoComponent,
-        FooterComponent,
-        TranslocoDirective,
-    ],
-    styles: ``
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    FooterComponent,
+    TranslocoDirective,
+  ],
+  styles: ``
 })
 @AutoUnsubscribe()
 export class AppComponent implements OnDestroy {
   public version: string = packageJson.version;
-  public componentToShow: string = 'example-one';
+  public componentList: any[] = [
+    { name: 'Example One', component: ExampleOneComponent },
+    { name: 'Example Two', component: ExampleTwoComponent },
+  ];
+  public activeComponent: number = 0;
 
   constructor(
     private updateService: UpdateService,
@@ -33,10 +36,9 @@ export class AppComponent implements OnDestroy {
     this.updateService.checkForUpdates();
   }
   
-  onComponentToggle(component: string): void {
-    this.componentToShow = component;
+  onComponentActivate(component: number): void {
+    this.activeComponent = component;
   }
 
   ngOnDestroy(): void {}
 }
-

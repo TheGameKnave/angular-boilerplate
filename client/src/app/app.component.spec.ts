@@ -37,10 +37,10 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should toggle componentToShow correctly', () => {
-    const newComponent = 'example-two';
-    component.onComponentToggle(newComponent);
-    expect(component.componentToShow).toBe(newComponent);
+  it('should toggle activeComponent correctly', () => {
+    const newComponent = 1;
+    component.onComponentActivate(newComponent);
+    expect(component.activeComponent).toBe(newComponent);
   });
 
   it('should call checkForUpdates on construction', () => {
