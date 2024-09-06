@@ -3,10 +3,21 @@
   <h2>{{ t('v.') }} {{ version }}</h2>
   <p>{{ t('Hello world') }}</p>
   <p>{{ t('There are {{count}} components.',{count: componentList.length}) }}</p>
- {{activeComponent}}
- <ng-container *ngComponentOutlet="componentList[activeComponent].component" />
+
   @for (component of componentList; track $index) {
-    <button (click)="onComponentActivate($index)">{{ t('Switch to {{componentName}}',{ componentName: t(component.name) }) }}</button>
+    <button
+      [class]="'component-' + component.name.replace(' ','-').toLowerCase()"
+      [disabled]="activeComponent === $index"
+      (click)="onComponentActivate($index)"
+    >{{ t(component.name) }}</button>
+  }
+  <button
+    class="component-clear"
+    [disabled]="activeComponent === null"
+    (click)="onComponentActivate(null)"
+  >🚫</button>
+  @if (activeComponent !== null) {
+    <ng-container *ngComponentOutlet="componentList[activeComponent].component"></ng-container>
   }
 
   <app-footer></app-footer>

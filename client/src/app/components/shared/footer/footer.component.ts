@@ -40,7 +40,6 @@ export class FooterComponent {
   }
 
   onI18n(event: Event): void {
-    console.log(event, event.type === 'keydown',event instanceof KeyboardEvent,(<any>event)['key'] === 'Enter');
     if (event.type === 'click' || (event.type === 'keydown' && event instanceof KeyboardEvent && event.key === 'Enter')) {
       const target = (event.target as HTMLElement).closest('li');
       if (target?.classList) {

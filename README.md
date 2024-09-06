@@ -5,14 +5,14 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 ## Current features
 * Angular 18 (with Node 20)
 * Parallel server/client execution
-* Bare-bones api proxy to the back-end
+* Bare-bones api proxy to the back-end *
 * SASS boilerplate included
-* Frontend environment detection/switching
+* Frontend environment detection/switching *
 * Auto-unsub from subscriptions and component variables
 * Heroku deployment
 * Google Analytics
-* Cookie API
-* Service worker to persist app and manage versions
+* Cookie API *
+* Service worker to persist app and manage versions *
 * Hot module replacement for faster dev iteration
 * Typescript with node for back-end
 * Client & Server unit testing via jasmine
@@ -24,15 +24,15 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * CI/CD (jenkins, sonar, etc?)
 * Tree-shaking/build optimization
 * Google Analytics reports on site activity
-* Feature flags
-* IndexedDB for offline storage
-* Websockets to reconcile disparities between server and local data
-* public api with GraphQL
+* Feature flags *
+* IndexedDB for offline storage *
+* Websockets to reconcile disparities between server and local data *
+* public api with GraphQL *
 * DB caching for external requests AND similar DB api calls (solr or the like)
 * Ionic & Electron integration
-* Elf state management
+* Elf state management *
 * Immutable.js to minimize mutation
-* Auth-agnostic (or maybe just Firebase) user management (emails and password resetting and deliverability)
+* Auth-agnostic (or maybe just Firebase) user management (emails and password resetting and deliverability) *
 
 ## Quick start
 
