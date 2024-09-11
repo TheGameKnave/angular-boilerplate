@@ -18,13 +18,38 @@
     "There are {{count}} components.": {
       "type": "string",
       "description": "Message about the number of components, using a pluralization format"
+    },
+    "App Version": {
+      "type": "string",
+      "description": "Name of the application version component"
+    },
+    "Environment": {
+      "type": "string",
+      "description": "Name of the environment component"
+    },
+    "Using {{environmentName}} environment.": {
+      "type": "string",
+      "description": "Message about the environment"
+    },
+    "Development": {
+      "type": "string",
+      "description": "Environment name for development"
+    },
+    "Production": {
+      "type": "string",
+      "description": "Environment name for production"
     }
   },
   "required": [
     "Hello world",
     "Angular Boilerplate",
     "v.",
-    "There are {{count}} components."
+    "There are {{count}} components.",
+    "App Version",
+    "Environment",
+    "Using {{environmentName}} environment.",
+    "Development",
+    "Production"
   ],
   "additionalProperties": false
 }

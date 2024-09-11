@@ -3,4 +3,9 @@
   ,"Angular Boilerplate": "Angular 模板"
   ,"v.": "v."
   ,"There are {{count}} components.": "{count, plural, =0 {没有组件。} other {有 # 个组件。}}"
-}
+  ,"App Version": "应用版本"
+  ,"Environment": "环境"
+  ,"Using {{environmentName}} environment.": "使用 {{environmentName}} 环境。"
+  ,"Development": "开发"
+  ,"Production": "生产"
+} 
