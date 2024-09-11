@@ -15,22 +15,6 @@
       "type": "string",
       "description": "Main page version"
     },
-    "Example One": {
-      "type": "string",
-      "description": "Name of component one"
-    },
-    "Example Two": {
-      "type": "string",
-      "description": "Name of component two"
-    },
-    "Switch to {{componentName}}": {
-      "type": "string",
-      "description": "Main page component swap button text with component name as {{componentName}}"
-    },
-    "{{componentName}} works!": {
-      "type": "string",
-      "description": "Success message with component name as {{componentName}}"
-    },
     "There are {{count}} components.": {
       "type": "string",
       "description": "Message about the number of components, using a pluralization format"
@@ -40,10 +24,6 @@
     "Hello world",
     "Angular Boilerplate",
     "v.",
-    "Example One",
-    "Example Two",
-    "Switch to {{componentName}}",
-    "{{componentName}} works!",
     "There are {{count}} components."
   ],
   "additionalProperties": false

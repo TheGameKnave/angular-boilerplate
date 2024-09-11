@@ -6,8 +6,6 @@ import { AutoUnsubscribe } from "src/app/helpers/unsub";
 
 import { TranslocoDirective } from '@jsverse/transloco';
 
-import { ExampleOneComponent } from './components/example-one/example-one.component';
-import { ExampleTwoComponent } from './components/example-two/example-two.component';
 import { AppVersionComponent } from './components/app-version/app-version.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 
@@ -26,8 +24,6 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 @AutoUnsubscribe()
 export class AppComponent implements OnDestroy {
   public componentList: any[] = [
-    { name: 'Example One', component: ExampleOneComponent },
-    { name: 'Example Two', component: ExampleTwoComponent },
     { name: 'App Version', component: AppVersionComponent },
   ];
   public activeComponent: number | null = null;

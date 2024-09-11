@@ -2,9 +2,5 @@
   "Hello world": "Bonjour le monde"
   ,"Angular Boilerplate": "Modèle Angular"
   ,"v.": "v."
-  ,"Example One": "Exemple Un"
-  ,"Example Two": "Exemple Deux"
-  ,"Switch to {{componentName}}": "Passer à {{componentName}}"
-  ,"{{componentName}} works!": "L'{{componentName}} fonctionne !"
   ,"There are {{count}} components.": "{count, plural, =0 {Il n'y a pas de composants.} one {Il y a 1 composant.} other {Il y a # composants.}}"
 }

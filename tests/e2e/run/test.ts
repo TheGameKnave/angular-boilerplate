@@ -51,74 +51,28 @@ test('Measure Page Load Time', async t => {
     await t.expect(pageLoadTime).lt(getThreshold("pageLoad"));
     console.log(`Page load time: ${pageLoadTime} milliseconds`);
 });
-test('Click exampleOne', async t => {
-    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
-    const elementOne = Selector('app-example-one');
-    const elementTwo = Selector('app-example-two'); 
-    await t
-    // checks the DOM for the elements that change during the button press
-        .expect(elementOne.exists).notOk()
-        .expect(elementTwo.exists).notOk()
-
-    // then clicks the button, looks for changes
-        .click('button.component-example-one')
-        .expect(elementOne.exists).ok()
-        .expect(elementTwo.exists).notOk();
-    const screenshotDir = `Click_exampleOne/${savePath}`
-    await t.takeScreenshot(screenshotDir);
-});
-test('Click exampleTwo', async t => {
-    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
-    const elementOne = Selector('app-example-one');
-    const elementTwo = Selector('app-example-two'); 
-    await t
-    // checks the DOM for the elements that change during the button press
-        .expect(elementOne.exists).notOk()
-        .expect(elementTwo.exists).notOk()
-
-    // then clicks the button, looks for changes
-        
-        .click('button.component-example-two')
-        .expect(!elementOne.exists).notOk()
-        .expect(elementTwo.exists).ok();
-    const screenshotDir = `Click_exampleTwo/${savePath}`
-    await t.takeScreenshot(screenshotDir);
-});
 test('Click appVersion', async t => {
     const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
-    const elementOne = Selector('app-example-one');
     const appVersion = Selector('app-app-version'); 
     await t
     // checks the DOM for the elements that change during the button press
-        .expect(elementOne.exists).notOk()
         .expect(appVersion.exists).notOk()
 
     // then clicks the button, looks for changes
         
         .click('button.component-app-version')
-        .expect(!elementOne.exists).notOk()
         .expect(appVersion.exists).ok();
     const screenshotDir = `Click_appVersion/${savePath}`
     await t.takeScreenshot(screenshotDir);
 });
 test('Click Clear', async t => {
     const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
-    const elementOne = Selector('app-example-one');
-    const elementTwo = Selector('app-example-two'); 
     await t
 
     // then clicks the button, looks for changes
-        .click('button.component-example-one')
-        .expect(elementOne.exists).ok()
-        .expect(elementTwo.exists).notOk()
-        
-        .click('button.component-example-two')
-        .expect(elementOne.exists).notOk()
-        .expect(elementTwo.exists).ok()
+        .click('button.component-api')
 
         .click('button.component-clear')
-        .expect(elementOne.exists).notOk()
-        .expect(elementTwo.exists).notOk();
     const screenshotDir = `Click_Clear/${savePath}`
     await t.takeScreenshot(screenshotDir);
 });
