@@ -84,6 +84,23 @@ test('Click exampleTwo', async t => {
     const screenshotDir = `Click_exampleTwo/${savePath}`
     await t.takeScreenshot(screenshotDir);
 });
+test('Click appVersion', async t => {
+    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
+    const elementOne = Selector('app-example-one');
+    const appVersion = Selector('app-app-version'); 
+    await t
+    // checks the DOM for the elements that change during the button press
+        .expect(elementOne.exists).notOk()
+        .expect(appVersion.exists).notOk()
+
+    // then clicks the button, looks for changes
+        
+        .click('button.component-app-version')
+        .expect(!elementOne.exists).notOk()
+        .expect(appVersion.exists).ok();
+    const screenshotDir = `Click_appVersion/${savePath}`
+    await t.takeScreenshot(screenshotDir);
+});
 test('Click Clear', async t => {
     const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     const elementOne = Selector('app-example-one');
@@ -121,7 +138,7 @@ test('Test Language Change', async t => {
       await t.click(buttons[key]);
       // Test if the page has been translated to not-english
       await t
-        .expect(Selector('app-root > :nth-child(3)').innerText).notEql("Hello world");
+        .expect(Selector('app-root > :nth-child(2)').innerText).notEql("Hello world");
     }
   }
 
@@ -129,5 +146,5 @@ test('Test Language Change', async t => {
   await t.click(buttons.enButton);
   // Test if the page has been translated to English
   await t
-    .expect(Selector('app-root > :nth-child(3)').innerText).eql("Hello world");
+    .expect(Selector('app-root > :nth-child(2)').innerText).eql("Hello world");
   });
