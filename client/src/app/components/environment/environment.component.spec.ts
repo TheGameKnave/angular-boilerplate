@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EnvironmentComponent } from './environment.component';
+import { getTranslocoModule } from 'src/app/helpers/transloco-testing.module';
 
 describe('EnvironmentComponent', () => {
   let component: EnvironmentComponent;
@@ -7,7 +8,10 @@ describe('EnvironmentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EnvironmentComponent]
+      imports: [
+        EnvironmentComponent,
+        getTranslocoModule(),
+      ]
     })
     .compileComponents();
   });

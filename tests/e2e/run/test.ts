@@ -84,7 +84,7 @@ test('Click Clear', async t => {
     await t
 
     // then clicks the button, looks for changes
-        .click('button.component-api')
+        .click('button.component-environment')
 
         .click('button.component-clear')
     const screenshotDir = `Click_Clear/${savePath}`
