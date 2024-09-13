@@ -12,7 +12,7 @@ async function traverseDirectory(dirPath) {
             const stats = await fs.promises.stat(filePath);
             if (stats.isDirectory()) {
                 await traverseDirectory(filePath); // Recursively traverse directories
-            } else {
+            } else if(stats.isFile() && file === 'tested.png') {
                 const newFilePath = path.join(dirPath, newFileName);
                 await fs.promises.rename(filePath, newFilePath);
                 console.log(`Renamed ${file} to ${newFileName}`);
