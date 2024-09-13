@@ -19,6 +19,8 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Benchmark memory usage and response times (throttled for mobile) in tests
 * Internationalization (i18n) with Transloco
 
+(* indicates a feature that’s visible in the sample app)
+
 ## Future features:
 * e2e testing with TestCafe + snapshots
 * CI/CD (jenkins, sonar, etc?)

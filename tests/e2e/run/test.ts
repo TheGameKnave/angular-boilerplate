@@ -79,6 +79,20 @@ test('Click environment', async t => {
     const screenshotDir = `Click_environment/${savePath}`
     await t.takeScreenshot(screenshotDir);
 });
+test('Click api', async t => {
+    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
+    const api = Selector('app-api'); 
+    await t
+    // checks the DOM for the elements that change during the button press
+        .expect(api.exists).notOk()
+
+    // then clicks the button, looks for changes
+        
+        .click('button.component-api')
+        .expect(api.exists).ok();
+    const screenshotDir = `Click_api/${savePath}`
+    await t.takeScreenshot(screenshotDir);
+});
 test('Click Clear', async t => {
     const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     await t

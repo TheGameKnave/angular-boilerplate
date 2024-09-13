@@ -11,6 +11,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
 import { AppVersionComponent } from './components/app-version/app-version.component';
 import { EnvironmentComponent } from './components/environment/environment.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
+import { ApiComponent } from './components/api/api.component';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +30,7 @@ export class AppComponent implements OnDestroy {
   public componentList: any[] = [
     { name: 'App Version', component: AppVersionComponent },
     { name: 'Environment', component: EnvironmentComponent },
+    { name: 'API', component: ApiComponent },
   ];
   public activeComponent: number | null = null;
 

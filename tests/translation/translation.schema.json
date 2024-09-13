@@ -38,18 +38,23 @@
     "Production": {
       "type": "string",
       "description": "Environment name for production"
+    },
+    "API": {
+      "type": "string",
+      "description": "API button label"
     }
   },
   "required": [
-    "Hello world",
-    "Angular Boilerplate",
-    "v.",
-    "There are {{count}} components.",
-    "App Version",
-    "Environment",
-    "Using {{environmentName}} environment.",
-    "Development",
-    "Production"
+    "Hello world"
+    ,"Angular Boilerplate"
+    ,"v."
+    ,"There are {{count}} components."
+    ,"App Version"
+    ,"Environment"
+    ,"Using {{environmentName}} environment."
+    ,"Development"
+    ,"Production"
+    ,"API"
   ],
   "additionalProperties": false
 }
