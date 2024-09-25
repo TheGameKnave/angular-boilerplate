@@ -43,6 +43,10 @@
       "type": "string",
       "description": "API button label"
     }
+    ,"IndexedDB": {
+      "type": "string",
+      "description": "IndexedDB button label"
+    }
   },
   "required": [
     "Hello world"
@@ -55,6 +59,7 @@
     ,"Development"
     ,"Production"
     ,"API"
+    ,"IndexedDB"
   ],
   "additionalProperties": false
 }

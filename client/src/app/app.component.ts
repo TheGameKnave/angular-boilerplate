@@ -10,6 +10,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
 
 import { AppVersionComponent } from './components/app-version/app-version.component';
 import { EnvironmentComponent } from './components/environment/environment.component';
+import { IndexedDBComponent } from './indexed-db/indexed-db.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { ApiComponent } from './components/api/api.component';
 
@@ -31,6 +32,7 @@ export class AppComponent implements OnDestroy {
     { name: 'App Version', component: AppVersionComponent },
     { name: 'Environment', component: EnvironmentComponent },
     { name: 'API', component: ApiComponent },
+    { name: 'IndexedDB', component: IndexedDBComponent }
   ];
   public activeComponent: number | null = null;
 
