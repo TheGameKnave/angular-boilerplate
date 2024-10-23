@@ -11,7 +11,7 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Auto-unsub from subscriptions and component variables
 * Heroku deployment
 * Google Analytics
-* Cookie API *
+* Cookie API
 * Service worker to persist app and manage versions *
 * Hot module replacement for faster dev iteration
 * Typescript with node for back-end
@@ -19,17 +19,16 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Benchmark memory usage and response times (throttled for mobile) in tests
 * Internationalization (i18n) with Transloco
 * IndexedDB for offline storage *
+* e2e testing with TestCafe + snapshots
 
 (* indicates a feature that’s visible in the sample app)
 
 ## Future features:
-* e2e testing with TestCafe + snapshots
 * CI/CD (jenkins, sonar, etc?)
-* Tree-shaking/build optimization
 * Google Analytics reports on site activity
 * Feature flags *
-* Websockets to reconcile disparities between server and local data *
 * public api with GraphQL *
+* Websockets to reconcile disparities between server and local data *
 * DB caching for external requests AND similar DB api calls (solr or the like)
 * Ionic & Electron integration
 * Elf state management *

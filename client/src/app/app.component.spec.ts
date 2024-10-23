@@ -57,6 +57,7 @@ describe('AppComponent', () => {
 });
 
 describe('CookieService', () => {
+  // this isn't the MOST robust test of the cookie implementation.
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let updateService: jasmine.SpyObj<UpdateService>;
