@@ -18,6 +18,7 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Client & Server unit testing via jasmine
 * Benchmark memory usage and response times (throttled for mobile) in tests
 * Internationalization (i18n) with Transloco
+* IndexedDB for offline storage *
 
 (* indicates a feature that’s visible in the sample app)
 
@@ -27,7 +28,6 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Tree-shaking/build optimization
 * Google Analytics reports on site activity
 * Feature flags *
-* IndexedDB for offline storage *
 * Websockets to reconcile disparities between server and local data *
 * public api with GraphQL *
 * DB caching for external requests AND similar DB api calls (solr or the like)

@@ -1,2 +1,8 @@
-<br><p>IndexedDB</p>
-<textarea></textarea><br>
+<p *transloco="let t">
+  <label for="textAreaData">{{ t('Enter some text to have it persist between page reloads') }}</label><br>
+  <textarea 
+    id="textAreaData" 
+    type="text" 
+    [formControl]="textAreaData"
+  ></textarea>
+</p>

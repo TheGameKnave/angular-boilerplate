@@ -43,7 +43,7 @@
       "type": "string",
       "description": "API button label"
     }
-    ,"IndexedDB": {
+    ,"Enter some text to have it persist between page reloads": {
       "type": "string",
       "description": "IndexedDB button label"
     }
@@ -59,7 +59,7 @@
     ,"Development"
     ,"Production"
     ,"API"
-    ,"IndexedDB"
+    ,"Enter some text to have it persist between page reloads"
   ],
   "additionalProperties": false
 }
