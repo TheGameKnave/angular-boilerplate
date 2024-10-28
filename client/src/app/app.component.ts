@@ -10,8 +10,8 @@ import { TranslocoDirective } from '@jsverse/transloco';
 
 import { AppVersionComponent } from './components/app-version/app-version.component';
 import { EnvironmentComponent } from './components/environment/environment.component';
-import { IndexedDBComponent } from './indexed-db/indexed-db.component';
-import { FooterComponent } from './components/shared/footer/footer.component';
+import { IndexedDBComponent } from './components/indexed-db/indexed-db.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
 import { ApiComponent } from './components/api/api.component';
 
 @Component({

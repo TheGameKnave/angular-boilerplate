@@ -2,9 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { UpdateService } from './services/update.service';
 import { CookieService } from 'ngx-cookie-service';
-import { FooterComponent } from './components/shared/footer/footer.component';
-import { ExampleOneComponent } from './components/example-one/example-one.component';
-import { ExampleTwoComponent } from './components/example-two/example-two.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
 import { getTranslocoModule } from './helpers/transloco-testing.module';
 import { By } from '@angular/platform-browser';
 
@@ -20,8 +18,6 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FooterComponent,
-        ExampleOneComponent,
-        ExampleTwoComponent,
         AppComponent,
         getTranslocoModule(),
       ],
@@ -69,8 +65,6 @@ describe('CookieService', () => {
     TestBed.configureTestingModule({
       imports: [
         FooterComponent,
-        ExampleOneComponent,
-        ExampleTwoComponent,
         AppComponent,
         getTranslocoModule(),
       ],
