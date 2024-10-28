@@ -23,6 +23,7 @@
     "@jsverse/transloco-messageformat": "^7.0.1",
     "@jsverse/transloco-persist-lang": "^7.0.1",
     "i18n-l10n-flags": "^2.0.0",
+    "idb": "^8.0.0",
     "ngx-cookie-service": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
