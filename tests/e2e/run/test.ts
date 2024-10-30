@@ -50,9 +50,11 @@ test('Measure Page Load Time', async t => {
     const pageLoadTime = endTime - startTime;
     await t.expect(pageLoadTime).lt(getThreshold("pageLoad"));
     console.log(`Page load time: ${pageLoadTime} milliseconds`);
+    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
+    const screenshotDir = `Page_load/${savePath}`;
+    await t.takeScreenshot(screenshotDir);
 });
 test('Click appVersion', async t => {
-    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     const appVersion = Selector('app-app-version'); 
     await t
     // checks the DOM for the elements that change during the button press
@@ -62,25 +64,25 @@ test('Click appVersion', async t => {
         
         .click('button.component-app-version')
         .expect(appVersion.exists).ok();
-    const screenshotDir = `Click_appVersion/${savePath}`
-    await t.takeScreenshot(screenshotDir);
+
+    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
+    const screenshotDir = `Click_appVersion/${savePath}`;
+    await t.takeElementScreenshot('app-app-version',screenshotDir);
 });
 test('Click environment', async t => {
-    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     const environment = Selector('app-environment'); 
     await t
     // checks the DOM for the elements that change during the button press
         .expect(environment.exists).notOk()
 
     // then clicks the button, looks for changes
-        
         .click('button.component-environment')
         .expect(environment.exists).ok();
-    const screenshotDir = `Click_environment/${savePath}`
-    await t.takeScreenshot(screenshotDir);
+    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
+    const screenshotDir = `Click_environment/${savePath}`;
+    await t.takeElementScreenshot('app-environment',screenshotDir);
 });
 test('Click api', async t => {
-    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     const api = Selector('app-api'); 
     await t
     // checks the DOM for the elements that change during the button press
@@ -90,18 +92,19 @@ test('Click api', async t => {
         
         .click('button.component-api')
         .expect(api.exists).ok();
-    const screenshotDir = `Click_api/${savePath}`
-    await t.takeScreenshot(screenshotDir);
+    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
+    const screenshotDir = `Click_api/${savePath}`;
+    await t.takeElementScreenshot('app-api',screenshotDir);
 });
 test('Click Clear', async t => {
-    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     await t
 
     // then clicks the button, looks for changes
         .click('button.component-environment')
 
         .click('button.component-clear')
-    const screenshotDir = `Click_Clear/${savePath}`
+    const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
+    const screenshotDir = `Click_Clear/${savePath}`;
     await t.takeScreenshot(screenshotDir);
 });
 test('Measure Memory Usage', async t => {
