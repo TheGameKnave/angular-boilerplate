@@ -32,6 +32,8 @@ jobs:
             echo 'Waiting for Angular server...'
             sleep 5
           done
+          echo 'Angular server is up and running!'
+          sleep 10 # give the server some time to fully start up
 
       - name: Run TestCafe Tests
         uses: DevExpress/testcafe-action@latest
