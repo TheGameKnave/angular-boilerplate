@@ -6,16 +6,12 @@ jobs:
   build:
     name: Install Node, Build, and Run Tests
     runs-on: ubuntu-latest
+    env:
+      # Define environment variables here
+      PORT: 4201
+      APP_PORT: 4200
 
     steps:
-      - name: Install Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
-      - name: Verify Chrome installation
-        run: google-chrome-stable --version
-
       - name: Install Node
         uses: actions/setup-node@v3
         with:
@@ -27,11 +23,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Create .env file
-        run: |
-          echo "PORT=4201" > server/.env
-          echo "APP_PORT=4200" >> server/.env
-
       - name: Start Angular server
         run: npm run prod &
 
@@ -41,10 +32,9 @@ jobs:
             echo 'Waiting for Angular server...'
             sleep 5
           done
-          echo 'Angular server is up and running!'
-          sleep 20 # give the server some time to fully start up
 
       - name: Run TestCafe Tests
         uses: DevExpress/testcafe-action@latest
         with:
-          args: 'chrome:headless --disable-search-engine-choice-screen --no-sandbox --window-size=1280,1024 tests/e2e/run'
+          args: |
+            chrome '--window-size=1280,1024' tests/e2e/run
