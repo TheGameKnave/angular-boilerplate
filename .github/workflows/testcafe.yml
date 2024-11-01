@@ -13,6 +13,9 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
+      - name: Verify Chrome installation
+        run: google-chrome-stable --version
+
       - name: Install Node
         uses: actions/setup-node@v3
         with:
@@ -39,9 +42,9 @@ jobs:
             sleep 5
           done
           echo 'Angular server is up and running!'
-          sleep 10 # give the server some time to fully start up
+          sleep 20 # give the server some time to fully start up
 
       - name: Run TestCafe Tests
         uses: DevExpress/testcafe-action@latest
         with:
-          args: 'chrome:headless --window-size=1280,1024 tests/e2e/run'
+          args: 'chrome:headless --no-sandbox --window-size=1280,1024 tests/e2e/run'
