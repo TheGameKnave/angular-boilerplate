@@ -47,4 +47,4 @@ jobs:
       - name: Run TestCafe Tests
         uses: DevExpress/testcafe-action@latest
         with:
-          args: 'chrome:headless --no-sandbox --window-size=1280,1024 tests/e2e/run'
+          args: 'chrome:headless --disable-search-engine-choice-screen --no-sandbox --window-size=1280,1024 tests/e2e/run'
