@@ -67,7 +67,7 @@ test('Click appVersion', async t => {
 
     const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     const screenshotDir = `Click_appVersion/${savePath}`;
-    await t.takeElementScreenshot('app-app-version',screenshotDir);
+    await t.takeElementScreenshot('.component-container',screenshotDir);
 });
 test('Click environment', async t => {
     const environment = Selector('app-environment'); 
@@ -80,7 +80,7 @@ test('Click environment', async t => {
         .expect(environment.exists).ok();
     const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     const screenshotDir = `Click_environment/${savePath}`;
-    await t.takeElementScreenshot('app-environment',screenshotDir);
+    await t.takeElementScreenshot('.component-container',screenshotDir);
 });
 test('Click api', async t => {
     const api = Selector('app-api'); 
@@ -94,7 +94,7 @@ test('Click api', async t => {
         .expect(api.exists).ok();
     const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     const screenshotDir = `Click_api/${savePath}`;
-    await t.takeElementScreenshot('app-api',screenshotDir);
+    await t.takeElementScreenshot('.component-container',screenshotDir);
 });
 test('Click Clear', async t => {
     await t
