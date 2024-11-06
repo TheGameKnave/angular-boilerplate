@@ -141,3 +141,5 @@ dump_prod.sql
 
 # generated files from e2e snapshot testing
 generated
+tests/e2e/screenshots/**/tested.png
+tests/e2e/screenshots/**/out.png
