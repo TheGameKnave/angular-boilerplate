@@ -92,22 +92,20 @@ tbd
 ### TestCafe end-to-end testing Startup
 
 #### Visual regression testing in Testcafe via testcafe-blink-diff
-Run the Testcafe command with more parameters, since 
-with this one we're taking screenshots and prepping to compare them.
+Run the Testcafe command with more parameters, since with this one we're taking screenshots and prepping to compare them.
 
-* from tests/e2e `TEST_MODE=accepted node test_runner.ts`
-Runs e2e tests and takes the base screenshots. Run this **once** when the site is working.
-Be careful when running this, this will overwrite the "working" screenshots in the directory.
+* from `tests/e2e`, run `node test_runner accepted`
+Runs e2e tests and takes the base screenshots if they don't exist. Run this once when the site is working, and again after each new e2e test case is created.
 
-* from tests/e2e `node test_runner.ts`
+* from `tests/e2e`, run `node test_runner`
 Runs e2e tests and takes new "tested" screenshots.
 
 * `npx testcafe-blink-diff tests/e2e/screenshots --compare accepted:tested --open --threshold 0.005`
-The CLI command to compare accepted:tested screenshots for differences. If new screenshot tests have been created, this will fail when looking for the "accepted.png"
+The CLI command to compare accepted:tested screenshots for differences. If a test case's screenshots have not been created, this will fail when looking for the "accepted.png"
 The report will be in generated/index.html.
 
-* `npm run accept`
-Accept all screenshot diffs and overwrite accepted comparisons.
+* from root, run `npm run accept <directory>`
+Accept all screenshot diffs and overwrite accepted comparisons. Optional argument is a directory to traverse, for targeting specific test cases.
 
 ### SonarQube code hygeine testing
 

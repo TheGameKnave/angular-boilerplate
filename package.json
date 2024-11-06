@@ -18,7 +18,7 @@
     "sonar": "sonar-scanner -Dsonar.token=$(grep SONAR_TOKEN server/.env | cut -d '=' -f 2)",
     "test": "./tests/test.sh",
     "test-win": "tests\\test.bat",
-    "accept": "cd tests/e2e && node accept_tests.js"
+    "accept": "cd tests/e2e && node accept_tests"
   },
   "workspaces": [
     "./client",

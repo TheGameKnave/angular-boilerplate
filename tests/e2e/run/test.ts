@@ -1,12 +1,22 @@
-import { AngularSelector, waitForAngular } from 'testcafe-angular-selectors';
-import { takeSnapshot } from 'testcafe-blink-diff';
+import { waitForAngular } from 'testcafe-angular-selectors';
+import * as path from 'path';
+import * as fs from 'fs';
 import { Selector, test } from 'testcafe';
 import { ClientFunction } from 'testcafe';
 import { getThreshold } from '../data/constants';
 import { SUPPORTED_LANGUAGES } from '../../../client/src/app/helpers/constants';
-// import { LANGUAGES } from 'i18n-l10n-flags';
 
 const screenshotMode = process.env.TEST_MODE || 'tested';
+const takeScreenshot = async (t: TestController, screenshotDir: string, element?: string) => {
+    const absolutePath = path.join(process.cwd(), 'screenshots/' + screenshotDir);
+    if ((screenshotMode === 'accepted' && !fs.existsSync(absolutePath)) || screenshotMode === 'tested') {
+        if (element) {
+            await t.takeElementScreenshot(element, screenshotDir);
+        } else {
+            await t.takeScreenshot(screenshotDir);
+        }
+    }
+};
 
 // making memory exception. Might want to move to global ts file
 declare global {
@@ -52,7 +62,7 @@ test('Measure Page Load Time', async t => {
     console.log(`Page load time: ${pageLoadTime} milliseconds`);
     const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     const screenshotDir = `Page_load/${savePath}`;
-    await t.takeScreenshot(screenshotDir);
+    await takeScreenshot(t, screenshotDir);
 });
 test('Click appVersion', async t => {
     const appVersion = Selector('app-app-version'); 
@@ -67,7 +77,7 @@ test('Click appVersion', async t => {
 
     const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     const screenshotDir = `Click_appVersion/${savePath}`;
-    await t.takeElementScreenshot('.component-container',screenshotDir);
+    await takeScreenshot(t,screenshotDir,'.component-container');
 });
 test('Click environment', async t => {
     const environment = Selector('app-environment'); 
@@ -80,7 +90,7 @@ test('Click environment', async t => {
         .expect(environment.exists).ok();
     const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     const screenshotDir = `Click_environment/${savePath}`;
-    await t.takeElementScreenshot('.component-container',screenshotDir);
+    await takeScreenshot(t,screenshotDir,'.component-container');
 });
 test('Click api', async t => {
     const api = Selector('app-api'); 
@@ -94,7 +104,7 @@ test('Click api', async t => {
         .expect(api.exists).ok();
     const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     const screenshotDir = `Click_api/${savePath}`;
-    await t.takeElementScreenshot('.component-container',screenshotDir);
+    await takeScreenshot(t,screenshotDir,'.component-container');
 });
 test('Click Clear', async t => {
     await t
@@ -105,7 +115,7 @@ test('Click Clear', async t => {
         .click('button.component-clear')
     const savePath = `${t.browser.alias.replace(/[^a-z0-9]/gi, '_')}/${screenshotMode}.png`;
     const screenshotDir = `Click_Clear/${savePath}`;
-    await t.takeScreenshot(screenshotDir);
+    await takeScreenshot(t,screenshotDir);
 });
 test('Measure Memory Usage', async t => {
     const memoryVal = await getMemory(t);

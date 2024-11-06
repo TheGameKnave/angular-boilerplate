@@ -1,7 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const directoryPath = 'screenshots/';
+// Get the directory to traverse from the command line argument
+const dirToTraverse = path.resolve('screenshots', process.argv[2] || '');
+
 const newFileName = 'accepted.png';
 
 async function traverseDirectory(dirPath) {
@@ -14,8 +16,10 @@ async function traverseDirectory(dirPath) {
                 await traverseDirectory(filePath); // Recursively traverse directories
             } else if(stats.isFile() && file === 'tested.png') {
                 const newFilePath = path.join(dirPath, newFileName);
-                await fs.promises.rename(filePath, newFilePath);
-                console.log(`Renamed ${file} to ${newFileName}`);
+                await fs.promises.copyFile(filePath, newFilePath);
+                // log filepath after tests/e2e/screenshots/
+                const screenshotsDir = path.resolve('tests/e2e/screenshots/');
+                console.log(`Copied ${path.relative(screenshotsDir, filePath)} to ${newFileName}`);
             }
         }
     } catch (err) {
@@ -23,5 +27,5 @@ async function traverseDirectory(dirPath) {
     }
 }
 
-// Start traversing from the root directory
-traverseDirectory(directoryPath);
+// Start traversing from the specified directory OR the root
+traverseDirectory(dirToTraverse);

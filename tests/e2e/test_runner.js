@@ -3,7 +3,7 @@ const { exec } = require("child_process");
 const { promisify } = require("util");
 const execPromise = promisify(exec);
 
-process.env.TEST_MODE = process.env.TEST_MODE || 'tested';
+process.env.TEST_MODE = process.argv[2] || process.env.TEST_MODE || 'tested';
 
 (async () => {
   const serverProcess = await exec("npm run dev");
@@ -33,7 +33,7 @@ process.env.TEST_MODE = process.env.TEST_MODE || 'tested';
   } finally {
     await testcafe.close();
     serverProcess.kill();
-    
+
     // Kill processes on ports 4200 and 4201
     try {
       await execPromise('lsof -ti :4200 | xargs kill -9');
