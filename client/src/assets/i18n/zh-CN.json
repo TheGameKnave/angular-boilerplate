@@ -9,5 +9,6 @@
   ,"Development": "开发"
   ,"Production": "生产"
   ,"API": "API"
+  ,"IndexedDB": "IndexedDB"
   ,"Enter some text to have it persist between page reloads": "输入文本以在页面重新加载时保持持久性"
 } 

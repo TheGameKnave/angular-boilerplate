@@ -9,5 +9,6 @@
   ,"Development": "Development"
   ,"Production": "Production"
   ,"API": "API"
+  ,"IndexedDB": "IndexedDB"
   ,"Enter some text to have it persist between page reloads": "Enter some text to have it persist between page reloads"
 }

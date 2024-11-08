@@ -6,46 +6,50 @@
     "Hello world": {
       "type": "string",
       "description": "Main page greeting"
-    },
-    "Angular Boilerplate": {
+    }
+    ,"Angular Boilerplate": {
       "type": "string",
       "description": "Main page title"
-    },
-    "v.": {
+    }
+    ,"v.": {
       "type": "string",
       "description": "Main page version"
-    },
-    "There are {{count}} components.": {
+    }
+    ,"There are {{count}} components.": {
       "type": "string",
       "description": "Message about the number of components, using a pluralization format"
-    },
-    "App Version": {
+    }
+    ,"App Version": {
       "type": "string",
       "description": "Name of the application version component"
-    },
-    "Environment": {
+    }
+    ,"Environment": {
       "type": "string",
       "description": "Name of the environment component"
-    },
-    "Using {{environmentName}} environment.": {
+    }
+    ,"Using {{environmentName}} environment.": {
       "type": "string",
       "description": "Message about the environment"
-    },
-    "Development": {
+    }
+    ,"Development": {
       "type": "string",
       "description": "Environment name for development"
-    },
-    "Production": {
+    }
+    ,"Production": {
       "type": "string",
       "description": "Environment name for production"
-    },
-    "API": {
+    }
+    ,"API": {
       "type": "string",
       "description": "API button label"
     }
-    ,"Enter some text to have it persist between page reloads": {
+    ,"IndexedDB": {
       "type": "string",
       "description": "IndexedDB button label"
+    }
+    ,"Enter some text to have it persist between page reloads": {
+      "type": "string",
+      "description": "IndexedDB component description"
     }
   },
   "required": [
@@ -59,6 +63,7 @@
     ,"Development"
     ,"Production"
     ,"API"
+    ,"IndexedDB"
     ,"Enter some text to have it persist between page reloads"
   ],
   "additionalProperties": false
