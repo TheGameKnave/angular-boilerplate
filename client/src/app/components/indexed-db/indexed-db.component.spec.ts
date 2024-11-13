@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { IndexedDBComponent } from './indexed-db.component';
 import { getTranslocoModule } from '../../helpers/transloco-testing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { openDB, IDBPDatabase } from 'idb';
+import { openDB, IDBPDatabase, deleteDB } from 'idb';
 
 describe('IndexedDBComponent initialization', () => {
   let component: IndexedDBComponent;
@@ -97,4 +97,94 @@ describe('IndexedDBComponent operations', () => {
     });
     expect(storedValue).toBe(testData);
   }));
+
+
+  it('should delete an item from IndexedDB', async () => {
+    await component.set('key', 'test value'); // Add an item to the database
+    await component.del('key'); // Delete the item
+
+    const value = await db.get('keyval', 'key');
+    expect(value).toBeUndefined();
+  });
+
+  it('should clear all items from IndexedDB', async () => {
+    await component.set('key1', 'value1'); // Add an item
+    await component.set('key2', 'value2'); // Add another item
+    await component.clear(); // Clear all items
+
+    const keys = await db.getAllKeys('keyval');
+    expect(keys.length).toBe(0);
+  });
+
+  it('should retrieve all keys from IndexedDB', async () => {
+    await component.set('key1', 'value1'); // Add an item
+    await component.set('key2', 'value2'); // Add another item
+
+    const keys = await component.keys() as string[];
+    expect(keys).toContain('key1');
+    expect(keys).toContain('key2');
+  });
+
+  it('should handle empty values', async () => {
+    component.textAreaData.setValue('');
+    await component.getDbValue();
+    expect(component.textAreaData.value).toBe('');
+  });
+
+  // TODO figure out how to test database upgrades without crashing the test suite
+  // it('should create the object store on database upgrade', async () => {
+  //   // Open the database with a higher version to trigger the upgrade
+  //   const upgradedDb = await openDB('boilerplate', 2, {
+  //     upgrade(db) {
+  //       // This block should be executed, covering the `upgrade` function
+  //       if (!db.objectStoreNames.contains('keyval')) {
+  //         db.createObjectStore('keyval');
+  //       }
+  //     },
+  //   });
+
+  //   // Verify that the object store was created
+  //   expect(upgradedDb.objectStoreNames.contains('keyval')).toBeTrue();
+
+  //   await deleteDB('boilerplate');
+  // });
+  
+  it('should handle multiple simultaneous updates', fakeAsync(async () => {
+    component.textAreaData.setValue('test');
+    tick(200);
+    component.textAreaData.setValue('test2');
+    tick(400);
+    await component.getDbValue();
+    expect(component.textAreaData.value).toBe('test2');
+  }));
+  
+  it('should clean up subscription', fakeAsync(() => {
+    component.ngOnDestroy();
+    tick(1100);
+    console.log(component.textAreaSub);
+    expect(component.textAreaSub?.closed).toBe(true);
+  }));
+  
+  it('should debounce updates', fakeAsync(async () => {
+    spyOn(component, 'set');
+    component.textAreaData.setValue('test');
+    tick(200);
+    expect(component.set).not.toHaveBeenCalled();
+    tick(400);
+    expect(component.set).toHaveBeenCalledTimes(1);
+  }));
+  
+  it('should handle key collisions', async () => {
+    await component.set('key', 'value1');
+    await component.set('key', 'value2');
+    const data = await component.get('key');
+    expect(data).toBe('value2');
+  });
+  
+  it('should clear data', async () => {
+    await component.set('key', 'value');
+    await component.clear();
+    const data = await component.get('key');
+    expect(data).toBeUndefined();
+  });
 });

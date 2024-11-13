@@ -85,27 +85,33 @@ This will display the API responses.
 
 ## Tests
 
+* from root, run `npm test` for full test suite, below (best to ensure green 100% coverage before any PRs to `dev`)
+
+### Translation Testing
+
+* from root, run `npm run test-translation` to uncover any gaps in translation files, relative to schema (will not detect completely missing schema keys; refer to browser errors for that)
+
 ### Unit Testing
 
-tbd
+* from root, run `npm run test-server` and `npm run test-client` to execute each unit test suite independently
 
-### TestCafe end-to-end testing Startup
+### TestCafe end-to-end testing
+
+* from root, run `npm run test-e2e`
+Runs e2e tests and takes new "tested" screenshots.
 
 #### Visual regression testing in Testcafe via testcafe-blink-diff
 Run the Testcafe command with more parameters, since with this one we're taking screenshots and prepping to compare them.
 
-* from `tests/e2e`, run `node test_runner accepted`
-Runs e2e tests and takes the base screenshots if they don't exist. Run this once when the site is working, and again after each new e2e test case is created.
-
-* from `tests/e2e`, run `node test_runner`
-Runs e2e tests and takes new "tested" screenshots.
-
-* `npx testcafe-blink-diff tests/e2e/screenshots --compare accepted:tested --open --threshold 0.005`
-The CLI command to compare accepted:tested screenshots for differences. If a test case's screenshots have not been created, this will fail when looking for the "accepted.png"
-The report will be in generated/index.html.
-
 * from root, run `npm run accept <directory>`
 Accept all screenshot diffs and overwrite accepted comparisons. Optional argument is a directory to traverse, for targeting specific test cases.
+
+* from `tests/e2e`, run `node test_runner accepted`
+Runs e2e tests and takes the base screenshots if they don't exist. (will overwrite existing screenshots)
+
+* from `tests/e2e`, run `npx testcafe-blink-diff tests/e2e/screenshots --compare accepted:tested --open --threshold 0.005`
+The CLI command to compare accepted:tested screenshots for differences. If a test case's screenshots have not been created, this will fail when looking for the "accepted.png"
+The report will be in generated/index.html.
 
 ### SonarQube code hygeine testing
 

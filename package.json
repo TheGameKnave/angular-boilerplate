@@ -17,7 +17,10 @@
     "prod": "run-p client-prod server-prod",
     "sonar": "sonar-scanner -Dsonar.token=$(grep SONAR_TOKEN server/.env | cut -d '=' -f 2)",
     "test": "./tests/test.sh",
-    "test-win": "tests\\test.bat",
+    "test-translation": "cd tests/translation && ts-node translation-validation.ts",
+    "test-server": "cd server && npm test",
+    "test-client": "cd client && npm test",
+    "test-e2e": "cd tests/e2e && node clean_screenshots && node test_runner",
     "accept": "cd tests/e2e && node accept_tests"
   },
   "workspaces": [

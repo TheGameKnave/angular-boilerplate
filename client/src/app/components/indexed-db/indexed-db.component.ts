@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { openDB } from 'idb';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { AutoUnsubscribe } from 'src/app/helpers/unsub';
 
-
+@AutoUnsubscribe()
 @Component({
   selector: 'app-indexed-db',
   standalone: true,
@@ -16,7 +17,7 @@ import { debounceTime } from 'rxjs/operators';
   templateUrl: './indexed-db.component.html',
   styles: ``
 })
-export class IndexedDBComponent {
+export class IndexedDBComponent implements OnInit, OnDestroy {
   textAreaData = new FormControl('');
   textAreaSub: Subscription | undefined;
 
@@ -62,4 +63,5 @@ export class IndexedDBComponent {
     return (await this.dbPromise).getAllKeys('keyval');
   }
 
+  ngOnDestroy(): void {}
 }
