@@ -21,21 +21,25 @@ export class IndexedDBComponent {
   textAreaSub: Subscription | undefined;
 
   ngOnInit() {
-    this.get('key').then(data => {
-      if (data) {
-        this.textAreaData.setValue(data);
-      }
-    })
+  
+    this.getDbValue().then(() => {});
+
     this.textAreaSub = this.textAreaData.valueChanges.pipe(
       debounceTime(400)
     ).subscribe((data) => {
-      console.log(data);
       this.set('key', data);
     });
-    this.dbPromise.then(async db => {
-      console.log(db);
+  
+  }
+
+  getDbValue(): Promise<void> {
+    return this.get('key').then(data => {
+      if (typeof data === 'string') {
+        this.textAreaData.setValue(data);
+      }
     });
   }
+
   dbPromise = openDB('boilerplate', 1, {
     upgrade(db) {
       db.createObjectStore('keyval');
