@@ -28,12 +28,12 @@ import { ApiComponent } from './components/api/api.component';
 })
 @AutoUnsubscribe()
 export class AppComponent implements OnDestroy {
-  public componentList: any[] = [
-    { name: 'App Version', component: AppVersionComponent },
-    { name: 'Environment', component: EnvironmentComponent },
-    { name: 'API', component: ApiComponent },
-    { name: 'IndexedDB', component: IndexedDBComponent }
-  ];
+  public componentList = {
+    'App Version':{ component: AppVersionComponent, available: true },
+    'Environment': { component: EnvironmentComponent, available: true },
+    'API': {component: ApiComponent, available: true },
+    'IndexedDB': {component: IndexedDBComponent, available: true }
+  };
   public activeComponent: number | null = null;
 
   constructor(
