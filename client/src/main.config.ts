@@ -10,6 +10,7 @@ import { cookiesStorage, GetLangParams, provideTranslocoPersistLang } from '@jsv
 import { provideTranslocoLocale } from '@jsverse/transloco-locale';
 
 import { SUPPORTED_LANGUAGES } from './app/helpers/constants';
+import { provideFeatureFlag } from './app/providers/feature-flag.provider';
 
 export function getLangFn({ cachedLang, browserLang, cultureLang, defaultLang }: GetLangParams) {
   return cachedLang ?? browserLang ?? (cultureLang || defaultLang);
@@ -24,7 +25,8 @@ export const appProviders = [
     })
   ),
   provideHttpClient(withInterceptorsFromDi()),
-  provideHttpClient(),
+  provideHttpClient(), // twice?
+  provideFeatureFlag(),
   provideTransloco({
     config: {
       availableLangs: SUPPORTED_LANGUAGES,

@@ -1,14 +1,16 @@
 <ng-container *transloco="let t">
   <h1>{{ t('Angular Boilerplate') }}</h1>
   <p>{{ t('Hello world') }}</p>
-  <p>{{ t('There are {{count}} components.',{count: componentList.length}) }}</p>
+  <p>{{ t('There are {{count}} components.',{count: componentListArr.length}) }}</p>
 
-  @for (component of componentList; track $index) {
-    <button
-      [class]="'component-' + component.name.replace(' ','-').toLowerCase()"
-      [disabled]="activeComponent === $index"
-      (click)="onComponentActivate($index)"
-    >{{ t(component.name) }}</button>
+  @for (component of componentListArr; track $index) {
+    @if (featureFlagService.getFeature(component[0])) {
+      <button
+        [class]="'component-' + component[0].replace(' ','-').toLowerCase()"
+        [disabled]="activeComponent === $index"
+        (click)="onComponentActivate($index)"
+      >{{ t(component[0]) }}</button>
+    }
   }
   <button
     class="component-clear"
@@ -16,8 +18,8 @@
     (click)="onComponentActivate(null)"
   >🚫</button>
   <div class="component-container">
-    @if (activeComponent !== null) {
-      <ng-container *ngComponentOutlet="componentList[activeComponent].component"></ng-container>
+    @if (activeComponent !== null && featureFlagService.getFeature(componentListArr[activeComponent][0])) {
+      <ng-container *ngComponentOutlet="componentListArr[activeComponent][1]"></ng-container>
     }
   </div>
 

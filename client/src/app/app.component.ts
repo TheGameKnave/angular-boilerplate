@@ -8,12 +8,24 @@ import { AutoUnsubscribe } from "src/app/helpers/unsub";
 
 import { TranslocoDirective } from '@jsverse/transloco';
 
+import { FooterComponent } from './components/layout/footer/footer.component';
 import { AppVersionComponent } from './components/app-version/app-version.component';
 import { EnvironmentComponent } from './components/environment/environment.component';
-import { IndexedDBComponent } from './components/indexed-db/indexed-db.component';
-import { FooterComponent } from './components/layout/footer/footer.component';
 import { ApiComponent } from './components/api/api.component';
+import { IndexedDBComponent } from './components/indexed-db/indexed-db.component';
+import { FeatureFlagService } from './services/feature-flag.service';
+  
+type ComponentList = {
+  [key: string]: any
+}
+export const componentList: ComponentList = {
+  'App Version': AppVersionComponent,
+  'Environment': EnvironmentComponent,
+  'API': ApiComponent,
+  'IndexedDB': IndexedDBComponent,
+};
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -26,25 +38,20 @@ import { ApiComponent } from './components/api/api.component';
   ],
   styles: ``
 })
-@AutoUnsubscribe()
 export class AppComponent implements OnDestroy {
-  public componentList = {
-    'App Version':{ component: AppVersionComponent, available: true },
-    'Environment': { component: EnvironmentComponent, available: true },
-    'API': {component: ApiComponent, available: true },
-    'IndexedDB': {component: IndexedDBComponent, available: true }
-  };
+  public componentListArr = Object.entries(componentList);
   public activeComponent: number | null = null;
 
   constructor(
     private updateService: UpdateService,
     private cookieService: CookieService, 
+    public featureFlagService: FeatureFlagService,
   ){
     this.updateService.checkForUpdates();
   }
 
   ngOnInit(): void {
-    let activeButton = this.cookieService.get('activeButton');
+    let activeButton = this.featureFlagService.getFeature(this.cookieService.get('activeButton')) ? this.cookieService.get('activeButton') : '';
     if(['', 'null'].includes(activeButton)) {
       this.activeComponent = null;
     }else {
