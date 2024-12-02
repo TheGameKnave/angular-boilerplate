@@ -17,5 +17,9 @@ router.get('/flags', (req: Request, res: Response, next: NextFunction) => {
   res.send(features);
 });
 
+router.put('/flags', (req: Request, res: Response, next: NextFunction) => {
+  features = req.body;
+  res.send(features);
+});
 
 export default router;
