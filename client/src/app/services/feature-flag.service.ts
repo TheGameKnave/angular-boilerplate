@@ -35,6 +35,6 @@ export class FeatureFlagService {
   }
 
   getFeature(feature: FeatureFlagKeys): boolean {
-    return this.features()[feature] ?? false;
+    return this.features()[feature] ?? feature === 'Features' ?? false;
   }
 }

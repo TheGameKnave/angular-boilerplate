@@ -20,11 +20,11 @@ type ComponentList = {
   [key: string]: any
 }
 export const componentList: ComponentList = {
+  'Features': FeaturesComponent,
   'App Version': AppVersionComponent,
   'Environment': EnvironmentComponent,
   'API': ApiComponent,
   'IndexedDB': IndexedDBComponent,
-  'Features': FeaturesComponent,
 };
 
 @AutoUnsubscribe()
@@ -41,8 +41,9 @@ export const componentList: ComponentList = {
   styles: ``
 })
 export class AppComponent implements OnDestroy {
+  componentList = componentList;
   public componentListArr = Object.entries(componentList);
-  public activeComponent: number | null = null;
+  public activeComponent: string | null = null;
 
   constructor(
     private updateService: UpdateService,
@@ -53,14 +54,15 @@ export class AppComponent implements OnDestroy {
   }
 
   ngOnInit(): void {
-    let activeButton = this.featureFlagService.getFeature(this.cookieService.get('activeButton')) ? this.cookieService.get('activeButton') : '';
+    let activeButton = this.cookieService.get('activeButton');
+    activeButton = this.featureFlagService.getFeature(activeButton) ? activeButton : '';
     if(['', 'null'].includes(activeButton)) {
       this.activeComponent = null;
     }else {
-      this.activeComponent = Number(activeButton);
+      this.activeComponent = activeButton;
     }
   }
-  onComponentActivate(component: number | null): void {
+  onComponentActivate(component: string | null): void {
     this.activeComponent = component;
     this.cookieService.set("activeButton", component !== null ? component.toString() : "null");
   }
