@@ -11,4 +11,6 @@
   ,"API": "API"
   ,"IndexedDB": "IndexedDB"
   ,"Enter some text to have it persist between page reloads": "輸入文字以讓其在頁面重新載入時持續存在"
+  ,"Features": "功能"
+  ,"Turn features on and off": "開啟和關閉功能"
 }
