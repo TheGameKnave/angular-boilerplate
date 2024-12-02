@@ -1,1 +1,11 @@
 <p>features works!</p>
+<ng-container *transloco="let t">
+  @for (feature of Object.entries(featureFlagService.features()); track $index) {
+    @if (featureFlagService.getFeature(feature[0])) {
+      <li>
+        <input type="checkbox" [id]="feature[0]">
+        <label [for]="feature[0]">{{ t(feature[0]) }}</label>
+      </li>
+    }
+  }
+</ng-container>

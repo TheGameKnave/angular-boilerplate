@@ -4,7 +4,7 @@
   <p>{{ t('There are {{count}} components.',{count: componentListArr.length}) }}</p>
 
   @for (component of componentListArr; track $index) {
-    @if (featureFlagService.getFeature(component[0])) {
+    @if (featureFlagService.getFeature(component[0]) || component[0] === 'Features') {
       <button
         [class]="'component-' + component[0].replace(' ','-').toLowerCase()"
         [disabled]="activeComponent === $index"

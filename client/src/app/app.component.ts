@@ -14,6 +14,7 @@ import { EnvironmentComponent } from './components/environment/environment.compo
 import { ApiComponent } from './components/api/api.component';
 import { IndexedDBComponent } from './components/indexed-db/indexed-db.component';
 import { FeatureFlagService } from './services/feature-flag.service';
+import { FeaturesComponent } from './components/features/features.component';
   
 type ComponentList = {
   [key: string]: any
@@ -23,6 +24,7 @@ export const componentList: ComponentList = {
   'Environment': EnvironmentComponent,
   'API': ApiComponent,
   'IndexedDB': IndexedDBComponent,
+  'Features': FeaturesComponent,
 };
 
 @AutoUnsubscribe()
