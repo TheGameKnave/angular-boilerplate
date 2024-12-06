@@ -36,7 +36,7 @@ describe('AppComponent', () => {
   });
 
   it('should toggle activeComponent correctly', () => {
-    const newComponent = 1;
+    const newComponent = 'Environment';
     component.onComponentActivate(newComponent);
     expect(component.activeComponent).toBe(newComponent);
   });
@@ -89,15 +89,15 @@ describe('CookieService', () => {
     expect(component.activeComponent).toBeNull();
   });
 
-  it('should set activeComponent to the cookie value when it is a number', () => {
-    cookieService.get.and.returnValue('1');
+  it('should set activeComponent to the cookie value when it is a string', () => {
+    cookieService.get.and.returnValue('Environment');
     fixture.detectChanges();
-    expect(component.activeComponent).toBe(1);
+    expect(component.activeComponent).toBe('Environment');
   });
 
   it('should set the cookie when onComponentActivate is called', () => {
-    component.onComponentActivate(1);
-    expect(cookieService.set).toHaveBeenCalledWith('activeButton', '1');
+    component.onComponentActivate('Environment');
+    expect(cookieService.set).toHaveBeenCalledWith('activeButton', 'Environment');
 
     component.onComponentActivate(null);
     expect(cookieService.set).toHaveBeenCalledWith('activeButton', 'null');

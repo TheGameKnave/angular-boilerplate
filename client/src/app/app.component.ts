@@ -14,6 +14,16 @@ import { IndexedDBComponent } from './components/indexed-db/indexed-db.component
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { ApiComponent } from './components/api/api.component';
 
+
+type ComponentList = {
+  [key: string]: any
+}
+export const componentList: ComponentList = {
+  'App Version': AppVersionComponent,
+  'Environment': EnvironmentComponent,
+  'API': ApiComponent,
+  'IndexedDB': IndexedDBComponent,
+};
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -28,13 +38,9 @@ import { ApiComponent } from './components/api/api.component';
 })
 @AutoUnsubscribe()
 export class AppComponent implements OnDestroy {
-  public componentList: any[] = [
-    { name: 'App Version', component: AppVersionComponent },
-    { name: 'Environment', component: EnvironmentComponent },
-    { name: 'API', component: ApiComponent },
-    { name: 'IndexedDB', component: IndexedDBComponent }
-  ];
-  public activeComponent: number | null = null;
+  componentList = componentList;
+  componentListArr = Object.entries(componentList);
+  public activeComponent: string | null = null;
 
   constructor(
     private updateService: UpdateService,
@@ -48,10 +54,10 @@ export class AppComponent implements OnDestroy {
     if(['', 'null'].includes(activeButton)) {
       this.activeComponent = null;
     }else {
-      this.activeComponent = Number(activeButton);
+      this.activeComponent = activeButton;
     }
   }
-  onComponentActivate(component: number | null): void {
+  onComponentActivate(component: string | null): void {
     this.activeComponent = component;
     this.cookieService.set("activeButton", component !== null ? component.toString() : "null");
   }
