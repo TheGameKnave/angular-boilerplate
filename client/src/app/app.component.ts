@@ -42,13 +42,13 @@ export const componentList: ComponentList = {
 })
 export class AppComponent implements OnDestroy {
   componentList = componentList;
-  public componentListArr = Object.entries(componentList);
-  public activeComponent: string | null = null;
+  componentListArr = Object.entries(componentList);
+  activeComponent: string | null = null;
 
   constructor(
     private updateService: UpdateService,
     private cookieService: CookieService, 
-    public featureFlagService: FeatureFlagService,
+    protected featureFlagService: FeatureFlagService,
   ){
     this.updateService.checkForUpdates();
   }
