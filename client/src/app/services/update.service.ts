@@ -20,7 +20,7 @@ export class UpdateService {
 
     interval(20 * 60 * 1000).subscribe(() => {
       this.updates.checkForUpdate().then(() => {
-        console.log('checked for updates');
+        /*keep this*/console.log('checked for updates');
       });
     });
 
@@ -35,7 +35,7 @@ export class UpdateService {
         window.location.reload();
       }
     }else if(event.type == 'VERSION_DETECTED') {
-      console.log(event);
+      /*keep this*/console.log(event);
     }
   }
 }

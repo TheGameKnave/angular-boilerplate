@@ -5,12 +5,14 @@ import { CookieService } from 'ngx-cookie-service';
 import { FooterComponent } from './components/layout/footer/footer.component';
 import { getTranslocoModule } from './helpers/transloco-testing.module';
 import { By } from '@angular/platform-browser';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { FeatureFlagService } from './services/feature-flag.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let updateService: jasmine.SpyObj<UpdateService>;
-  let cookieService: jasmine.SpyObj<CookieService>;
 
   beforeEach(() => {
     const updateServiceSpy = jasmine.createSpyObj('UpdateService', ['checkForUpdates']);
@@ -22,6 +24,8 @@ describe('AppComponent', () => {
         getTranslocoModule(),
       ],
       providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
         { provide: UpdateService, useValue: updateServiceSpy },
       ],
     }).compileComponents();
@@ -58,9 +62,12 @@ describe('CookieService', () => {
   let fixture: ComponentFixture<AppComponent>;
   let updateService: jasmine.SpyObj<UpdateService>;
   let cookieService: jasmine.SpyObj<CookieService>;
+  let featureFlagService: jasmine.SpyObj<FeatureFlagService>;
+
   beforeEach(() => {
     const updateServiceSpy = jasmine.createSpyObj('UpdateService', ['checkForUpdates']);
     const cookieServiceSpy = jasmine.createSpyObj('CookieService', ['get', 'set']);
+    const featureFlagServiceSpy = jasmine.createSpyObj('FeatureFlagService', ['getFeature']);
 
     TestBed.configureTestingModule({
       imports: [
@@ -69,8 +76,11 @@ describe('CookieService', () => {
         getTranslocoModule(),
       ],
       providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
         { provide: UpdateService, useValue: updateServiceSpy },
         { provide: CookieService, useValue: cookieServiceSpy },
+        { provide: FeatureFlagService, useValue: featureFlagServiceSpy },
       ],
     }).compileComponents();
 
@@ -78,6 +88,7 @@ describe('CookieService', () => {
     component = fixture.componentInstance;
     updateService = TestBed.inject(UpdateService) as jasmine.SpyObj<UpdateService>;
     cookieService = TestBed.inject(CookieService) as jasmine.SpyObj<CookieService>;
+    featureFlagService = TestBed.inject(FeatureFlagService) as jasmine.SpyObj<FeatureFlagService>;
   });
   it('should set activeComponent to null when cookie is empty or null', () => {
     cookieService.get.and.returnValue('');
@@ -90,6 +101,7 @@ describe('CookieService', () => {
   });
 
   it('should set activeComponent to the cookie value when it is a string', () => {
+    featureFlagService.getFeature.and.returnValue(true);
     cookieService.get.and.returnValue('Environment');
     fixture.detectChanges();
     expect(component.activeComponent).toBe('Environment');

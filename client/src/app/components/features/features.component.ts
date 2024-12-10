@@ -32,15 +32,14 @@ export class FeaturesComponent implements OnInit, OnDestroy {
         this.featureFlagService.setFeature(feature, value);
       });
       this.featureSubs.push(controlSubscription);
-    
-      const featuresSubscription = this.features$.subscribe(features => {
-        Object.keys(features).forEach((feature) => {
-          if (!this.featureControls[feature]) {
-            (this.featureControls[feature] as FormControl).setValue(features[feature]);
-          }
-        });
+    });
+  
+    this.features$.subscribe(features => {
+      Object.keys(features).forEach((feature) => {
+        if (this.featureControls.hasOwnProperty(feature)) {
+          (this.featureControls[feature] as FormControl).setValue(features[feature]);
+        }
       });
-      this.featureSubs.push(featuresSubscription);
     });
   }
 

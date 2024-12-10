@@ -187,4 +187,15 @@ describe('IndexedDBComponent operations', () => {
     const data = await component.get('key');
     expect(data).toBeUndefined();
   });
+
+  it('should load data from IndexedDB on initialization', async () => {
+    // Add some data to the IndexedDB
+    await component.set('key', 'Initial data');
+  
+    // Call getDbValue() to load the data
+    await component.getDbValue();
+  
+    // Check that the textAreaData value is set to 'Initial data'
+    expect(component.textAreaData.value).toBe('Initial data');
+  });
 });

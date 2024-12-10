@@ -21,7 +21,6 @@ const generateLanguagePaths = (languages: readonly string[]) => {
 };
 
 const LANGUAGE_PATHS = generateLanguagePaths(SUPPORTED_LANGUAGES);
-console.log(LANGUAGE_PATHS);
 
 export function getTranslocoModule(options: TranslocoTestingOptions = {}) {
   return TranslocoTestingModule.forRoot({

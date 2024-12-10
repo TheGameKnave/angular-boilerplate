@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction, Router } from 'express';
 const router = Router();
-let features = { // this wants to eventually live behind a database mock
+let features = { // TODO this wants to eventually live behind a database mock
   'App Version': true,
   'Environment': true,
-  'API': true,
+  'API': false,
   'IndexedDB': true,
 }
 
