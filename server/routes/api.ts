@@ -1,25 +1,23 @@
 import { Request, Response, NextFunction, Router } from 'express';
-const router = Router();
-let features = { // TODO this wants to eventually live behind a database mock
-  'App Version': true,
-  'Environment': true,
-  'API': false,
-  'IndexedDB': true,
-}
+import { readFeatureFlags } from '../services/featureFlagService';
 
+const router = Router();
+
+// Default route
 router.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.send({
-    message: 'api works'
+    message: 'API works',
   });
 });
 
+// GET: Fetch feature flags (initial load)
 router.get('/flags', (req: Request, res: Response, next: NextFunction) => {
-  res.send(features);
-});
-
-router.put('/flags', (req: Request, res: Response, next: NextFunction) => {
-  features = req.body;
-  res.send(features);
+  try {
+    const features = readFeatureFlags();
+    res.send(features);
+  } catch (err) {
+    next(err);
+  }
 });
 
 export default router;

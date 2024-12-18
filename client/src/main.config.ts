@@ -11,11 +11,15 @@ import { provideTranslocoLocale } from '@jsverse/transloco-locale';
 
 import { SUPPORTED_LANGUAGES } from './app/helpers/constants';
 import { provideFeatureFlag } from './app/providers/feature-flag.provider';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 
 export function getLangFn({ cachedLang, browserLang, cultureLang, defaultLang }: GetLangParams) {
   return cachedLang ?? browserLang ?? (cultureLang || defaultLang);
 }
-export const isTestEnvironment = typeof jasmine !== 'undefined';
+declare var TEST_ENV: any;
+export const isTestEnvironment = typeof TEST_ENV !== 'undefined';
+
+const socketIoConfig: SocketIoConfig = { url: '/socket.io', options: {} };
 
 export const appProviders = [
   importProvidersFrom(
@@ -23,7 +27,8 @@ export const appProviders = [
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerImmediately',
-    })
+    }),
+    SocketIoModule.forRoot(socketIoConfig),
   ),
   provideHttpClient(withInterceptorsFromDi()),
   // istanbul ignore next

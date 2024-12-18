@@ -1,28 +1,29 @@
-import path from "path";
-import express, { Request, Response } from 'express';
+import path from 'path';
+import express from 'express';
+import { createServer } from 'http';
+import { Server as SocketIOServer } from 'socket.io';
 import pino from 'express-pino-logger';
 import config from './config/environment';
 import rateLimit from 'express-rate-limit';
 import apiRouter from './routes/api';
+import { readFeatureFlags, writeFeatureFlags } from './services/featureFlagService';
 
 declare global {
-  var cache: { // NOSONAR
+  var cache: {
     [resource: string]: {
-      time: Date,
-      data: any,
-    }
+      time: Date;
+      data: any;
+    };
   };
 }
 global.cache = {};
 
 function setupStaticFileServing(app: express.Application, env: string) {
   if (env === 'production' || env === 'staging' || env === 'development') {
-    // Serve any static files
-    const dirname = path.resolve(__dirname, "../client/dist/angular-boilerplate/browser");
+    const dirname = path.resolve(__dirname, '../client/dist/angular-boilerplate/browser');
     app.use(express.static(dirname, { maxAge: 3600000 }));
 
-    // Handle app routing, return all requests to ngx app
-    app.get('*', (req: Request, res: Response) => {
+    app.get('*', (req, res) => {
       res.sendFile(path.join(dirname, 'index.html'));
     });
   }
@@ -32,14 +33,14 @@ export function setupApp(): express.Application {
   const app = express();
   const logger = pino();
 
-  app.use(logger); // logging framework
+  app.use(logger);
   app.use(express.json());
 
   const apiLimiter = rateLimit({
-    windowMs: 10 * 60 * 1000, // 10 minute window
-    max: 2000, // Limit each IP to 2000 requests per `window`
-    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+    windowMs: 10 * 60 * 1000,
+    max: 2000,
+    standardHeaders: true,
+    legacyHeaders: false,
   });
 
   app.use('/api', apiLimiter);
@@ -50,10 +51,39 @@ export function setupApp(): express.Application {
   return app;
 }
 
-// istanbul ignore next
+// Initialize server and WebSocket
 if (require.main === module) {
   const app = setupApp();
-  app.listen(config.server_port || 3000, () => {
-    console.log('Express server is running on ' + (config.server_port || 3000));
+  const server = createServer(app);
+  const io = new SocketIOServer(server);
+
+  app.set('io', io);
+
+  // Handle WebSocket connections
+  io.on('connection', (socket) => {
+    console.log('A client connected:', socket.id);
+
+    // Send the current flags when a client connects
+    socket.emit('feature-flags', readFeatureFlags());
+
+    // Handle updates to the feature flags
+    socket.on('update-feature-flags', (newFeatures: Record<string, boolean>) => {
+      console.log(`Received updated flags from ${socket.id}:`, newFeatures);
+
+      // Write updates to the file
+      writeFeatureFlags(newFeatures);
+
+      // Broadcast the updated flags to all clients
+      io.emit('feature-flags', newFeatures);
+    });
+
+    socket.on('disconnect', () => {
+      console.log('A client disconnected:', socket.id);
+    });
+  });
+
+  const PORT = config.server_port || 3000;
+  server.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
   });
 }
