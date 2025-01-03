@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeaturesComponent } from './features.component';
 import { FeatureFlagService } from 'src/app/services/feature-flag.service';
 import { of } from 'rxjs';
-import { getTranslocoModule } from 'src/app/helpers/transloco-testing.module';
+import { getTranslocoModule } from 'src/../../tests/helpers/transloco-testing.module';
 
 describe('FeaturesComponent', () => {
   let component: FeaturesComponent;
