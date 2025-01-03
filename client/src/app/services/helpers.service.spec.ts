@@ -13,7 +13,7 @@ describe('HelpersService', () => {
     TestBed.configureTestingModule({
       providers: [
         HelpersService,
-        { provide: ENVIRONMENT, useValue: { production: false } } // Mocking the ENVIRONMENT object
+        { provide: ENVIRONMENT, useValue: { env: 'testing' } } // Mocking the ENVIRONMENT object
       ]
     });
     service = TestBed.inject(HelpersService);
@@ -24,7 +24,7 @@ describe('HelpersService', () => {
     TestBed.configureTestingModule({
       providers: [
         HelpersService,
-        { provide: ENVIRONMENT, useValue: { production: false } } // Mocking the ENVIRONMENT object
+        { provide: ENVIRONMENT, useValue: { env: 'testing' } } // Mocking the ENVIRONMENT object
       ]
     });
     service = TestBed.inject(HelpersService);
@@ -35,7 +35,7 @@ describe('HelpersService', () => {
     TestBed.configureTestingModule({
       providers: [
         HelpersService,
-        { provide: ENVIRONMENT, useValue: { production: true } } // Mocking the ENVIRONMENT object to production
+        { provide: ENVIRONMENT, useValue: { env: 'production' } } // Mocking the ENVIRONMENT object to production
       ]
     });
     service = TestBed.inject(HelpersService);
