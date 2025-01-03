@@ -15,7 +15,6 @@ import { provideFeatureFlag } from './app/providers/feature-flag.provider';
 export function getLangFn({ cachedLang, browserLang, cultureLang, defaultLang }: GetLangParams) {
   return cachedLang ?? browserLang ?? (cultureLang || defaultLang);
 }
-export const isTestEnvironment = typeof jasmine !== 'undefined';
 
 export const appProviders = [
   importProvidersFrom(
@@ -27,7 +26,7 @@ export const appProviders = [
   ),
   provideHttpClient(withInterceptorsFromDi()),
   // istanbul ignore next
-  !isTestEnvironment ? provideFeatureFlag() : [], // TODO figure out how to mock this in test environment without putting it in the code!!
+  provideFeatureFlag(), // TODO figure out how to mock this in test environment without putting it in the code!!
   provideTransloco({
     config: {
       availableLangs: SUPPORTED_LANGUAGES,

@@ -1,11 +1,6 @@
 import { Request, Response, NextFunction, Router } from 'express';
+const featureFlagService = require('../services/featureFlagService');
 const router = Router();
-let features = { // TODO this wants to eventually live behind a database mock
-  'App Version': true,
-  'Environment': true,
-  'API': false,
-  'IndexedDB': true,
-}
 
 router.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.send({
@@ -14,12 +9,12 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 
 router.get('/flags', (req: Request, res: Response, next: NextFunction) => {
-  res.send(features);
+  res.send(featureFlagService.readFeatureFlags());
 });
 
 router.put('/flags', (req: Request, res: Response, next: NextFunction) => {
-  features = req.body;
-  res.send(features);
+  featureFlagService.writeFeatureFlags(req.body);
+  res.send(featureFlagService.readFeatureFlags());
 });
 
 export default router;
