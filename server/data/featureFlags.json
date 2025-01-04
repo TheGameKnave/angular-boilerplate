@@ -1,6 +1,6 @@
 {
   "App Version": true,
   "Environment": true,
-  "API": false,
+  "API": true,
   "IndexedDB": true
 }

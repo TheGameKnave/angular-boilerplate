@@ -7,5 +7,5 @@ function getBaseUrl(): string {
 // Dynamic environment configuration
 export const ENVIRONMENT = {
   baseUrl: getBaseUrl(),
-  production: true,
+  env: 'production',
 };

@@ -3,7 +3,7 @@ import { AppComponent } from './app.component';
 import { UpdateService } from './services/update.service';
 import { CookieService } from 'ngx-cookie-service';
 import { FooterComponent } from './components/layout/footer/footer.component';
-import { getTranslocoModule } from './helpers/transloco-testing.module';
+import { getTranslocoModule } from '../../../tests/helpers/transloco-testing.module';
 import { By } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';

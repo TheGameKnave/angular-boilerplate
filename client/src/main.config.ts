@@ -1,4 +1,4 @@
-import { importProvidersFrom, isDevMode } from '@angular/core';
+import { importProvidersFrom, inject, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -12,12 +12,13 @@ import { provideTranslocoLocale } from '@jsverse/transloco-locale';
 import { SUPPORTED_LANGUAGES } from './app/helpers/constants';
 import { provideFeatureFlag } from './app/providers/feature-flag.provider';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { ENVIRONMENT } from 'src/environments/environment';
 
 export function getLangFn({ cachedLang, browserLang, cultureLang, defaultLang }: GetLangParams) {
   return cachedLang ?? browserLang ?? (cultureLang || defaultLang);
 }
-declare var TEST_ENV: any;
-export const isTestEnvironment = typeof TEST_ENV !== 'undefined';
+
+export const isTestEnvironment = ENVIRONMENT.env === 'testing'; // TODO figure out how to mock this in test environment without putting it in the code!!
 
 const socketIoConfig: SocketIoConfig = { url: '/socket.io', options: {} };
 

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AppVersionComponent } from './app-version.component';
-import { getTranslocoModule } from 'src/app/helpers/transloco-testing.module';
+import { getTranslocoModule } from 'src/../../tests/helpers/transloco-testing.module';
 
 describe('AppVersionComponent', () => {
   let component: AppVersionComponent;

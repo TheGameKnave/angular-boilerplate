@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CookieService } from 'ngx-cookie-service';
 import { SUPPORTED_LANGUAGES } from 'src/app/helpers/constants';
 import { FooterComponent } from './footer.component';
-import { getTranslocoModule } from 'src/app/helpers/transloco-testing.module';
+import { getTranslocoModule } from 'src/../../tests/helpers/transloco-testing.module';
 import { By } from '@angular/platform-browser';
 
 
