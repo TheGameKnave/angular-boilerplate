@@ -1,0 +1,56 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  # TODO run other automated tests here as well
+  # testcafe:
+  #   name: Install Node, Build, and Run Tests
+  #   runs-on: macos-latest
+  #   env:
+  #     # Define environment variables here
+  #     PORT: 4201
+  #     APP_PORT: 4200
+
+  #   steps:
+  #     - name: Install Node
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '20.16.0'
+
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+
+  #     - name: Install dependencies
+  #       run: npm ci
+
+  #     - name: Start Angular server
+  #       run: npm run prod &
+
+  #     - name: Wait for Angular server to start
+  #       run: |
+  #         until curl --output /dev/null --silent --head --fail http://localhost:4200; do
+  #           echo 'Waiting for Angular server...'
+  #           sleep 5
+  #         done
+
+  #     - name: Run TestCafe Tests
+  #       uses: DevExpress/testcafe-action@latest
+  #       with:
+  #         args: |
+  #           chrome '--window-size=1280,1024' tests/e2e/run
+  sonarqube:
+    name: SonarQube
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: 641df5902a96079ee7650cfc87725253a98ab4db

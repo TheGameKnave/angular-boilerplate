@@ -21,12 +21,12 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * IndexedDB for offline storage *
 * e2e testing with TestCafe + snapshots
 * Feature flags *
+* CI/CD (github actions, sonar)
 * Hotjar script for user behavior analysis
 
 (* indicates a feature that’s visible in the sample app)
 
 ## Future features:
-* CI/CD (jenkins, sonar, etc?)
 * public api with GraphQL *
 * DB-agnostic query layer
 * Elf state management *
