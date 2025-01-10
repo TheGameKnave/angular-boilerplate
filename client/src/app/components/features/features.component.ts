@@ -35,12 +35,9 @@ export class FeaturesComponent implements OnInit, OnDestroy {
     });
   
     this.features$.subscribe(features => {
-      console.log('Features emitted:', features);
       Object.keys(features).forEach((feature) => {
-        console.log(`Checking feature: ${feature}`,this.featureControls.hasOwnProperty(feature), this.featureControls[feature].value, features[feature]);
         if (this.featureControls.hasOwnProperty(feature) && this.featureControls[feature].value !== features[feature]) {
-          console.log(`Updating FormControl for feature: ${feature}`);
-          (this.featureControls[feature] as FormControl).setValue(features[feature]);
+          this.featureControls[feature].setValue(features[feature]);
         }
       });
     });
