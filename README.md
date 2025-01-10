@@ -20,19 +20,19 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Internationalization (i18n) with Transloco
 * IndexedDB for offline storage *
 * e2e testing with TestCafe + snapshots
+* Feature flags *
+* Hotjar script for user behavior analysis
 
 (* indicates a feature that’s visible in the sample app)
 
 ## Future features:
 * CI/CD (jenkins, sonar, etc?)
-* Google Analytics reports on site activity
-* Feature flags *
 * public api with GraphQL *
-* Websockets to reconcile disparities between server and local data *
-* DB caching for external requests AND similar DB api calls (solr or the like)
-* Ionic & Electron integration
+* DB-agnostic query layer
 * Elf state management *
 * Immutable.js to minimize mutation
+* Websockets to reconcile disparities between server and local data *
+* Ionic & Electron integration
 * Auth-agnostic (or maybe just Firebase) user management (emails and password resetting and deliverability) *
 
 ## Quick start
