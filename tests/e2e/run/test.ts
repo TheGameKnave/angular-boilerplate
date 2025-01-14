@@ -1,8 +1,7 @@
 import { waitForAngular } from 'testcafe-angular-selectors';
 import * as path from 'path';
 import * as fs from 'fs';
-import { Selector, test } from 'testcafe';
-import { ClientFunction } from 'testcafe';
+import { Selector, test, ClientFunction } from 'testcafe';
 import { getThreshold } from '../data/constants';
 import { SUPPORTED_LANGUAGES } from '../../../client/src/app/helpers/constants';
 
@@ -40,7 +39,7 @@ const getMemory = async t => JSON.parse(
 }));
 //compare current memory against memory threshold
 const validateMemory = (memoryVal: { jsHeapSizeLimit: number; usedJSHeapSize: number; totalJSHeapSize: number }, threshold: number) => {
-    const { jsHeapSizeLimit, usedJSHeapSize, totalJSHeapSize } = memoryVal;
+    const usedJSHeapSize = memoryVal.usedJSHeapSize;
     const isMemoryLowerThanThreshold =  usedJSHeapSize < threshold;
     return isMemoryLowerThanThreshold;
 };

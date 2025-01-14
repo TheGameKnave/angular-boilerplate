@@ -64,7 +64,6 @@ async function cleanTestedScreenshots(rootDir) {
 
         // If the directory does not contain an accepted.png file and none of its subdirectories contain an accepted.png file, remove it
         if (!hasSubdirWithAccepted) {
-          //console.log(`removing ${path.relative(rootDir, dir)}`);
           await fs.rm(dir, { recursive: true });
         }
       } else {
