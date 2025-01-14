@@ -105,7 +105,7 @@ jobs:
           echo "Task API Response:"
           cat task.json
 
-          STATUS=$(jq -r '.status' task.json)
+          STATUS=$(grep -o '"status":"[^"]*"' task.json | cut -d: -f2 | tr -d '"')
           if [[ "$STATUS" != "SUCCESS" ]]; then
             echo "Analysis did not complete successfully!"
             exit 1
