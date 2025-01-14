@@ -113,7 +113,7 @@ jobs:
 
           echo "Fetching Quality Gate status..."
           ANALYSIS_ID=$(jq -r '.analysisId' task.json)
-          curl -s "https://sonarcloud.io/api/qualitygates/project_status?analysisId=$ANALYSIS_ID" -o gate.json
+          curl -s -u "${{ secrets.SONAR_TOKEN }}:" "https://sonarcloud.io/api/qualitygates/project_status?analysisId=$ANALYSIS_ID" -o gate.json
 
           echo "Quality Gate API Response:"
           cat gate.json
