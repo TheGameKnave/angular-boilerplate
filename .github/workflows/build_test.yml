@@ -100,7 +100,7 @@ jobs:
         run: |
           TASK_ID=$(cat .scannerwork/report-task.txt | grep ceTaskId | cut -d= -f2)
           echo "Fetching task status... for $TASK_ID"
-          curl -s "https://sonarcloud.io/api/ce/task?id=$TASK_ID" -o task.json
+          curl -s -u "${{ secrets.SONAR_TOKEN }}:" "https://sonarcloud.io/api/ce/task?id=$TASK_ID" -o task.json
 
           echo "Task API Response:"
           cat task.json
