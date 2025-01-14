@@ -94,9 +94,32 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       - name: Wait for Quality Gate
         run: |
-          curl -s https://sonarcloud.io/api/ce/task?id=$(cat .scannerwork/report-task.txt | grep ceTaskId | cut -d= -f2) > task.json
+          echo "Fetching task status..."
+          TASK_ID=$(cat .scannerwork/report-task.txt | grep ceTaskId | cut -d= -f2)
+          curl -s "https://sonarcloud.io/api/ce/task?id=$TASK_ID" -o task.json
+      
+          echo "Task API Response:"
+          cat task.json
+      
           STATUS=$(jq -r '.status' task.json)
-          if [ "$STATUS" != "SUCCESS" ]; then
-            echo "Quality Gate failed or analysis failed!"
+          if [[ "$STATUS" != "SUCCESS" ]]; then
+            echo "Analysis did not complete successfully!"
             exit 1
           fi
+      
+          echo "Fetching Quality Gate status..."
+          ANALYSIS_ID=$(jq -r '.analysisId' task.json)
+          curl -s "https://sonarcloud.io/api/qualitygates/project_status?analysisId=$ANALYSIS_ID" -o gate.json
+      
+          echo "Quality Gate API Response:"
+          cat gate.json
+      
+          GATE_STATUS=$(jq -r '.projectStatus.status' gate.json)
+          if [[ "$GATE_STATUS" != "OK" ]]; then
+            echo "Quality Gate failed!"
+            exit 1
+          fi
+      
+          echo "Quality Gate passed successfully!"
+        shell: bash
+        
