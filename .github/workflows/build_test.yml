@@ -1,4 +1,4 @@
-name: Build
+name: Build and SonarQube Analysis
 on:
   pull_request:
     branches:
@@ -13,7 +13,6 @@ jobs:
   build-and-test:
     runs-on: macos-latest
     env:
-      # Define environment variables here
       PORT: 4201
       APP_PORT: 4200
 
@@ -75,15 +74,19 @@ jobs:
   sonarqube:
     name: SonarQube
     runs-on: macos-latest
+    needs: build-and-test # Waits for 'build-and-test' to complete
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0  # Disable shallow clone for better analysis relevance
+
       - name: Install SonarScanner
         run: |
           curl -sSLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-macosx-aarch64.zip
           unzip -q sonar-scanner-cli.zip -d $HOME/sonar-scanner
           echo "$HOME/sonar-scanner/sonar-scanner-6.2.1.4610-macosx-aarch64/bin" >> $GITHUB_PATH
+
       - name: Run SonarScanner
         run: |
           sonar-scanner \
@@ -92,34 +95,34 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
       - name: Wait for Quality Gate
         run: |
-          echo "Fetching task status..."
           TASK_ID=$(cat .scannerwork/report-task.txt | grep ceTaskId | cut -d= -f2)
+          echo "Fetching task status... for $TASK_ID"
           curl -s "https://sonarcloud.io/api/ce/task?id=$TASK_ID" -o task.json
-      
+
           echo "Task API Response:"
           cat task.json
-      
+
           STATUS=$(jq -r '.status' task.json)
           if [[ "$STATUS" != "SUCCESS" ]]; then
             echo "Analysis did not complete successfully!"
             exit 1
           fi
-      
+
           echo "Fetching Quality Gate status..."
           ANALYSIS_ID=$(jq -r '.analysisId' task.json)
           curl -s "https://sonarcloud.io/api/qualitygates/project_status?analysisId=$ANALYSIS_ID" -o gate.json
-      
+
           echo "Quality Gate API Response:"
           cat gate.json
-      
+
           GATE_STATUS=$(jq -r '.projectStatus.status' gate.json)
           if [[ "$GATE_STATUS" != "OK" ]]; then
             echo "Quality Gate failed!"
             exit 1
           fi
-      
+
           echo "Quality Gate passed successfully!"
         shell: bash
-        
