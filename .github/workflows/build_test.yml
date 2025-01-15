@@ -71,15 +71,6 @@ jobs:
       #   run: |
       #     echo "\nRunning screenshot diff tests\n\n"
       #     cd tests/e2e && npx testcafe-blink-diff screenshots --compare accepted:tested --open --threshold 0.003
-  sonarqube:
-    name: SonarQube
-    runs-on: macos-latest
-    needs: build-and-test # Waits for 'build-and-test' to complete
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Disable shallow clone for better analysis relevance
 
       - name: Install SonarScanner
         run: |
