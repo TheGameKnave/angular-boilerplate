@@ -3,7 +3,7 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build",
-    "start": "ng serve --hmr",
+    "start": "ng serve --hmr --proxy-config src/proxy.conf.json",
     "test": "ng test --configuration test --browsers=ChromeHeadless --watch=false",
     "watch": "ng test"
   },
@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@types/jasmine": "~4.3.0",
+    "@types/socket.io": "^3.0.2",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

@@ -4,6 +4,7 @@ const router = Router();
 
 // Default route
 router.get('/', (req: Request, res: Response, next: NextFunction) => {
+  console.log('API works');
   res.send({
     message: 'API works',
   });

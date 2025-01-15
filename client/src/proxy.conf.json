@@ -4,7 +4,7 @@
     "secure": false
   },
   "/socket.io": {
-    "target": "http://localhost:3000",
+    "target": "http://localhost:4201",
     "ws": true,
     "secure": false,
     "changeOrigin": true
