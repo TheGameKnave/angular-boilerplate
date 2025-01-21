@@ -20,7 +20,7 @@ export function getLangFn({ cachedLang, browserLang, cultureLang, defaultLang }:
 
 export const isTestEnvironment = ENVIRONMENT.env === 'testing'; // TODO figure out how to mock this in test environment without putting it in the code!!
 
-const socketIoConfig: SocketIoConfig = { url: '/socket.io', options: {} };
+const socketIoConfig: SocketIoConfig = { url: 'http://localhost:4200/', options: {} };
 
 export const appProviders = [
   importProvidersFrom(
