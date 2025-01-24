@@ -161,7 +161,6 @@ describe('IndexedDBComponent operations', () => {
   it('should clean up subscription', fakeAsync(() => {
     component.ngOnDestroy();
     tick(1100);
-    console.log(component.textAreaSub);
     expect(component.textAreaSub?.closed).toBe(true);
   }));
   

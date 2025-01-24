@@ -23,6 +23,7 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * Feature flags *
 * CI/CD (github actions, sonar)
 * Hotjar script for user behavior analysis
+* Websockets to reconcile disparities between server and local data *
 
 (* indicates a feature that’s visible in the sample app)
 
@@ -31,7 +32,6 @@ This repo is intended to allow spooling up Angular projects in a monorepo rapidl
 * DB-agnostic query layer
 * Elf state management *
 * Immutable.js to minimize mutation
-* Websockets to reconcile disparities between server and local data *
 * Ionic & Electron integration
 * Auth-agnostic (or maybe just Firebase) user management (emails and password resetting and deliverability) *
 

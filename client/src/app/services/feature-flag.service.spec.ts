@@ -3,17 +3,24 @@ import { FeatureFlagService } from './feature-flag.service';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { of } from 'rxjs';
+import { Socket } from 'ngx-socket-io';
 
 describe('FeatureFlagService', () => {
   let service: FeatureFlagService;
   let httpMock: any;
+  let socketSpy: jasmine.SpyObj<Socket>;
 
   beforeEach(() => {
+    socketSpy = jasmine.createSpyObj('Socket', ['on', 'fromEvent', 'emit', 'disconnect', 'connect']);
+    socketSpy.ioSocket = { connected: true };
+
     TestBed.configureTestingModule({
       providers: [
         FeatureFlagService,
         provideHttpClient(),
-        provideHttpClientTesting()
+        provideHttpClientTesting(),
+        { provide: Socket, useValue: socketSpy },
+        FeatureFlagService,
       ]
     });
 
@@ -41,12 +48,11 @@ describe('FeatureFlagService', () => {
     const feature = 'App Version';
     const value = true;
     const newFeatures = { [feature]: value };
-
+  
     service.setFeature(feature, value);
-
-    const req = httpMock.expectOne('/api/flags');
-    expect(req.request.method).toBe('PUT');
-    req.flush(newFeatures);
+  
+    expect(socketSpy.emit).toHaveBeenCalledTimes(1);
+    expect(socketSpy.emit).toHaveBeenCalledWith('update-feature-flag', newFeatures);
   });
 
   it('should get feature', () => {
@@ -57,23 +63,27 @@ describe('FeatureFlagService', () => {
     expect(service.getFeature(feature)).toBe(value);
   });
 
-  it('should update features when response is different', fakeAsync(() => {
-    const initialFeatures = { 'App Version': true, 'Environment': true };
+  it('should update features when WebSocket emits an update', () => {
+    // Arrange: Mock an update payload
+    const updatePayload = { 'App Version': false, 'New Feature': true };
+    const initialFeatures = { 'App Version': true };
     service.features.set(initialFeatures);
   
-    const feature = 'App Version';
-    const value = false;
+    // Act: Simulate the WebSocket emitting an "update-feature-flags" event
+    const onCallback = socketSpy.on.calls.mostRecent().args[1];
+    onCallback(updatePayload); // Trigger the callback passed to `socket.on`
+  
+    // Assert: Check if features were updated correctly
+    expect(service.features()).toEqual({ 'App Version': false, 'New Feature': true });
+  });  
+
+  it('should update features when response is different', fakeAsync(() => {
+    const feature = 'flag1';
+    const value = true;
     service.setFeature(feature, value);
-  
-    const req = httpMock.expectOne('/api/flags');
-    expect(req.request.method).toBe('PUT');
-  
-    const newFeatures = { 'App Version': true, 'Environment': true };
-    req.flush(newFeatures);
-  
-    tick(); // wait for the subscribe block to be executed
-  
-    expect(service.features()).toEqual(newFeatures);
+    tick();
+    expect(socketSpy.emit).toHaveBeenCalledTimes(1);
+    expect(socketSpy.emit).toHaveBeenCalledWith('update-feature-flag', { [feature]: value });
   }));
 
   it('should return false for unknown feature', () => {

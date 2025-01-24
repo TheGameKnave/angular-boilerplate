@@ -11,12 +11,16 @@ import { provideTranslocoLocale } from '@jsverse/transloco-locale';
 
 import { SUPPORTED_LANGUAGES } from './app/helpers/constants';
 import { provideFeatureFlag } from './app/providers/feature-flag.provider';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { ENVIRONMENT } from 'src/environments/environment';
 
 export function getLangFn({ cachedLang, browserLang, cultureLang, defaultLang }: GetLangParams) {
   return cachedLang ?? browserLang ?? (cultureLang || defaultLang);
 }
+
 export const isTestEnvironment = ENVIRONMENT.env === 'testing'; // TODO figure out how to mock this in test environment without putting it in the code!!
+
+const socketIoConfig: SocketIoConfig = { url: ENVIRONMENT.baseUrl, options: {} };
 
 export const appProviders = [
   importProvidersFrom(
@@ -24,7 +28,8 @@ export const appProviders = [
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerImmediately',
-    })
+    }),
+    SocketIoModule.forRoot(socketIoConfig),
   ),
   provideHttpClient(withInterceptorsFromDi()),
   // istanbul ignore next

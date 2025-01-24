@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["jest"],
     "outDir": "./build",
     "sourceMap": true,
     "esModuleInterop": true,

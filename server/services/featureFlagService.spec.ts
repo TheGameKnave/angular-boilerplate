@@ -1,59 +1,112 @@
-import { readFeatureFlags, writeFeatureFlags } from './featureFlagService';
 import fs from 'fs';
-import path from 'path';
+import { readFeatureFlags, writeFeatureFlags } from './featureFlagService';
 
-// Path to the mock database file
-const FEATURE_FLAGS_PATH = path.resolve(__dirname, '../data/featureFlags.json');
-
-// Mock the fs module
+// Mock fs.promises
 jest.mock('fs', () => ({
-  ...jest.requireActual('fs'),
-  writeFileSync: jest.fn(), // Mock the writeFileSync method
+  promises: {
+    readFile: jest.fn(),
+    writeFile: jest.fn(),
+  },
 }));
 
 describe('FeatureFlagsService', () => {
   beforeEach(() => {
-    // Reset the mock before each test to ensure clean state
-    (fs.writeFileSync as jest.Mock).mockClear();
+    jest.spyOn(console, 'log').mockImplementation(() => {});
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    jest.clearAllMocks(); // Clear mocks after each test
+  });
+
+  describe('readFeatureFlags', () => {
+    it('should return parsed JSON data if the file contains valid data', async () => {
+      const mockData = JSON.stringify({ featureA: true, featureB: false });
+      (fs.promises.readFile as jest.Mock).mockResolvedValueOnce(mockData);
+
+      const result = await readFeatureFlags();
+
+      expect(result).toEqual({ featureA: true, featureB: false });
+      expect(fs.promises.readFile).toHaveBeenCalledWith(expect.any(String), 'utf-8');
+    });
+
+    it('should retry and return undefined if the file is empty', async () => {
+      (fs.promises.readFile as jest.Mock)
+        .mockResolvedValueOnce('')
+        .mockResolvedValueOnce('')
+        .mockResolvedValueOnce('');
+
+      const result = await readFeatureFlags();
+
+      expect(result).toBeUndefined();
+      expect(fs.promises.readFile).toHaveBeenCalledTimes(3);
+    });
+
+    it('should throw an error for invalid JSON', async () => {
+      (fs.promises.readFile as jest.Mock).mockResolvedValueOnce('{invalidJSON');
+
+      await expect(readFeatureFlags()).rejects.toThrow(SyntaxError);
+      expect(fs.promises.readFile).toHaveBeenCalledTimes(1);
+    });
+
+    it('should retry on read errors and eventually throw', async () => {
+      const mockError = new Error('File not found');
+      (fs.promises.readFile as jest.Mock)
+        .mockRejectedValueOnce(mockError)
+        .mockRejectedValueOnce(mockError)
+        .mockRejectedValueOnce(mockError);
+
+      await expect(readFeatureFlags()).rejects.toThrow('File not found');
+      expect(fs.promises.readFile).toHaveBeenCalledTimes(3);
+    });
   });
 
   describe('writeFeatureFlags', () => {
-    it('should write updated feature flags to the JSON file once', () => {
-      // Prepare the new features to write
-      const newFeatures = { 'App Version': false, 'Environment': true };
+    it('should write new features to the file and return the updated features', async () => {
+      const existingFeatures = { featureA: true };
+      const newFeatures = { featureB: false };
+      const updatedFeatures = { ...existingFeatures, ...newFeatures };
 
-      // Mock fs.writeFileSync (no-op)
-      (fs.writeFileSync as jest.Mock).mockImplementation(() => {});
+      (fs.promises.readFile as jest.Mock).mockResolvedValueOnce(JSON.stringify(existingFeatures));
+      (fs.promises.writeFile as jest.Mock).mockResolvedValueOnce(undefined);
 
-      // Call the function once
-      writeFeatureFlags(newFeatures);
+      const result = await writeFeatureFlags(newFeatures);
 
-      // Assertions
-      expect(fs.writeFileSync).toHaveBeenCalledTimes(1); // Check only one call
-      expect(fs.writeFileSync).toHaveBeenCalledWith(
-        FEATURE_FLAGS_PATH,
+      expect(result).toEqual(updatedFeatures);
+      expect(fs.promises.writeFile).toHaveBeenCalledWith(
+        expect.any(String),
+        JSON.stringify(updatedFeatures, null, 2),
+        'utf-8'
+      );
+    });
+
+    it('should write features to the file if no existing features are present', async () => {
+      const newFeatures = { featureA: true };
+
+      (fs.promises.readFile as jest.Mock).mockResolvedValueOnce('');
+      (fs.promises.writeFile as jest.Mock).mockResolvedValueOnce(undefined);
+
+      const result = await writeFeatureFlags(newFeatures);
+
+      expect(result).toEqual(newFeatures);
+      expect(fs.promises.writeFile).toHaveBeenCalledWith(
+        expect.any(String),
         JSON.stringify(newFeatures, null, 2),
         'utf-8'
       );
     });
 
-    it('should not modify actual files during testing', () => {
-      // Prepare the new features
-      const newFeatures = { 'App Version': false, 'Environment': true };
+    it('should throw an error if writing to the file fails', async () => {
+      const newFeatures = { featureA: true };
+      const mockError = new Error('Write failed');
 
-      // Mock fs.writeFileSync (no-op)
-      (fs.writeFileSync as jest.Mock).mockImplementation(() => {});
+      (fs.promises.readFile as jest.Mock).mockResolvedValueOnce('');
+      (fs.promises.writeFile as jest.Mock).mockRejectedValueOnce(mockError);
 
-      // Call the function
-      writeFeatureFlags(newFeatures);
-
-      // Check that fs.writeFileSync was called with the correct parameters
-      expect(fs.writeFileSync).toHaveBeenCalledTimes(1);
-      expect(fs.writeFileSync).toHaveBeenCalledWith(
-        FEATURE_FLAGS_PATH,
-        JSON.stringify(newFeatures, null, 2),
-        'utf-8'
-      );
+      await expect(writeFeatureFlags(newFeatures)).rejects.toThrow('Write failed');
+      expect(fs.promises.writeFile).toHaveBeenCalledTimes(1);
     });
   });
 });
