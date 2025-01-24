@@ -8,6 +8,7 @@ import { By } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { FeatureFlagService } from './services/feature-flag.service';
+import { Socket } from 'ngx-socket-io';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -16,6 +17,7 @@ describe('AppComponent', () => {
 
   beforeEach(() => {
     const updateServiceSpy = jasmine.createSpyObj('UpdateService', ['checkForUpdates']);
+    const socketSpy = jasmine.createSpyObj('Socket', ['on', 'fromEvent', 'emit', 'disconnect', 'connect']);
 
     TestBed.configureTestingModule({
       imports: [
@@ -27,6 +29,8 @@ describe('AppComponent', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         { provide: UpdateService, useValue: updateServiceSpy },
+        { provide: Socket, useValue: socketSpy },
+        FeatureFlagService,
       ],
     }).compileComponents();
 

@@ -29,8 +29,7 @@ export class FeatureFlagService {
   }
   constructor() {
     // Listen for WebSocket updates
-    this.socket.on('feature-flag-update', (update: Partial<FeatureFlagResponse>) => {
-      console.log('Received feature flag update:', update);
+    this.socket.on('update-feature-flags', (update: Partial<FeatureFlagResponse>) => {
       const newFeatures = { ...this.features(), ...update };
       this.features.set(newFeatures);
     });
@@ -46,8 +45,6 @@ export class FeatureFlagService {
     this.features.set(newFeatures);
 
     // Notify backend of the updated flag
-    console.log('Sending feature flag update:', { [feature]: value });
-    console.log('WebSocket connection status:', this.socket.ioSocket.connected);
     this.socket.emit('update-feature-flag', { [feature]: value });
   }
 

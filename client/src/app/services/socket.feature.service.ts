@@ -15,7 +15,7 @@ export class SocketFeatureService {
 
   // Subscribe to feature flag updates
   getFeatureFlags(): Observable<FeatureFlag[]> {
-    return this.socketIoService.listen<FeatureFlag[]>('feature-flags');
+    return this.socketIoService.listen<FeatureFlag[]>('update-feature-flags');
   }
 
   // Emit an event to request feature flag updates

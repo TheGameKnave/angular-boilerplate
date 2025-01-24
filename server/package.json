@@ -57,7 +57,7 @@
   "devDependencies": {
     "@tsconfig/node18": "^18.2.2",
     "@types/express-pino-logger": "^4.0.5",
-    "@types/jest": "^29.5.12",
+    "@types/jest": "^29.5.14",
     "@types/sinon": "^17.0.3",
     "@types/supertest": "^6.0.2",
     "jest": "^29.7.0",
