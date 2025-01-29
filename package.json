@@ -35,5 +35,10 @@
     "testcafe-blink-diff": "^0.5.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "graphql": "^16.10.0",
+    "graphql-http": "^1.22.4",
+    "lowdb": "^7.0.1"
   }
 }
