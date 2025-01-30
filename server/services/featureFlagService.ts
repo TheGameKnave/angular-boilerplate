@@ -1,6 +1,3 @@
-import fs from 'fs';
-import path from 'path';
-
 // Import lowdb 1.0.0; TODO rip this out as soon as you have a data solution
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
@@ -13,8 +10,6 @@ const db = low(adapter);
 export const readFeatureFlags = () => {
   return db.get('featureFlags').value();
 };
-
-
 
 
 // Write updated feature flags to the JSON file

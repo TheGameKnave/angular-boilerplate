@@ -2,14 +2,14 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeaturesComponent } from './features.component';
 import { FeatureFlagService } from 'src/app/services/feature-flag.service';
-import featureFlags from 'src/../../server/data/featureFlags.json';
+import db from 'src/../../server/data/db.json';
 import { getTranslocoModule } from 'src/../../tests/helpers/transloco-testing.module';
 import { signal } from '@angular/core';
 
 // Path to the mock database file
 
 describe('FeaturesComponent', () => {
-  const features = {...featureFlags};
+  const features = {...db.featureFlags};
   let component: FeaturesComponent;
   let fixture: ComponentFixture<FeaturesComponent>;
   let featureFlagService: jasmine.SpyObj<FeatureFlagService>;
