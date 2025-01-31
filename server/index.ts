@@ -6,8 +6,7 @@ import config from './config/environment';
 import rateLimit from 'express-rate-limit';
 import apiRouter from './routes/api';
 import { setupWebSocket } from './services/websocketService';
-import { createHandler } from 'graphql-http/lib/use/express';
-import { buildSchema } from 'graphql';
+import { graphqlMiddleware } from './services/graphqlService';
 
 declare global {
   var cache: {
@@ -51,31 +50,9 @@ export function setupApp(): express.Application {
 
   setupStaticFileServing(app, process.env.NODE_ENV || 'development');
   
+  // Initialize GraphQL
   app.use(express.urlencoded({ extended: true })); // Add this line
-  const schema = buildSchema(
-    `type Query {
-      hello: String
-      add(a: Int!, b: Int!): Int
-    }`
-);
-  
-  const root = {
-    hello: () => 'Hello, world!',
-    add: ({ a, b }: { a: number; b: number }) => a + b,
-  };
-  
-  app.all('/graphql', (req, res, next) => {
-    if (req.method === 'POST') {
-      express.json()(req, res, () => {
-        createHandler({
-          schema,
-          rootValue: root,
-        })(req, res, next);
-      });
-    } else {
-      next();
-    }
-  });
+  app.all('/graphql', graphqlMiddleware());
   
   return app;
 }
