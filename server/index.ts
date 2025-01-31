@@ -1,12 +1,10 @@
 import path from 'path';
 import express from 'express';
 import { createServer } from 'http';
-import { Server as SocketIOServer } from 'socket.io';
 import pino from 'express-pino-logger';
 import config from './config/environment';
 import rateLimit from 'express-rate-limit';
 import apiRouter from './routes/api';
-import { readFeatureFlags, writeFeatureFlags } from './services/featureFlagService';
 import { setupWebSocket } from './services/websocketService';
 import { createHandler } from 'graphql-http/lib/use/express';
 import { buildSchema } from 'graphql';

@@ -3,8 +3,14 @@
   <ul>
     @for (feature of Object.entries(featureFlagService.features()); track $index) {
       <li>
-        <input type="checkbox" [formControl]="featureControl(feature[0])">
-        <label [for]="feature[0]">{{ t(feature[0]) }}</label>
+        <input
+          [id]="feature[0]"
+          type="checkbox"
+          [formControl]="featureControl(feature[0])"
+        />
+        <label
+          [for]="feature[0]">{{ t(feature[0]) }}
+        </label>
       </li>
     }
   </ul>
